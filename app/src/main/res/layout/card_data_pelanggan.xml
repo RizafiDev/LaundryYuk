@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="4dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:cardCornerRadius="20dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:orientation="vertical">
+        <TextView
+            android:id="@+id/tvDataIDPelanggan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ID Pelanggan"
+            android:fontFamily="@font/inter_medium"
+            />
+        <TextView
+            android:id="@+id/tvDataNamaPelanggan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_semibold"
+            android:text="Nama Pelanggan"
+            android:textSize="24sp"
+            android:layout_marginTop="24dp"
+            />
+            <TextView
+            android:id="@+id/tvDataAlamatPelanggan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_medium"
+            android:text="Alamat"
+            android:textSize="16sp"
+            android:paddingTop="8dp"
+            />
+            <TextView
+            android:id="@+id/tvDataNoHpPelanggan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_medium"
+            android:text="No HP"
+            android:textSize="16sp"
+                android:paddingTop="8dp"
+            />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2"
+                android:paddingTop="8dp"
+                >
+                <Button
+                    android:layout_weight="1"
+                    android:id="@+id/btnHubungi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#22c55e"
+                    android:padding="16dp"
+                    android:fontFamily="@font/inter_medium"
+                    android:text="Hubungi"
+                    android:layout_marginRight="5dp"/>
+                <Button
+                    android:layout_weight="1"
+                    android:id="@+id/btnLihat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#f59e0b"
+                    android:padding="16dp"
+                    android:fontFamily="@font/inter_medium"
+                    android:layout_marginLeft="5dp"
+                    android:text="Lihat"/>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

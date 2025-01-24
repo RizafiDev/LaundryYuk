@@ -5,6 +5,107 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".pelanggan.TambahPelangganActivity">
+    tools:context=".pelanggan.TambahPelangganActivity"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TAMBAH PELANGGAN"
+        android:fontFamily="@font/inter_bold"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textAlignment="center"
+        app:layout_constraintTop_toTopOf="parent"
+        android:paddingTop="24dp"
+        />
+    <LinearLayout
+        android:id="@+id/containerNama"
+        app:layout_constraintTop_toBottomOf="@id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="32dp"
+        android:paddingHorizontal="20dp"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nama Lengkap :"
+            android:fontFamily="@font/inter_medium"
+            android:textSize="16sp"
+            android:layout_marginBottom="12dp"/>
+        <EditText
+            android:id="@+id/etTambahNamaPelanggan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nama Lengkap"
+            android:textAlignment="textStart"
+            android:padding="16dp"
+            android:background="@drawable/rounded_et"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/containerAlamat"
+        app:layout_constraintTop_toBottomOf="@id/containerNama"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="32dp"
+        android:paddingHorizontal="20dp"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Alamat :"
+            android:fontFamily="@font/inter_medium"
+            android:textSize="16sp"
+            android:layout_marginBottom="12dp"/>
+        <EditText
+            android:id="@+id/etTambahAlamatPelanggan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Alamat"
+            android:textAlignment="textStart"
+            android:padding="16dp"
+            android:background="@drawable/rounded_et"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/containerNoHp"
+        app:layout_constraintTop_toBottomOf="@id/containerAlamat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="32dp"
+        android:paddingHorizontal="20dp"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="No HP :"
+            android:fontFamily="@font/inter_medium"
+            android:textSize="16sp"
+            android:layout_marginBottom="12dp"/>
+        <EditText
+            android:id="@+id/etTambahNoHpPelanggan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="No Hp"
+            android:inputType="phone"
+            android:textAlignment="textStart"
+            android:padding="16dp"
+            android:background="@drawable/rounded_et"/>
+    </LinearLayout>
+    <Button
+        app:layout_constraintTop_toBottomOf="@id/containerNoHp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Simpan"
+        android:textSize="16sp"
+        android:padding="16dp"
+        android:layout_marginTop="32dp"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
