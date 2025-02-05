@@ -13,4 +13,12 @@
     <string name="activity_layanan_nohp">Phone</string>
     <string name="activity_layanan_cabang">Branch Name</string>
     <string name="activity_layanan_simpan">Save</string>
+    <string name="card_pelanggan_cabang">Branch Name</string>
+    <string name="card_pegawai_id">Officer ID</string>
+    <string name="card_pegawai_nama">Officer Name</string>
+    <string name="card_pegawai_alamat">Officer Address</string>
+    <string name="card_pegawai_nohp">Phone</string>
+    <string name="card_pegawai_terdaftar">Registered</string>
+    <string name="card_pegawai_cabang">Branch</string>
+    <string name="activity_tambah_pegawai_header">Add Officer</string>
 </resources>

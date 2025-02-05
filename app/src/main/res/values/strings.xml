@@ -12,4 +12,12 @@
     <string name="activity_layanan_nohp">No HP</string>
     <string name="activity_layanan_cabang">Nama Cabang</string>
     <string name="activity_layanan_simpan">Simpan</string>
+    <string name="card_pelanggan_cabang">Nama Cabang</string>
+    <string name="card_pegawai_id">ID Pegawai</string>
+    <string name="card_pegawai_nama">Nama Pegawai</string>
+    <string name="card_pegawai_alamat">Alamat Pegawai</string>
+    <string name="card_pegawai_nohp">No HP</string>
+    <string name="card_pegawai_terdaftar">Terdaftar</string>
+    <string name="card_pegawai_cabang">Cabang</string>
+    <string name="activity_tambah_pegawai_header">Tambah Pegawai</string>
 </resources>

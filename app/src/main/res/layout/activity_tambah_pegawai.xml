@@ -5,14 +5,14 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".pelanggan.TambahPelangganActivity"
+    tools:context=".pegawai.TambahPegawaiActivity"
     android:background="@color/white">
 
     <TextView
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/activity_layanan_header"
+        android:text="@string/activity_tambah_pegawai_header"
         android:fontFamily="@font/inter_bold"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"

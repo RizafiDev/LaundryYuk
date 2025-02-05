@@ -13,6 +13,12 @@
         android:theme="@style/Theme.Laundry"
         tools:targetApi="31">
         <activity
+            android:name=".pegawai.DataPegawaiActivity"
+            android:exported="false" />
+        <activity
+            android:name=".pegawai.TambahPegawaiActivity"
+            android:exported="false" />
+        <activity
             android:name=".layanan.TambahLayananActivity"
             android:exported="false" />
         <activity
@@ -29,7 +35,7 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
     </application>
 
 </manifest>

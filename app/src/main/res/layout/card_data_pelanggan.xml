@@ -51,6 +51,15 @@
             android:textSize="16sp"
                 android:paddingTop="8dp"
             />
+            <TextView
+                android:id="@+id/tvDataCabangPelanggan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_medium"
+                android:text="@string/card_pelanggan_cabang"
+                android:textSize="16sp"
+                android:paddingTop="8dp"
+                />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
