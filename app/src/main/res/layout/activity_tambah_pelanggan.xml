@@ -12,7 +12,7 @@
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TAMBAH PELANGGAN"
+        android:text="@string/activity_layanan_header"
         android:fontFamily="@font/inter_bold"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,7 +33,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Nama Lengkap :"
+            android:text="@string/activity_layanan_namalengkap"
             android:fontFamily="@font/inter_medium"
             android:textSize="16sp"
             android:layout_marginBottom="12dp"/>
@@ -41,7 +41,7 @@
             android:id="@+id/etTambahNamaPelanggan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nama Lengkap"
+            android:hint="@string/activity_layanan_namalengkap"
             android:textAlignment="textStart"
             android:padding="16dp"
             android:background="@drawable/rounded_et"/>
@@ -58,7 +58,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Alamat :"
+            android:text="@string/activity_layanan_alamat"
             android:fontFamily="@font/inter_medium"
             android:textSize="16sp"
             android:layout_marginBottom="12dp"/>
@@ -66,7 +66,7 @@
             android:id="@+id/etTambahAlamatPelanggan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Alamat"
+            android:hint="@string/activity_layanan_alamat"
             android:textAlignment="textStart"
             android:padding="16dp"
             android:background="@drawable/rounded_et"/>
@@ -83,7 +83,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="No HP :"
+            android:text="@string/activity_layanan_nohp"
             android:fontFamily="@font/inter_medium"
             android:textSize="16sp"
             android:layout_marginBottom="12dp"/>
@@ -91,14 +91,40 @@
             android:id="@+id/etTambahNoHpPelanggan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="No Hp"
+            android:hint="@string/activity_layanan_nohp"
+            android:inputType="phone"
+            android:textAlignment="textStart"
+            android:padding="16dp"
+            android:background="@drawable/rounded_et"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/containerCabang"
+        app:layout_constraintTop_toBottomOf="@id/containerNoHp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="32dp"
+        android:paddingHorizontal="20dp"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/activity_layanan_cabang"
+            android:fontFamily="@font/inter_medium"
+            android:textSize="16sp"
+            android:layout_marginBottom="12dp"/>
+        <EditText
+            android:id="@+id/etTambahCabangPelanggan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/activity_layanan_cabang"
             android:inputType="phone"
             android:textAlignment="textStart"
             android:padding="16dp"
             android:background="@drawable/rounded_et"/>
     </LinearLayout>
     <Button
-        app:layout_constraintTop_toBottomOf="@id/containerNoHp"
+        app:layout_constraintTop_toBottomOf="@id/containerCabang"
         android:layout_marginHorizontal="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

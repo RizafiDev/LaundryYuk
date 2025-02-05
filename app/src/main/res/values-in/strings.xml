@@ -2,4 +2,15 @@
 <resources>
     <string name="app_name">laundry</string>
     <string name="card_pelanggan_id">ID Pelanggan</string>
+    <string name="card_pelanggan_nama">Nama Pelanggan</string>
+    <string name="card_pelanggan_alamat">Alamat Pelanggan</string>
+    <string name="card_pelanggan_nohp">No Hp</string>
+    <string name="card_pelanggan_hubungi">Hubungi</string>
+    <string name="card_pelanggan_lihat">Lihat</string>
+    <string name="activity_layanan_header">Tambah Pelanggan</string>
+    <string name="activity_layanan_namalengkap">Nama Lengkap</string>
+    <string name="activity_layanan_alamat">Alamat</string>
+    <string name="activity_layanan_nohp">No HP</string>
+    <string name="activity_layanan_cabang">Nama Cabang</string>
+    <string name="activity_layanan_simpan">Simpan</string>
 </resources>
