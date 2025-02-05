@@ -115,6 +115,7 @@
 
                 <!-- Pelanggan -->
                 <LinearLayout
+                    android:id="@+id/AppDataPelanggan"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -292,6 +293,7 @@
             android:padding="40dp"
             >
             <LinearLayout
+                android:id="@+id/AppDataPegawai"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
