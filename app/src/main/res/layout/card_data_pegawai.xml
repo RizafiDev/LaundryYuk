@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -17,40 +17,58 @@
             android:layout_height="wrap_content"
             android:padding="16dp"
             android:orientation="vertical">
-        <TextView
-            android:id="@+id/tvDataIDPelanggan"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="ID Pelanggan"
-            android:fontFamily="@font/inter_medium"
-            />
-        <TextView
-            android:id="@+id/tvDataNamaPelanggan"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/inter_semibold"
-            android:text="Nama Pelanggan"
-            android:textSize="24sp"
-            android:layout_marginTop="16dp"
-            />
             <TextView
-            android:id="@+id/tvDataAlamatPelanggan"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+                android:id="@+id/tvDataIDPegawai"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ID Pegawai"
                 android:fontFamily="@font/inter_medium"
-            android:text="Alamat"
-            android:textSize="16sp"
-            android:paddingTop="8dp"
-            />
+                />
             <TextView
-            android:id="@+id/tvDataNoHpPelanggan"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+                android:id="@+id/tvDataNamaPegawai"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_semibold"
+                android:text="Nama Pegawai"
+                android:textSize="24sp"
+                android:layout_marginTop="16dp"
+                />
+            <TextView
+                android:id="@+id/tvDataAlamatPegawai"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:fontFamily="@font/inter_medium"
-            android:text="No HP"
-            android:textSize="16sp"
+                android:text="Alamat"
+                android:textSize="16sp"
                 android:paddingTop="8dp"
-            />
+                />
+            <TextView
+                android:id="@+id/tvDataNoHpPegawai"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_medium"
+                android:text="No HP"
+                android:textSize="16sp"
+                android:paddingTop="8dp"
+                />
+            <TextView
+                android:id="@+id/tvDataTerdaftarPegawai"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_medium"
+                android:text="Terdaftar"
+                android:textSize="16sp"
+                android:paddingTop="8dp"
+                />
+            <TextView
+                android:id="@+id/tvDataCabangPegawai"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_medium"
+                android:text="Cabang"
+                android:textSize="16sp"
+                android:paddingTop="8dp"
+                />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -82,4 +100,4 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
