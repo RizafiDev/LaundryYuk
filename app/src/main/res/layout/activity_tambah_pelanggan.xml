@@ -118,12 +118,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/activity_layanan_cabang"
-            android:inputType="phone"
             android:textAlignment="textStart"
             android:padding="16dp"
             android:background="@drawable/rounded_et"/>
     </LinearLayout>
     <Button
+        android:id="@+id/btnSimpanPelanggan"
         app:layout_constraintTop_toBottomOf="@id/containerCabang"
         android:layout_marginHorizontal="16dp"
         android:layout_width="match_parent"

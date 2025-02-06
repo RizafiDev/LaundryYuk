@@ -21,4 +21,10 @@
     <string name="card_pegawai_terdaftar">Registered</string>
     <string name="card_pegawai_cabang">Branch</string>
     <string name="activity_tambah_pegawai_header">Add Officer</string>
+    <string name="validasi_nama_pelanggan">Customer Name Cannot Be Empty</string>
+    <string name="validasi_alamat_pelanggan">Alamat cannot be empty</string>
+    <string name="validasi_nohp_pelanggan">Phone number canot be empyt</string>
+    <string name="validasi_cabang_pelanggan">Branch cannot be empty</string>
+    <string name="sukses_simpan_pelanggan">Data Saved</string>
+    <string name="gagal_simpan_pelanggan">Data not saved</string>
 </resources>

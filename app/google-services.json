@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "348486120489",
+    "project_id": "rizafidevlaundryfix",
+    "storage_bucket": "rizafidevlaundryfix.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:348486120489:android:522afa7c99ca7505f79838",
+        "android_client_info": {
+          "package_name": "com.firmansyah.laundry"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdnE0J3gC5WowZhxbh4-gnun3phD4vD6Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

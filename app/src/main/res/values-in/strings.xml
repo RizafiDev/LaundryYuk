@@ -21,4 +21,10 @@
     <string name="card_pegawai_terdaftar">Terdaftar</string>
     <string name="card_pegawai_cabang">Cabang</string>
     <string name="activity_tambah_pegawai_header">Tambah Pegawai</string>
+    <string name="validasi_nama_pelanggan">Nama Pelanggan Tidak Boleh Kosong</string>
+    <string name="validasi_alamat_pelanggan">Alamat tidak boleh kosong</string>
+    <string name="validasi_nohp_pelanggan">No Hp tidak boleh kosong</string>
+    <string name="validasi_cabang_pelanggan">Cabang tidak boleh kosong</string>
+    <string name="sukses_simpan_pelanggan">Data disimpan</string>
+    <string name="gagal_simpan_pelanggan">Data gagal disimpan</string>
 </resources>
