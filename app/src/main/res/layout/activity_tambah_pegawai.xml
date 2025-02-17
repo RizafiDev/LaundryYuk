@@ -38,7 +38,7 @@
             android:textSize="16sp"
             android:layout_marginBottom="12dp"/>
         <EditText
-            android:id="@+id/etTambahNamaPelanggan"
+            android:id="@+id/etTambahNamaPegawai"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/activity_layanan_namalengkap"
@@ -63,7 +63,7 @@
             android:textSize="16sp"
             android:layout_marginBottom="12dp"/>
         <EditText
-            android:id="@+id/etTambahAlamatPelanggan"
+            android:id="@+id/etTambahAlamatPegawai"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/activity_layanan_alamat"
@@ -88,7 +88,7 @@
             android:textSize="16sp"
             android:layout_marginBottom="12dp"/>
         <EditText
-            android:id="@+id/etTambahNoHpPelanggan"
+            android:id="@+id/etTambahNoHpPegawai"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/activity_layanan_nohp"
@@ -114,7 +114,7 @@
             android:textSize="16sp"
             android:layout_marginBottom="12dp"/>
         <EditText
-            android:id="@+id/etTambahCabangPelanggan"
+            android:id="@+id/etTambahCabangPegawai"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/activity_layanan_cabang"
@@ -132,6 +132,7 @@
         android:textSize="16sp"
         android:padding="16dp"
         android:layout_marginTop="32dp"
+        android:id="@+id/btnSimpanPegawai"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
