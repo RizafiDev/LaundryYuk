@@ -31,7 +31,7 @@ class DataPelangganActivity : AppCompatActivity() {
 
     private fun getDATA() {
         val query = myRef.orderByChild("idPelanggan").limitToLast(100)
-        query.addListenerForSingleValueEvent(object : ValueEventListener {
+        query.addValueEventListener(object : ValueEventListener { // Ganti addListenerForSingleValueEvent
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
                     pelangganList.clear()

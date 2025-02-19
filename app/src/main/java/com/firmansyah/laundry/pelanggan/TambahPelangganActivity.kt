@@ -3,7 +3,6 @@ package com.firmansyah.laundry.pelanggan
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -12,13 +11,15 @@ import androidx.core.view.WindowInsetsCompat
 import com.firmansyah.laundry.R
 import com.google.firebase.database.FirebaseDatabase
 import com.firmansyah.laundry.model.ModelPelanggan
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class TambahPelangganActivity : AppCompatActivity() {
 
     private val database = FirebaseDatabase.getInstance()
     private val myRef = database.getReference("pelanggan")
 
-    private lateinit var tvJudul: TextView
     private lateinit var etNama: EditText
     private lateinit var etAlamat: EditText
     private lateinit var etNoHP: EditText
@@ -36,7 +37,7 @@ class TambahPelangganActivity : AppCompatActivity() {
             insets
         }
 
-        // Inisialisasi Viewz
+        // Inisialisasi View
         etNama = findViewById(R.id.etTambahNamaPelanggan)
         etAlamat = findViewById(R.id.etTambahAlamatPelanggan)
         etNoHP = findViewById(R.id.etTambahNoHpPelanggan)
@@ -89,12 +90,17 @@ class TambahPelangganActivity : AppCompatActivity() {
         val pelangganBaru = myRef.push()
         val pelangganId = pelangganBaru.key ?: return
 
+        // Tambahkan tanggal saat ini
+        val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+        val tanggalTerdaftar = sdf.format(Date())
+
         val data = ModelPelanggan(
             idPelanggan = pelangganId,
             namaPelanggan = nama,
             alamatPelanggan = alamat,
             noHPPelanggan = noHP,
-            cabangPelanggan = cabang
+            cabangPelanggan = cabang, // Pastikan dikirim
+            tanggalTerdaftar = tanggalTerdaftar // Tambahkan tanggal
         )
 
         pelangganBaru.setValue(data)

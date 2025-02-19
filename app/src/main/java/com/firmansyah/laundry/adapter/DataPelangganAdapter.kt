@@ -24,13 +24,14 @@ class DataPelangganAdapter(private val listPelanggan: ArrayList<ModelPelanggan>)
         holder.tvNama.text = item.namaPelanggan ?: ""
         holder.tvAlamat.text = item.alamatPelanggan ?: ""
         holder.tvNoHP.text = item.noHPPelanggan ?: ""
-
+        holder.tvTerdaftar.text = "Terdaftar: ${item.tanggalTerdaftar ?: "-"}"
+        holder.tvCabang.text = item.cabangPelanggan ?:""
         holder.btHubungi.setOnClickListener {
-            // Tambahkan aksi klik di sini
+            // Tambahkan aksi klik untuk menghubungi pelanggan
         }
 
         holder.btLihat.setOnClickListener {
-            // Tambahkan aksi klik di sini
+            // Tambahkan aksi klik untuk melihat detail pelanggan
         }
     }
 
@@ -43,6 +44,8 @@ class DataPelangganAdapter(private val listPelanggan: ArrayList<ModelPelanggan>)
         val tvNama: TextView = itemView.findViewById(R.id.tvDataNamaPelanggan)
         val tvAlamat: TextView = itemView.findViewById(R.id.tvDataAlamatPelanggan)
         val tvNoHP: TextView = itemView.findViewById(R.id.tvDataNoHpPelanggan)
+        val tvCabang: TextView = itemView.findViewById(R.id.tvDataCabangPelanggan)
+        val tvTerdaftar: TextView = itemView.findViewById(R.id.tvDataTerdaftarPelanggan) // Tampilkan tanggal terdaftar
         val btHubungi: Button = itemView.findViewById(R.id.btnHubungi)
         val btLihat: Button = itemView.findViewById(R.id.btnLihat)
     }
