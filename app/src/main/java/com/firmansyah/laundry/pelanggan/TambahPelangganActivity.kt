@@ -94,6 +94,7 @@ class TambahPelangganActivity : AppCompatActivity() {
         val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
         val tanggalTerdaftar = sdf.format(Date())
 
+
         val data = ModelPelanggan(
             idPelanggan = pelangganId,
             namaPelanggan = nama,

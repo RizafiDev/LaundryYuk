@@ -25,7 +25,9 @@ class DataPelangganAdapter(private val listPelanggan: ArrayList<ModelPelanggan>)
         holder.tvAlamat.text = item.alamatPelanggan ?: ""
         holder.tvNoHP.text = item.noHPPelanggan ?: ""
         holder.tvTerdaftar.text = "Terdaftar: ${item.tanggalTerdaftar ?: "-"}"
-        holder.tvCabang.text = item.cabangPelanggan ?:""
+        holder.tvCabang.text = "Cabang ${item.cabangPelanggan ?: "Tidak Terdaftar"}"
+
+
         holder.btHubungi.setOnClickListener {
             // Tambahkan aksi klik untuk menghubungi pelanggan
         }

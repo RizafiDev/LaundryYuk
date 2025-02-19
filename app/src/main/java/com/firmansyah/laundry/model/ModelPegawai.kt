@@ -5,5 +5,6 @@ data class ModelPegawai(
     val namaPegawai: String = "",
     val alamatPegawai: String = "",
     val noHPPegawai: String = "",
-    val cabangPegawai: String = ""
+    val cabangPegawai: String = "",
+    val tanggalTerdaftar: String? = ""
 )

@@ -31,7 +31,7 @@ class DataPegawaiActivity : AppCompatActivity() {
 
     private fun getDATA() {
         val query = myRef.orderByChild("idPegawai").limitToLast(100)
-        query.addListenerForSingleValueEvent(object : ValueEventListener {
+        query.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
                     pegawaiList.clear()
