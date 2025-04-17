@@ -27,4 +27,7 @@
     <string name="validasi_cabang_pelanggan">Branch cannot be empty</string>
     <string name="sukses_simpan_pelanggan">Data Saved</string>
     <string name="gagal_simpan_pelanggan">Data not saved</string>
+    <string name="validasi_nama">Name cannot be empty</string>
+    <string name="validasi_harga">Price cannor be empty</string>
+    <string name="validasi_cabang">Branch cannot be empty</string>
 </resources>

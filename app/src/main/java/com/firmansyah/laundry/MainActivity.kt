@@ -12,6 +12,9 @@ import android.content.Intent
 import android.widget.LinearLayout
 import com.firmansyah.laundry.pelanggan.DataPelangganActivity
 import com.firmansyah.laundry.pegawai.DataPegawaiActivity
+import com.firmansyah.laundry.layanan.DataLayananActivity
+import com.firmansyah.laundry.laporan.DataLaporanActivity
+
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,6 +37,20 @@ class MainActivity : AppCompatActivity() {
         val appDataPegawai = findViewById<LinearLayout>(R.id.AppDataPegawai)
         appDataPegawai.setOnClickListener{
             val intent = Intent(this, DataPegawaiActivity::class.java)
+            startActivity(intent)
+        }
+
+//        redirect to layanan
+        val appDataLayanan = findViewById<LinearLayout>(R.id.AppDataLayanan)
+        appDataLayanan.setOnClickListener{
+            val intent = Intent(this, DataLayananActivity::class.java)
+            startActivity(intent)
+        }
+
+//        redirect to laporan
+        val appDataLaporan = findViewById<LinearLayout>(R.id.AppDataLaporan)
+        appDataLaporan.setOnClickListener{
+            val intent = Intent(this, DataLaporanActivity::class.java)
             startActivity(intent)
         }
 

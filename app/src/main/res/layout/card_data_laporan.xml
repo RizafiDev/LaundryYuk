@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardElevation="4dp"
+    app:cardCornerRadius="12dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="12dp">
+
+        <!-- Nama & Status -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="4dp">
+
+            <!-- Nama -->
+            <TextView
+                android:id="@+id/tvNama"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Name"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:fontFamily="@font/inter_medium" />
+
+            <!-- Status -->
+            <TextView
+                android:id="@+id/tvStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Belum Dibayar"
+                android:textSize="12sp"
+                android:textColor="#FFFFFF"
+                android:fontFamily="@font/inter_bold"
+                android:textStyle="bold"
+                android:background="@drawable/bg_status_red"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="4dp" />
+        </LinearLayout>
+
+        <!-- Tanggal -->
+        <TextView
+            android:id="@+id/tvTanggal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2025-02-19 20:08:18"
+            android:textSize="12sp"
+            android:fontFamily="@font/inter_medium"
+            android:textColor="#777777"
+            android:layout_marginTop="4dp" />
+
+        <!-- Layanan & Icon -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="12dp">
+
+            <ImageView
+                android:id="@+id/imgIcon"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="12dp"
+                android:src="@drawable/mesincuci"
+                android:contentDescription="Icon Layanan" />
+
+            <TextView
+                android:id="@+id/tvLayanan"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Cuci Lipat 6kg"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:fontFamily="@font/inter_medium" />
+        </LinearLayout>
+
+        <!-- Tambahan -->
+        <TextView
+            android:id="@+id/tvTambahan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+3 Layanan Tambahan"
+            android:textSize="12sp"
+            android:fontFamily="@font/inter_medium"
+            android:textColor="#999999"
+            android:layout_marginTop="4dp" />
+
+        <!-- Total Bayar -->
+        <TextView
+            android:id="@+id/tvTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total Bayar Rp36.000,00"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:fontFamily="@font/inter_medium"
+            android:layout_marginTop="12dp" />
+
+        <!-- Tombol -->
+        <Button
+            android:id="@+id/btnAksi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bayar Sekarang"
+            android:fontFamily="@font/inter_medium"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp"
+            android:layout_gravity="end"
+            android:backgroundTint="@android:color/holo_orange_dark"
+            android:textColor="#FFFFFF" />
+
+        <!-- Tanggal Diambil -->
+        <TextView
+            android:id="@+id/tvDiambil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Diambil Pada 2025-04-14 14:14:14"
+            android:textSize="12sp"
+            android:textColor="#777777"
+            android:layout_marginTop="8dp"
+            android:visibility="gone" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

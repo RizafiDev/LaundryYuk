@@ -26,4 +26,7 @@
     <string name="validasi_cabang_pelanggan">Cabang tidak boleh kosong</string>
     <string name="sukses_simpan_pelanggan">Data disimpan</string>
     <string name="gagal_simpan_pelanggan">Data gagal disimpan</string>
+    <string name="validasi_nama">Nama tidak boleh kosong</string>
+    <string name="validasi_harga">Harga tidak boleh kosong</string>
+    <string name="validasi_cabang">Cabang tidak boleh kosong</string>
 </resources>

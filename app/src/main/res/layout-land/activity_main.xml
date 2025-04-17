@@ -146,6 +146,7 @@
 
                         <!-- Laporan -->
                         <LinearLayout
+                            android:id="@+id/AppDataLaporan"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -245,6 +246,7 @@
                     android:padding="40dp"
                     >
                     <LinearLayout
+                        android:id="@+id/AppDataLayanan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"

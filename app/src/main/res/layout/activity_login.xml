@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Background Ilustrasi -->
+    <ImageView
+        android:id="@+id/illustrationImage"
+        android:layout_width="match_parent"
+        android:layout_height="380dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/login_ilustration"
+        android:contentDescription="Illustration" />
+
+    <!-- Form Login Mengambang -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="300dp"
+        android:layout_gravity="top"
+        card_view:cardCornerRadius="24dp"
+        card_view:cardElevation="8dp"
+        android:background="@android:color/white"
+        android:padding="24dp">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:padding="24dp"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Judul -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Selamat Datang Di Access!"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/inter_bold"
+                    android:textColor="#000000" />
+
+                <!-- Subjudul -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Login atau Register sekarang! untuk menikmati Semua fitur yang tersedia di Access."
+                    android:textSize="14sp"
+                    android:layout_marginTop="8dp"
+                    android:textColor="#666666"
+                    android:fontFamily="@font/inter_medium" />
+
+                <!-- Label No. Telp -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="No. Telp :"
+                    android:layout_marginTop="16dp"
+                    android:textColor="#666666"
+                    android:fontFamily="@font/inter_semibold" />
+
+                <!-- Input No HP -->
+                <EditText
+                    android:id="@+id/editTextPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Masukkan No. HP Anda"
+                    android:fontFamily="@font/inter_semibold"
+                    android:inputType="phone"
+                    android:textSize="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:padding="14dp"
+                    android:background="@drawable/edittext_background" />
+
+                <!-- Label Password -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Password :"
+                    android:textColor="#666666"
+                    android:fontFamily="@font/inter_semibold" />
+
+                <!-- Input Password -->
+                <EditText
+                    android:id="@+id/editTextPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Masukkan Password Anda"
+                    android:inputType="textPassword"
+                    android:fontFamily="@font/inter_semibold"
+                    android:textSize="16dp"
+                    android:padding="14dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/edittext_background" />
+
+                <!-- Tombol Lanjutkan -->
+                <Button
+                    android:id="@+id/btnLogin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="LANJUTKAN"
+                    android:fontFamily="@font/inter_bold"
+                    android:backgroundTint="#4338ca"
+                    android:textColor="#FFFFFF"
+                    android:padding="14dp" />
+
+                <!-- Divider -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Atau gunakan akun"
+                    android:layout_marginTop="24dp"
+                    android:fontFamily="@font/inter_medium"
+                    android:textColor="#999999" />
+
+                <!-- Tombol Google -->
+                <Button
+                    android:id="@+id/btnGoogle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Sign in with Google"
+                    android:layout_marginTop="16dp"
+                    android:drawableLeft="@drawable/googlexml"
+                    android:fontFamily="@font/inter_bold"
+                    android:backgroundTint="#FFFFFF"
+                    android:textColor="#000000"
+                    android:elevation="2dp"
+                    android:padding="12dp" />
+
+                <!-- Bantuan -->
+                <TextView
+                    android:id="@+id/tvHelp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mengalami Kendala? Hubungi Kami"
+                    android:textColor="#1E88E5"
+                    android:layout_marginTop="24dp"
+                    android:fontFamily="@font/inter_medium"/>
+            </LinearLayout>
+        </ScrollView>
+    </androidx.cardview.widget.CardView>
+</FrameLayout>
