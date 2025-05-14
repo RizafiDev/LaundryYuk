@@ -14,6 +14,7 @@ import com.firmansyah.laundry.pelanggan.DataPelangganActivity
 import com.firmansyah.laundry.pegawai.DataPegawaiActivity
 import com.firmansyah.laundry.layanan.DataLayananActivity
 import com.firmansyah.laundry.laporan.DataLaporanActivity
+import com.firmansyah.laundry.transaksi.DataTransaksiActivity
 
 
 class MainActivity : AppCompatActivity() {
@@ -53,6 +54,14 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, DataLaporanActivity::class.java)
             startActivity(intent)
         }
+
+//        rediret to transaksi
+        val appDataTransaksi = findViewById<LinearLayout>(R.id.AppDataTransaksi)
+        appDataTransaksi.setOnClickListener{
+            val intent = Intent(this, DataTransaksiActivity::class.java)
+            startActivity(intent)
+        }
+
 
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->

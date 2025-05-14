@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    cardElevation="4dp"
+    android:orientation="vertical"
+    app:layout_constraintTop_toTopOf="parent"
+    app:cardCornerRadius="20dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_marginBottom="10dp"
+    android:layout_marginTop="10dp"
+    android:id="@+id/CVDATA_LAYANAN">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tvDataIDLayanan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ID Layanan :"
+            android:fontFamily="@font/inter"
+            />
+        <TextView
+            android:id="@+id/tvDataNamaLayanan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_bold"
+            android:text="Nama Layanan"
+            android:textSize="24sp"
+            android:layout_marginTop="16dp"
+            />
+        <TextView
+            android:id="@+id/tvDataHargaLayanan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter"
+            android:text="Harga Layanan :"
+            android:textSize="16sp"
+            android:paddingTop="8dp"
+            />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

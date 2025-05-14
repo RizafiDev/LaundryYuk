@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/CVDATA_TRANSAKSI_PELANGGAN"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    android:layout_marginTop="10dp"
+    app:cardElevation="4dp"
+    app:cardCornerRadius="20dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/tvDataIDPelanggan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/card_pelanggan_id"
+            android:fontFamily="@font/inter" />
+
+        <TextView
+            android:id="@+id/tvDataNamaPelanggan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/card_pelanggan_nama"
+            android:textSize="24sp"
+            android:fontFamily="@font/inter_bold"
+            android:layout_marginTop="16dp" />
+
+        <TextView
+            android:id="@+id/tvDataNoHpPelanggan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/card_pelanggan_nohp"
+            android:textSize="16sp"
+            android:paddingTop="8dp"
+            android:fontFamily="@font/inter" />
+
+        <TextView
+            android:id="@+id/tvDataAlamatPelanggan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/card_pelanggan_alamat"
+            android:textSize="16sp"
+            android:paddingTop="8dp"
+            android:fontFamily="@font/inter" />
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
