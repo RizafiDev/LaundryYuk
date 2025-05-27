@@ -14,6 +14,7 @@ import com.firmansyah.laundry.pelanggan.DataPelangganActivity
 import com.firmansyah.laundry.pegawai.DataPegawaiActivity
 import com.firmansyah.laundry.layanan.DataLayananActivity
 import com.firmansyah.laundry.laporan.DataLaporanActivity
+import com.firmansyah.laundry.tambahan.DataTambahanActivity
 import com.firmansyah.laundry.transaksi.DataTransaksiActivity
 
 
@@ -59,6 +60,12 @@ class MainActivity : AppCompatActivity() {
         val appDataTransaksi = findViewById<LinearLayout>(R.id.AppDataTransaksi)
         appDataTransaksi.setOnClickListener{
             val intent = Intent(this, DataTransaksiActivity::class.java)
+            startActivity(intent)
+        }
+        //        rediret to tambahan
+        val appDataTambahan = findViewById<LinearLayout>(R.id.AppDataTambahan)
+        appDataTambahan.setOnClickListener{
+            val intent = Intent(this, DataTambahanActivity::class.java)
             startActivity(intent)
         }
 

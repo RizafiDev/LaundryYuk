@@ -15,6 +15,21 @@
         android:theme="@style/Theme.Laundry"
         tools:targetApi="31">
         <activity
+            android:name=".transaksi.CheckoutActivity"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".tambahan.DataTambahanActivity"
+            android:exported="false" />
+        <activity
+            android:name=".tambahan.TambahTambahanActivity"
+            android:exported="false" />
+        <activity
             android:name=".transaksi.PilihLayananActivity"
             android:exported="false" />
         <activity
@@ -28,9 +43,6 @@
             android:exported="false" />
         <activity
             android:name=".laporan.DataLaporanActivity"
-            android:exported="false" />
-        <activity
-            android:name=".DataLaporanActivity"
             android:exported="false" />
         <activity
             android:name=".layanan.DataLayananActivity"
@@ -53,11 +65,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

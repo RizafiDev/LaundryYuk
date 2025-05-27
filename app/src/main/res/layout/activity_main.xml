@@ -267,6 +267,7 @@
             android:padding="40dp"
             >
             <LinearLayout
+                android:id="@+id/AppDataTambahan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
