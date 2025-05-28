@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import android.content.Intent
 import android.widget.LinearLayout
+import com.firmansyah.laundry.auth.AkunActivity
 import com.firmansyah.laundry.pelanggan.DataPelangganActivity
 import com.firmansyah.laundry.pegawai.DataPegawaiActivity
 import com.firmansyah.laundry.layanan.DataLayananActivity
@@ -68,7 +69,12 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, DataTambahanActivity::class.java)
             startActivity(intent)
         }
-
+        //        rediret to akun
+        val appDataAkun = findViewById<LinearLayout>(R.id.AppDataAkun)
+        appDataAkun.setOnClickListener{
+            val intent = Intent(this, AkunActivity::class.java)
+            startActivity(intent)
+        }
 
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->

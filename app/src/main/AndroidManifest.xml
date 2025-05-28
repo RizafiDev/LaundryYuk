@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -15,14 +16,22 @@
         android:theme="@style/Theme.Laundry"
         tools:targetApi="31">
         <activity
-            android:name=".transaksi.CheckoutActivity"
-            android:exported="true" >
+            android:name=".auth.SplashActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".auth.AkunActivity"
+            android:exported="false" />
+        <activity
+            android:name=".auth.RegistrationActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".transaksi.CheckoutActivity"
+            android:exported="false" />
         <activity
             android:name=".tambahan.DataTambahanActivity"
             android:exported="false" />
@@ -40,7 +49,7 @@
             android:exported="false" />
         <activity
             android:name=".auth.LoginActivity"
-            android:exported="false" />
+            android:exported="false"/>
         <activity
             android:name=".laporan.DataLaporanActivity"
             android:exported="false" />
@@ -55,18 +64,16 @@
             android:exported="true" />
         <activity
             android:name=".layanan.TambahLayananActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".pelanggan.TambahPelangganActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".pelanggan.DataPelangganActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true">
-
-        </activity>
+            android:exported="false" />
     </application>
 
 </manifest>

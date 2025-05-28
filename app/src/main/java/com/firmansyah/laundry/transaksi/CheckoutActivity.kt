@@ -1,21 +1,145 @@
 package com.firmansyah.laundry.transaksi
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.firmansyah.laundry.R
+import com.firmansyah.laundry.adapter.LayananTambahanAdapter
+import com.firmansyah.laundry.model.ModelTambahan
 
 class CheckoutActivity : AppCompatActivity() {
+
+    private lateinit var tvNamaPelanggan: TextView
+    private lateinit var tvNoHp: TextView
+    private lateinit var tvNamaLayanan: TextView
+    private lateinit var tvHargaLayanan: TextView
+    private lateinit var tvKilogram: TextView
+    private lateinit var tvTotalHarga: TextView
+    private lateinit var tvPajak: TextView
+    private lateinit var tvTotalPembayaran: TextView
+    private lateinit var tvTambahanKosong: TextView
+    private lateinit var rvLayananTambahan: RecyclerView
+    private lateinit var btnMinus: ImageView
+    private lateinit var btnPlus: ImageView
+    private lateinit var btnBayar: TextView
+
+    private var kilogram = 1
+    private var basePrice = 0
+    private val taxRate = 0.12
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_checkout)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+
+        initViews()
+        setupRecyclerView()
+        loadDataFromIntent()
+        setupClickListeners()
+    }
+
+    private fun initViews() {
+        tvNamaPelanggan = findViewById(R.id.tv_nama_pelanggan)
+        tvNoHp = findViewById(R.id.tv_no_hp)
+        tvNamaLayanan = findViewById(R.id.tv_nama_layanan)
+        tvHargaLayanan = findViewById(R.id.tv_harga_layanan)
+        tvKilogram = findViewById(R.id.tv_kilogram)
+        tvTotalHarga = findViewById(R.id.tv_total_harga)
+        tvPajak = findViewById(R.id.tv_pajak)
+        tvTotalPembayaran = findViewById(R.id.tv_total_pembayaran)
+        tvTambahanKosong = findViewById(R.id.tv_tambahan_kosong)
+        rvLayananTambahan = findViewById(R.id.rv_layanan_tambahan)
+        btnMinus = findViewById(R.id.btn_minus)
+        btnPlus = findViewById(R.id.btn_plus)
+        btnBayar = findViewById(R.id.btn_bayar)
+    }
+
+    private fun setupRecyclerView() {
+        rvLayananTambahan.apply {
+            layoutManager = LinearLayoutManager(this@CheckoutActivity)
+            isNestedScrollingEnabled = false
         }
+    }
+
+    private fun loadDataFromIntent() {
+        intent?.extras?.let { bundle ->
+            // Load customer data
+            tvNamaPelanggan.text = bundle.getString("namaPelanggan", "")
+            tvNoHp.text = bundle.getString("noHPPelanggan", "")
+
+            // Load main service data
+            tvNamaLayanan.text = bundle.getString("namaLayanan", "")
+            val harga = bundle.getString("hargaLayanan", "0")
+            tvHargaLayanan.text = "Rp $harga"
+            basePrice = parseHarga(harga)
+
+            // Load additional services
+            val tambahanList = bundle.getSerializable("tambahanList") as? ArrayList<ModelTambahan>
+            if (tambahanList.isNullOrEmpty()) {
+                tvTambahanKosong.visibility = View.VISIBLE
+                rvLayananTambahan.visibility = View.GONE
+            } else {
+                tvTambahanKosong.visibility = View.GONE
+                rvLayananTambahan.visibility = View.VISIBLE
+
+                val adapter = LayananTambahanAdapter(tambahanList.toMutableList()) { _, _ -> }
+                rvLayananTambahan.adapter = adapter
+
+                // Add additional services price to base price
+                tambahanList.forEach { tambahan ->
+                    basePrice += parseHarga(tambahan.hargaLayanan)
+                }
+            }
+
+            // Calculate initial total
+            calculateTotal()
+        }
+    }
+
+    private fun setupClickListeners() {
+        btnMinus.setOnClickListener {
+            if (kilogram > 1) {
+                kilogram--
+                tvKilogram.text = "$kilogram Kg"
+                calculateTotal()
+            }
+        }
+
+        btnPlus.setOnClickListener {
+            kilogram++
+            tvKilogram.text = "$kilogram Kg"
+            calculateTotal()
+        }
+
+        btnBayar.setOnClickListener {
+            // Tombol bayar hanya untuk menampilkan informasi atau kembali ke halaman sebelumnya
+            finish()
+        }
+    }
+
+    private fun parseHarga(harga: String?): Int {
+        return harga
+            ?.replace("Rp", "")
+            ?.replace(".", "")
+            ?.replace(",", "")
+            ?.trim()
+            ?.toIntOrNull() ?: 0
+    }
+
+    private fun calculateTotal() {
+        val subtotal = basePrice * kilogram
+        val tax = (subtotal * taxRate).toInt()
+        val total = subtotal + tax
+
+        tvTotalHarga.text = "Rp ${formatRupiah(subtotal)}"
+        tvPajak.text = "Rp ${formatRupiah(tax)}"
+        tvTotalPembayaran.text = "Rp ${formatRupiah(total)}"
+    }
+
+    private fun formatRupiah(amount: Int): String {
+        return String.format("%,d", amount).replace(',', '.')
     }
 }

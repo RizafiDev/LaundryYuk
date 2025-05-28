@@ -29,4 +29,6 @@
     <string name="validasi_nama">Nama tidak boleh kosong</string>
     <string name="validasi_harga">Harga tidak boleh kosong</string>
     <string name="validasi_cabang">Cabang tidak boleh kosong</string>
+    <string name="default_web_client_id">348486120489-96t7e54je1ckrg5s40dncf8g943eo9nu.apps.googleusercontent.com</string>
+
 </resources>

@@ -9,10 +9,10 @@
     <ImageView
         android:id="@+id/illustrationImage"
         android:layout_width="match_parent"
-        android:layout_height="380dp"
+        android:layout_height="296dp"
+        android:contentDescription="Illustration"
         android:scaleType="centerCrop"
-        android:src="@drawable/login_ilustration"
-        android:contentDescription="Illustration" />
+        android:src="@drawable/login_ilustration" />
 
     <!-- Form Login Mengambang -->
     <androidx.cardview.widget.CardView
@@ -49,11 +49,32 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Login sekarang! untuk menikmati Semua fitur yang tersedia di LaundryYuk"
+                    android:text="Daftar sekarang! untuk menikmati Semua fitur yang tersedia di LaundryYuk"
                     android:textSize="14sp"
                     android:layout_marginTop="8dp"
                     android:textColor="#666666"
                     android:fontFamily="@font/inter_medium" />
+
+                <!-- Label Username -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Nama Pengguna :"
+                    android:layout_marginTop="16dp"
+                    android:textColor="#666666"
+                    android:fontFamily="@font/inter_semibold" />
+
+                <!-- Input No HP -->
+                <EditText
+                    android:layout_marginTop="8dp"
+                    android:id="@+id/editTextUsername"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Masukkan Nama Pengguna Anda"
+                    android:fontFamily="@font/inter_semibold"
+                    android:textSize="16dp"
+                    android:padding="14dp"
+                    android:background="@drawable/edittext_background" />
 
                 <!-- Label Email -->
                 <TextView
@@ -64,10 +85,10 @@
                     android:textColor="#666666"
                     android:fontFamily="@font/inter_semibold" />
 
-                <!-- Input No HP -->
+                <!-- Input email -->
                 <EditText
                     android:layout_marginTop="8dp"
-                    android:id="@+id/editTextPhone"
+                    android:id="@+id/editTextEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Masukkan Email Anda"
@@ -140,7 +161,7 @@
                     android:textAlignment="center"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Belum memiliki akun? Daftar"
+                    android:text="Sudah memiliki akun? Login"
                     android:textColor="#1E88E5"
                     android:layout_marginTop="24dp"
                     android:fontFamily="@font/inter_medium"/>

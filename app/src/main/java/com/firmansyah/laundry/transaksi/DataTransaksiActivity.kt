@@ -225,16 +225,18 @@ class DataTransaksiActivity : AppCompatActivity() {
 
         val totalHarga = calculateTotalForProcess()
 
-        AlertDialog.Builder(this)
-            .setTitle("Konfirmasi Transaksi")
-            .setMessage(buildTransactionSummary(totalHarga))
-            .setPositiveButton("Proses") { _, _ ->
-                Toast.makeText(this, "Transaksi berhasil diproses", Toast.LENGTH_SHORT).show()
-                // Simpan ke Firebase jika perlu, atau lanjut ke halaman lain
-            }
-            .setNegativeButton("Batal") { dialog, _ -> dialog.dismiss() }
-            .show()
+        // Langsung menuju CheckoutActivity tanpa modal konfirmasi
+        val intent = Intent(this, CheckoutActivity::class.java).apply {
+            putExtra("namaPelanggan", selectedPelangganNama)
+            putExtra("noHPPelanggan", selectedPelangganHP)
+            putExtra("namaLayanan", selectedLayananNama)
+            putExtra("hargaLayanan", selectedLayananHarga)
+            putExtra("tambahanList", ArrayList(selectedTambahanList))
+            putExtra("totalHarga", totalHarga.toString())
+        }
+        startActivity(intent)
     }
+
 
     private fun buildTransactionSummary(totalHarga: Int): String {
         val summary = StringBuilder()
