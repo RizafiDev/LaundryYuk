@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.firmansyah.laundry.R
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 
 class AkunActivity : AppCompatActivity() {
@@ -36,12 +38,23 @@ class AkunActivity : AppCompatActivity() {
     }
 
     private fun logoutUser() {
-        // Logout dari Firebase Auth
+        // Logout dari Firebase
         firebaseAuth.signOut()
 
-        // Arahkan ke LoginActivity
-        Toast.makeText(this, "Berhasil logout", Toast.LENGTH_SHORT).show()
-        startActivity(Intent(this, LoginActivity::class.java))
-        finish() // Tutup AkunActivity agar tidak bisa kembali
+        // Logout dari Google
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+        val googleSignInClient = GoogleSignIn.getClient(this, gso)
+
+        googleSignInClient.signOut().addOnCompleteListener {
+            Toast.makeText(this, "Berhasil logout", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            finish()
+        }
     }
+
 }

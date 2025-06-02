@@ -1,6 +1,5 @@
 package com.firmansyah.laundry.auth
 
-import RegistrationActivity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
@@ -17,6 +16,7 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+
 
 class LoginActivity : AppCompatActivity() {
 

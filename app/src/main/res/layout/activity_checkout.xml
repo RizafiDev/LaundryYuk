@@ -24,7 +24,7 @@
                     android:text="Checkout"
                     android:fontFamily="@font/inter_bold"
                     android:textSize="18sp"
-                    android:padding="18dp" />
+                    android:padding="20dp" />
             </androidx.cardview.widget.CardView>
 
             <!--informasi pelanggan-->
@@ -358,19 +358,52 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center">
-
-                    <TextView
-                        android:id="@+id/btn_bayar"
-                        android:textAlignment="center"
-                        android:textColor="@color/white"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Bayar"
-                        android:fontFamily="@font/inter_bold"
-                        android:textSize="16sp"
-                        android:padding="14dp"
-                        android:background="@drawable/button_background"
-                        android:layout_margin="10dp" />
+                        android:orientation="vertical"
+                        android:padding="16dp">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:weightSum="2"
+                            android:layout_marginBottom="16dp"
+                            android:paddingHorizontal="4dp"
+                            android:layout_gravity="center">
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textColor="@color/black"
+                                android:fontFamily="@font/inter_medium"
+                                android:textSize="14sp"
+                                android:text="Metode Pembayaran"/>
+                            <TextView
+                                android:id="@+id/btn_pilih_metode_pembayaran"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:textAlignment="textEnd"
+                                android:textColor="#4338ca"
+                                android:layout_weight="1"
+                                android:text="Pilih metode pembayaran"/>
+                        </LinearLayout>
+                        <TextView
+                            android:id="@+id/btn_bayar"
+                            android:textAlignment="center"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:textColor="@color/white"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Bayar"
+                            android:fontFamily="@font/inter_bold"
+                            android:textSize="16sp"
+                            android:padding="14dp"
+                            android:background="@drawable/button_background"
+                             />
+                    </LinearLayout>
+
+
                 </androidx.cardview.widget.CardView>
 
             </androidx.cardview.widget.CardView>

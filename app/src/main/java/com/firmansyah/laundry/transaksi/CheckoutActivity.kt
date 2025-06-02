@@ -1,9 +1,11 @@
 package com.firmansyah.laundry.transaksi
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -26,10 +28,27 @@ class CheckoutActivity : AppCompatActivity() {
     private lateinit var btnMinus: ImageView
     private lateinit var btnPlus: ImageView
     private lateinit var btnBayar: TextView
+    private lateinit var btnPilihMetodePembayaran: TextView
 
     private var kilogram = 1
     private var basePrice = 0
     private val taxRate = 0.12
+    private var selectedPaymentMethod = "Pilih metode pembayaran"
+
+    // Activity Result Launcher untuk menerima hasil dari MetodePembayaranActivity
+    private val paymentMethodLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == RESULT_OK) {
+            val paymentMethod = result.data?.getStringExtra("selected_payment_method")
+            paymentMethod?.let {
+                selectedPaymentMethod = it
+                btnPilihMetodePembayaran.text = it
+                // Ubah warna text menjadi hitam setelah memilih metode pembayaran
+                btnPilihMetodePembayaran.setTextColor(resources.getColor(android.R.color.black))
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,6 +74,7 @@ class CheckoutActivity : AppCompatActivity() {
         btnMinus = findViewById(R.id.btn_minus)
         btnPlus = findViewById(R.id.btn_plus)
         btnBayar = findViewById(R.id.btn_bayar)
+        btnPilihMetodePembayaran = findViewById(R.id.btn_pilih_metode_pembayaran)
     }
 
     private fun setupRecyclerView() {
@@ -114,9 +134,25 @@ class CheckoutActivity : AppCompatActivity() {
             calculateTotal()
         }
 
+        btnPilihMetodePembayaran.setOnClickListener {
+            val intent = Intent(this, MetodePembayaranActivity::class.java)
+            paymentMethodLauncher.launch(intent)
+        }
+
         btnBayar.setOnClickListener {
-            // Tombol bayar hanya untuk menampilkan informasi atau kembali ke halaman sebelumnya
-            finish()
+            if (selectedPaymentMethod == "Pilih metode pembayaran") {
+                // Tampilkan pesan bahwa metode pembayaran harus dipilih terlebih dahulu
+                // Anda bisa menggunakan Toast atau AlertDialog
+                android.widget.Toast.makeText(
+                    this,
+                    "Silakan pilih metode pembayaran terlebih dahulu",
+                    android.widget.Toast.LENGTH_SHORT
+                ).show()
+            } else {
+                // Proses pembayaran atau navigasi ke halaman selanjutnya
+                // Untuk saat ini hanya finish activity
+                finish()
+            }
         }
     }
 
