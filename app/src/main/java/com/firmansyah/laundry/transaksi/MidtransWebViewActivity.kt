@@ -1,39 +1,30 @@
 package com.firmansyah.laundry.transaksi
 
+import android.content.Intent
 import android.os.Bundle
+import android.webkit.JavascriptInterface
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.firmansyah.laundry.R
-import com.firmansyah.laundry.model.PaymentStatusResponse
-import com.firmansyah.laundry.network.ApiService
-import com.firmansyah.laundry.network.RetrofitClient
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import org.json.JSONObject
 
 class MidtransWebViewActivity : AppCompatActivity() {
 
     private lateinit var webView: WebView
-    private lateinit var apiService: ApiService
     private var orderId: String = ""
+    private var paymentMethod: String = "E-Money" // Default value
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_midtrans_web_view)
 
         initViews()
-        setupApiService()
         setupBackPressedHandler()
         loadPaymentPage()
     }
-
-    private fun setupApiService() {
-        apiService = RetrofitClient.instance
-    }
-
 
     private fun initViews() {
         webView = findViewById(R.id.webview_midtrans)
@@ -43,21 +34,38 @@ class MidtransWebViewActivity : AppCompatActivity() {
             domStorageEnabled = true
             loadWithOverviewMode = true
             useWideViewPort = true
+            builtInZoomControls = false
+            displayZoomControls = false
         }
+
+        // Add JavaScript interface to detect payment method
+        webView.addJavascriptInterface(WebAppInterface(), "Android")
 
         webView.webViewClient = object : WebViewClient() {
             override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
                 url?.let {
                     when {
-                        it.contains("payment-success") -> {
+                        it.contains("payment/finish") ||
+                                it.contains("payment-success") ||
+                                it.contains("status_code=200") ||
+                                it.contains("transaction_status=settlement") ||
+                                it.contains("transaction_status=capture") -> {
                             handlePaymentSuccess()
                             return true
                         }
-                        it.contains("payment-error") -> {
+                        it.contains("payment/error") ||
+                                it.contains("payment-error") ||
+                                it.contains("status_code=201") ||
+                                it.contains("transaction_status=deny") ||
+                                it.contains("transaction_status=cancel") ||
+                                it.contains("transaction_status=expire") ||
+                                it.contains("transaction_status=failure") -> {
                             handlePaymentError()
                             return true
                         }
-                        it.contains("payment-pending") -> {
+                        it.contains("payment/pending") ||
+                                it.contains("payment-pending") ||
+                                it.contains("transaction_status=pending") -> {
                             handlePaymentPending()
                             return true
                         }
@@ -65,6 +73,40 @@ class MidtransWebViewActivity : AppCompatActivity() {
                     }
                 }
                 return false
+            }
+
+            override fun onPageFinished(view: WebView?, url: String?) {
+                super.onPageFinished(view, url)
+
+                // Inject JavaScript to detect payment method when page finishes loading
+                view?.evaluateJavascript("""
+                    if (typeof window.paymentMethod !== 'undefined') {
+                        Android.setPaymentMethod(window.paymentMethod);
+                    } else if (typeof Snap !== 'undefined') {
+                        Android.setPaymentMethod(Snap.getActivePaymentMethod());
+                    } else {
+                        // Fallback to check URL for payment method
+                        var url = window.location.href;
+                        if (url.includes('gopay')) Android.setPaymentMethod('Gopay');
+                        else if (url.includes('shopeepay')) Android.setPaymentMethod('ShopeePay');
+                        else if (url.includes('qris')) Android.setPaymentMethod('QRIS');
+                        else if (url.includes('bank_transfer')) Android.setPaymentMethod('Bank Transfer');
+                        else Android.setPaymentMethod('E-Money');
+                    }
+                """.trimIndent(), null)
+            }
+        }
+    }
+
+    inner class WebAppInterface {
+        @JavascriptInterface
+        fun setPaymentMethod(method: String) {
+            paymentMethod = when (method.toLowerCase()) {
+                "gopay" -> "Gopay"
+                "shopeepay" -> "ShopeePay"
+                "qris" -> "QRIS"
+                "bank_transfer" -> "Transfer Bank"
+                else -> method
             }
         }
     }
@@ -102,50 +144,35 @@ class MidtransWebViewActivity : AppCompatActivity() {
     }
 
     private fun handlePaymentSuccess() {
-        checkTransactionStatus("success")
+        // Return success result with payment method
+        val resultIntent = Intent().apply {
+            putExtra("payment_method", paymentMethod)
+        }
+        setResult(RESULT_OK, resultIntent)
+        finish()
     }
 
     private fun handlePaymentError() {
-        checkTransactionStatus("error")
+        AlertDialog.Builder(this)
+            .setTitle("Pembayaran Gagal")
+            .setMessage("Pembayaran gagal atau dibatalkan\nOrder ID: $orderId")
+            .setPositiveButton("OK") { _, _ ->
+                setResult(RESULT_CANCELED)
+                finish()
+            }
+            .setCancelable(false)
+            .show()
     }
 
     private fun handlePaymentPending() {
-        checkTransactionStatus("pending")
-    }
-
-    private fun checkTransactionStatus(expectedStatus: String) {
-        apiService.checkTransactionStatus(orderId).enqueue(object : Callback<PaymentStatusResponse> {
-            override fun onResponse(
-                call: Call<PaymentStatusResponse>,
-                response: Response<PaymentStatusResponse>
-            ) {
-                if (response.isSuccessful) {
-                    val status = response.body()?.transactionStatus
-                    showPaymentResult(expectedStatus, status)
-                } else {
-                    showPaymentResult(expectedStatus, "unknown")
-                }
-            }
-
-            override fun onFailure(call: Call<PaymentStatusResponse>, t: Throwable) {
-                showPaymentResult(expectedStatus, "error")
-            }
-        })
-    }
-
-    private fun showPaymentResult(expectedStatus: String, actualStatus: String?) {
-        val message = when (expectedStatus) {
-            "success" -> "Pembayaran berhasil!"
-            "error" -> "Pembayaran gagal atau dibatalkan"
-            "pending" -> "Pembayaran sedang diproses"
-            else -> "Status pembayaran tidak diketahui"
-        }
-
         AlertDialog.Builder(this)
-            .setTitle("Status Pembayaran")
-            .setMessage("$message\nOrder ID: $orderId")
+            .setTitle("Pembayaran Pending")
+            .setMessage("Pembayaran sedang diproses\nOrder ID: $orderId\n\nAnda akan diarahkan ke invoice.")
             .setPositiveButton("OK") { _, _ ->
-                setResult(RESULT_OK)
+                val resultIntent = Intent().apply {
+                    putExtra("payment_method", paymentMethod)
+                }
+                setResult(RESULT_OK, resultIntent)
                 finish()
             }
             .setCancelable(false)

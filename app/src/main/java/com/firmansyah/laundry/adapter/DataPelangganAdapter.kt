@@ -20,11 +20,10 @@ class DataPelangganAdapter(private val listPelanggan: ArrayList<ModelPelanggan>)
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = listPelanggan[position]
-        holder.tvDataIDPelanggan.text = item.idPelanggan ?: ""
         holder.tvNama.text = item.namaPelanggan ?: ""
         holder.tvAlamat.text = item.alamatPelanggan ?: ""
         holder.tvNoHP.text = item.noHPPelanggan ?: ""
-        holder.tvTerdaftar.text = "Terdaftar: ${item.tanggalTerdaftar ?: "-"}"
+        holder.tvTerdaftar.text = "Bergabung pada ${item.tanggalTerdaftar ?: "-"}"
         holder.tvCabang.text = "Cabang ${item.cabangPelanggan ?: "Tidak Terdaftar"}"
 
 
@@ -42,13 +41,12 @@ class DataPelangganAdapter(private val listPelanggan: ArrayList<ModelPelanggan>)
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val tvDataIDPelanggan: TextView = itemView.findViewById(R.id.tvDataIDPelanggan)
         val tvNama: TextView = itemView.findViewById(R.id.tvDataNamaPelanggan)
         val tvAlamat: TextView = itemView.findViewById(R.id.tvDataAlamatPelanggan)
         val tvNoHP: TextView = itemView.findViewById(R.id.tvDataNoHpPelanggan)
         val tvCabang: TextView = itemView.findViewById(R.id.tvDataCabangPelanggan)
         val tvTerdaftar: TextView = itemView.findViewById(R.id.tvDataTerdaftarPelanggan) // Tampilkan tanggal terdaftar
-        val btHubungi: Button = itemView.findViewById(R.id.btnHubungi)
-        val btLihat: Button = itemView.findViewById(R.id.btnLihat)
+        val btHubungi: TextView = itemView.findViewById(R.id.btnHubungi)
+        val btLihat: TextView = itemView.findViewById(R.id.btnLihat)
     }
 }

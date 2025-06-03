@@ -8,6 +8,7 @@ data class PaymentResponse(
     data class PaymentData(
         val token: String,
         val redirect_url: String,
+        val payment_type: String? = null,
         val order_id: String
     )
 }

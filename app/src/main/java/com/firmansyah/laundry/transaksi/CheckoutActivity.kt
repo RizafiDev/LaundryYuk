@@ -44,17 +44,16 @@ class CheckoutActivity : AppCompatActivity() {
     private lateinit var btnPilihMetodePembayaran: TextView
 
     private var kilogram = 1
-    private var basePrice = 0
+    private var baseServicePrice = 0
     private val taxRate = 0.12
     private var selectedPaymentMethod = "Pilih metode pembayaran"
+    private var actualPaymentMethod = "Cash"
     private var tambahanList: ArrayList<ModelTambahan>? = null
     private var namaPelanggan = ""
     private var noHpPelanggan = ""
     private var namaLayanan = ""
 
     private val apiService by lazy { RetrofitClient.instance }
-
-    // Firebase instances
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var database: FirebaseDatabase
 
@@ -75,8 +74,10 @@ class CheckoutActivity : AppCompatActivity() {
     ) { result ->
         when (result.resultCode) {
             RESULT_OK -> {
-                saveTransactionToDatabase()
-                showSuccessDialog("Pembayaran berhasil!")
+                actualPaymentMethod = result.data?.getStringExtra("payment_method") ?: "E-Money"
+                saveTransactionToDatabase { transactionId ->
+                    navigateToInvoice(transactionId)
+                }
             }
             RESULT_CANCELED -> showErrorDialog("Pembayaran dibatalkan")
         }
@@ -86,7 +87,6 @@ class CheckoutActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_checkout)
 
-        // Initialize Firebase
         firebaseAuth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance()
 
@@ -131,7 +131,8 @@ class CheckoutActivity : AppCompatActivity() {
             tvNamaLayanan.text = namaLayanan
             val harga = bundle.getString("hargaLayanan") ?: "0"
             tvHargaLayanan.text = "Rp $harga"
-            basePrice = parseHarga(harga)
+
+            baseServicePrice = parseHarga(harga)
 
             tambahanList = bundle.getSerializable("tambahanList") as? ArrayList<ModelTambahan>
             if (tambahanList.isNullOrEmpty()) {
@@ -141,9 +142,6 @@ class CheckoutActivity : AppCompatActivity() {
                 tvTambahanKosong.visibility = View.GONE
                 rvLayananTambahan.visibility = View.VISIBLE
                 rvLayananTambahan.adapter = LayananTambahanAdapter(tambahanList!!.toMutableList()) { _, _ -> }
-                tambahanList!!.forEach { tambahan ->
-                    basePrice += parseHarga(tambahan.hargaLayanan ?: "0")
-                }
             }
             calculateTotal()
         }
@@ -179,25 +177,23 @@ class CheckoutActivity : AppCompatActivity() {
     }
 
     private fun processCashPayment() {
-        AlertDialog.Builder(this)
-            .setTitle("Pembayaran Cash")
-            .setMessage("Pembayaran akan diproses sebagai cash. Silakan bayar di kasir.")
-            .setPositiveButton("OK") { _, _ ->
-                saveTransactionToDatabase()
-                showSuccessDialog("Transaksi berhasil disimpan")
-            }
-            .show()
+        actualPaymentMethod = "Cash"
+        saveTransactionToDatabase { transactionId ->
+            navigateToInvoice(transactionId)
+        }
     }
 
     private fun processEMoneyPayment() {
-        val subtotal = basePrice * kilogram
-        val tax = (subtotal * taxRate).toInt()
-        val totalAmount = subtotal + tax
+        val serviceSubtotal = baseServicePrice * kilogram
+        val tambahanTotal = tambahanList?.sumOf { parseHarga(it.hargaLayanan ?: "0") } ?: 0
+        val subtotalBeforeTax = serviceSubtotal + tambahanTotal
+        val tax = (subtotalBeforeTax * taxRate).toInt()
+        val totalAmount = subtotalBeforeTax + tax
 
         val itemDetails = mutableListOf<PaymentRequest.ItemDetail>().apply {
             add(PaymentRequest.ItemDetail(
                 id = "main_service",
-                price = basePrice,
+                price = baseServicePrice,
                 quantity = kilogram,
                 name = "$namaLayanan ($kilogram Kg)"
             ))
@@ -245,6 +241,7 @@ class CheckoutActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     response.body()?.let { paymentResponse ->
                         if (paymentResponse.success) {
+                            actualPaymentMethod = paymentResponse.data.payment_type ?: "E-Money"
                             openMidtransWebView(paymentResponse.data.redirect_url, paymentResponse.data.order_id)
                         } else {
                             showError("Gagal membuat transaksi: ${paymentResponse.message ?: "Unknown error"}")
@@ -272,35 +269,40 @@ class CheckoutActivity : AppCompatActivity() {
         midtransLauncher.launch(intent)
     }
 
-    private fun saveTransactionToDatabase() {
-        val currentUser = firebaseAuth.currentUser
-        if (currentUser == null) {
-            Log.e("Firebase", "No user logged in")
-            return
-        }
+    private fun generateTransactionId(): String {
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = String.format("%02d", calendar.get(Calendar.MONTH) + 1)
+        val day = String.format("%02d", calendar.get(Calendar.DAY_OF_MONTH))
+        val timestamp = System.currentTimeMillis()
+        val uniqueId = (timestamp % 10000).toString().padStart(4, '0')
 
-        val subtotal = basePrice * kilogram
+        return "TRX$year$month$day$uniqueId"
+    }
+
+    private fun saveTransactionToDatabase(onSuccess: (String) -> Unit) {
+        val currentUser = firebaseAuth.currentUser ?: return
+
+        val serviceSubtotal = baseServicePrice * kilogram
+        val tambahanTotal = tambahanList?.sumOf { parseHarga(it.hargaLayanan ?: "0") } ?: 0
+        val subtotal = serviceSubtotal + tambahanTotal
         val tax = (subtotal * taxRate).toInt()
         val total = subtotal + tax
 
-        // Generate unique transaction ID
-        val transactionId = database.reference.child("transactions").push().key ?: return
-
-        // Get current timestamp
+        val transactionId = generateTransactionId()
         val timestamp = System.currentTimeMillis()
         val dateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault())
         val formattedDate = dateFormat.format(Date(timestamp))
 
-        // Prepare additional services data
         val layananTambahanData = tambahanList?.map { tambahan ->
             mapOf(
                 "id" to (tambahan.idLayanan ?: ""),
                 "nama" to (tambahan.namaLayanan ?: ""),
-                "harga" to parseHarga(tambahan.hargaLayanan ?: "0")
+                "harga" to parseHarga(tambahan.hargaLayanan ?: "0"),
+                "quantity" to 1
             )
         } ?: emptyList()
 
-        // Create transaction data
         val transactionData = mapOf(
             "transactionId" to transactionId,
             "timestamp" to timestamp,
@@ -311,33 +313,31 @@ class CheckoutActivity : AppCompatActivity() {
             ),
             "layanan" to mapOf(
                 "nama" to namaLayanan,
-                "hargaPerKg" to (basePrice - (tambahanList?.sumOf { parseHarga(it.hargaLayanan ?: "0") } ?: 0)),
+                "hargaPerKg" to baseServicePrice,
                 "kilogram" to kilogram,
                 "layananTambahan" to layananTambahanData
             ),
             "pembayaran" to mapOf(
-                "metodePembayaran" to selectedPaymentMethod,
+                "metodePembayaran" to actualPaymentMethod,
                 "subtotal" to subtotal,
                 "pajak" to tax,
                 "totalPembayaran" to total
             ),
             "karyawan" to mapOf(
                 "uid" to currentUser.uid,
-                "nama" to (currentUser.displayName ?: ""),
+                "nama" to (currentUser.displayName ?: "Admin"),
                 "email" to (currentUser.email ?: "")
             ),
             "status" to "completed"
         )
 
-        // Save to Firebase Realtime Database
         database.reference
-            .child("transactions")
+            .child("transaksi")
             .child(transactionId)
             .setValue(transactionData)
             .addOnSuccessListener {
-                Log.d("Firebase", "Transaction saved successfully")
-                // Also save to monthly summary for reporting
                 saveMonthlyReport(total, timestamp)
+                onSuccess(transactionId)
             }
             .addOnFailureListener { exception ->
                 Log.e("Firebase", "Failed to save transaction", exception)
@@ -345,11 +345,40 @@ class CheckoutActivity : AppCompatActivity() {
             }
     }
 
+    private fun navigateToInvoice(transactionId: String) {
+        val intent = Intent(this, InvoiceActivity::class.java)
+        intent.putExtra("transactionId", transactionId)
+        intent.putExtra("namaPelanggan", namaPelanggan)
+        intent.putExtra("noHpPelanggan", noHpPelanggan)
+        intent.putExtra("namaLayanan", namaLayanan)
+        intent.putExtra("kilogram", kilogram)
+        intent.putExtra("metodePembayaran", actualPaymentMethod)
+        intent.putExtra("namaPegawai", firebaseAuth.currentUser?.displayName ?: "Admin")
+        intent.putExtra("baseServicePrice", baseServicePrice)
+
+        val serviceSubtotal = baseServicePrice * kilogram
+        val tambahanTotal = tambahanList?.sumOf { parseHarga(it.hargaLayanan ?: "0") } ?: 0
+        val subtotal = serviceSubtotal + tambahanTotal
+        val tax = (subtotal * taxRate).toInt()
+        val total = subtotal + tax
+
+        intent.putExtra("subtotal", subtotal)
+        intent.putExtra("pajak", tax)
+        intent.putExtra("totalPembayaran", total)
+
+        if (!tambahanList.isNullOrEmpty()) {
+            intent.putExtra("tambahanList", tambahanList)
+        }
+
+        startActivity(intent)
+        finish()
+    }
+
     private fun saveMonthlyReport(totalAmount: Int, timestamp: Long) {
         val calendar = Calendar.getInstance()
         calendar.timeInMillis = timestamp
         val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH) + 1 // Calendar.MONTH is 0-based
+        val month = calendar.get(Calendar.MONTH) + 1
         val monthKey = "${year}_${String.format("%02d", month)}"
 
         val currentUser = firebaseAuth.currentUser ?: return
@@ -358,7 +387,6 @@ class CheckoutActivity : AppCompatActivity() {
             .child("monthly_reports")
             .child(monthKey)
 
-        // Get current monthly data and update it
         monthlyRef.get().addOnSuccessListener { snapshot ->
             val currentData = snapshot.value as? Map<String, Any> ?: emptyMap()
             val currentTotal = (currentData["totalPendapatan"] as? Long)?.toInt() ?: 0
@@ -372,7 +400,7 @@ class CheckoutActivity : AppCompatActivity() {
                 "lastUpdated" to timestamp,
                 "lastUpdatedBy" to mapOf(
                     "uid" to currentUser.uid,
-                    "nama" to (currentUser.displayName ?: ""),
+                    "nama" to (currentUser.displayName ?: "Admin"),
                     "email" to (currentUser.email ?: "")
                 )
             )
@@ -387,6 +415,18 @@ class CheckoutActivity : AppCompatActivity() {
         }
     }
 
+    private fun calculateTotal() {
+        val serviceSubtotal = baseServicePrice * kilogram
+        val tambahanTotal = tambahanList?.sumOf { parseHarga(it.hargaLayanan ?: "0") } ?: 0
+        val subtotal = serviceSubtotal + tambahanTotal
+        val tax = (subtotal * taxRate).toInt()
+        val total = subtotal + tax
+
+        tvTotalHarga.text = "Rp ${formatRupiah(subtotal)}"
+        tvPajak.text = "Rp ${formatRupiah(tax)}"
+        tvTotalPembayaran.text = "Rp ${formatRupiah(total)}"
+    }
+
     private fun parseHarga(harga: String): Int {
         return try {
             harga.replace("Rp", "")
@@ -399,31 +439,12 @@ class CheckoutActivity : AppCompatActivity() {
         }
     }
 
-    private fun calculateTotal() {
-        val subtotal = basePrice * kilogram
-        val tax = (subtotal * taxRate).toInt()
-        val total = subtotal + tax
-
-        tvTotalHarga.text = "Rp ${formatRupiah(subtotal)}"
-        tvPajak.text = "Rp ${formatRupiah(tax)}"
-        tvTotalPembayaran.text = "Rp ${formatRupiah(total)}"
-    }
-
     private fun formatRupiah(amount: Int): String {
         return String.format("%,d", amount).replace(',', '.')
     }
 
     private fun showError(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
-    }
-
-    private fun showSuccessDialog(message: String) {
-        AlertDialog.Builder(this)
-            .setTitle("Sukses")
-            .setMessage(message)
-            .setPositiveButton("OK") { _, _ -> finish() }
-            .setCancelable(false)
-            .show()
     }
 
     private fun showErrorDialog(message: String) {
