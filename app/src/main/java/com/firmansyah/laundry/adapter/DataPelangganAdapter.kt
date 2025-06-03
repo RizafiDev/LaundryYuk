@@ -3,14 +3,16 @@ package com.firmansyah.laundry.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.firmansyah.laundry.R
 import com.firmansyah.laundry.model.ModelPelanggan
 
-class DataPelangganAdapter(private val listPelanggan: ArrayList<ModelPelanggan>) :
-    RecyclerView.Adapter<DataPelangganAdapter.ViewHolder>() {
+class DataPelangganAdapter(
+    private val listPelanggan: ArrayList<ModelPelanggan>,
+    private val onItemClick: (ModelPelanggan) -> Unit,
+    private val onHubungiClick: (ModelPelanggan) -> Unit
+) : RecyclerView.Adapter<DataPelangganAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -26,13 +28,12 @@ class DataPelangganAdapter(private val listPelanggan: ArrayList<ModelPelanggan>)
         holder.tvTerdaftar.text = "Bergabung pada ${item.tanggalTerdaftar ?: "-"}"
         holder.tvCabang.text = "Cabang ${item.cabangPelanggan ?: "Tidak Terdaftar"}"
 
-
         holder.btHubungi.setOnClickListener {
-            // Tambahkan aksi klik untuk menghubungi pelanggan
+            onHubungiClick(item)
         }
 
         holder.btLihat.setOnClickListener {
-            // Tambahkan aksi klik untuk melihat detail pelanggan
+            onItemClick(item)
         }
     }
 
@@ -45,7 +46,7 @@ class DataPelangganAdapter(private val listPelanggan: ArrayList<ModelPelanggan>)
         val tvAlamat: TextView = itemView.findViewById(R.id.tvDataAlamatPelanggan)
         val tvNoHP: TextView = itemView.findViewById(R.id.tvDataNoHpPelanggan)
         val tvCabang: TextView = itemView.findViewById(R.id.tvDataCabangPelanggan)
-        val tvTerdaftar: TextView = itemView.findViewById(R.id.tvDataTerdaftarPelanggan) // Tampilkan tanggal terdaftar
+        val tvTerdaftar: TextView = itemView.findViewById(R.id.tvDataTerdaftarPelanggan)
         val btHubungi: TextView = itemView.findViewById(R.id.btnHubungi)
         val btLihat: TextView = itemView.findViewById(R.id.btnLihat)
     }

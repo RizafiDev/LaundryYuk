@@ -10,9 +10,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.firmansyah.laundry.R
 import com.firmansyah.laundry.adapter.DataPelangganAdapter
-import com.google.firebase.database.*
 import com.firmansyah.laundry.model.ModelPelanggan
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.database.*
 
 class DataPelangganActivity : AppCompatActivity() {
     private val database = FirebaseDatabase.getInstance()
@@ -31,15 +31,33 @@ class DataPelangganActivity : AppCompatActivity() {
 
     private fun getDATA() {
         val query = myRef.orderByChild("idPelanggan").limitToLast(100)
-        query.addValueEventListener(object : ValueEventListener { // Ganti addListenerForSingleValueEvent
+        query.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
                     pelangganList.clear()
                     for (dataSnapshot in snapshot.children) {
                         val pelanggan = dataSnapshot.getValue(ModelPelanggan::class.java)
-                        pelanggan?.let { pelangganList.add(it) }
+                        pelanggan?.let {
+                            // This will now work since idPelanggan is var
+                            it.idPelanggan = dataSnapshot.key
+                            pelangganList.add(it)
+                        }
                     }
-                    val adapter = DataPelangganAdapter(pelangganList)
+                    val adapter = DataPelangganAdapter(pelangganList,
+                        onItemClick = { pelanggan ->
+                            val intent = Intent(this@DataPelangganActivity, EditPelangganActivity::class.java)
+                            intent.putExtra("PELANGGAN_DATA", pelanggan)
+                            startActivity(intent)
+                        },
+                        onHubungiClick = { pelanggan ->
+                            val nomor = pelanggan.noHPPelanggan ?: return@DataPelangganAdapter
+                            val nomorFormatted = nomor.replaceFirst("^0".toRegex(), "62")
+                            val url = "https://wa.me/$nomorFormatted"
+                            val intent = Intent(Intent.ACTION_VIEW)
+                            intent.data = android.net.Uri.parse(url)
+                            startActivity(intent)
+                        }
+                    )
                     rvDataPelanggan.adapter = adapter
                     adapter.notifyDataSetChanged()
                 }

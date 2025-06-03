@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/main"
-    tools:context=".pelanggan.TambahPelangganActivity"
+    tools:context=".pelanggan.EditPelangganActivity"
     android:background="#f9fafb">
 
     <!-- Background Ilustrasi -->
@@ -22,13 +22,13 @@
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Tambah Pelanggan"
+        android:text="Edit Pelanggan"
         android:fontFamily="@font/inter_semibold"
         android:textSize="18sp"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:layout_marginTop="28dp"
- />
+        />
 
     <!-- Form Tambah Pelanggan Mengambang -->
     <androidx.cardview.widget.CardView
@@ -55,7 +55,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Data Pelanggan Baru"
+                    android:text="Edit Data Pelanggan"
                     android:textSize="20sp"
                     android:fontFamily="@font/inter_bold"
                     android:textColor="#000000"
@@ -65,7 +65,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Lengkapi data dibawah untuk menambahkan pelanggan baru"
+                    android:text="Edit data dengan benar untuk mengubah data pelanggan"
                     android:textSize="14sp"
                     android:textColor="#666666"
                     android:fontFamily="@font/inter_medium"
@@ -79,7 +79,8 @@
                     android:fontFamily="@font/inter_semibold"
                     android:textSize="16sp"
                     android:textColor="#666666"
-                    android:layout_marginBottom="8dp"/>
+                    android:layout_marginBottom="8dp"
+                    />
 
                 <EditText
                     android:id="@+id/etTambahNamaPelanggan"
@@ -91,7 +92,8 @@
                     android:textAlignment="textStart"
                     android:padding="16dp"
                     android:layout_marginBottom="16dp"
-                    android:background="@drawable/edittext_background"/>
+                    android:background="@drawable/edittext_background_enabled"
+                    />
 
                 <!-- Container Alamat -->
                 <TextView
@@ -115,7 +117,7 @@
                     android:layout_marginBottom="16dp"
                     android:minLines="2"
                     android:gravity="top"
-                    android:background="@drawable/edittext_background"/>
+                    android:background="@drawable/edittext_background_enabled"/>
 
                 <!-- Container No HP -->
                 <TextView
@@ -138,7 +140,7 @@
                     android:textAlignment="textStart"
                     android:padding="16dp"
                     android:layout_marginBottom="16dp"
-                    android:background="@drawable/edittext_background"/>
+                    android:background="@drawable/edittext_background_enabled"/>
 
                 <!-- Container Cabang -->
                 <TextView
@@ -160,14 +162,14 @@
                     android:textAlignment="textStart"
                     android:padding="16dp"
                     android:layout_marginBottom="24dp"
-                    android:background="@drawable/edittext_background"/>
+                    android:background="@drawable/edittext_background_enabled"/>
 
                 <!-- Tombol Simpan -->
                 <TextView
                     android:id="@+id/btnSimpanPelanggan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/activity_layanan_simpan"
+                    android:text="Edit Data"
                     android:fontFamily="@font/inter_bold"
                     android:textSize="16sp"
                     android:textAlignment="center"

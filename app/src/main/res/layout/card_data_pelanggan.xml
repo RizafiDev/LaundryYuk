@@ -25,7 +25,8 @@
                 <ImageView
                     android:layout_width="18dp"
                     android:layout_height="18dp"
-                    android:src="@drawable/user_solid"/>
+                    android:src="@drawable/user_solid"
+                    app:tint="#4338ca"/>
                 <TextView
                     android:id="@+id/tvDataNamaPelanggan"
                     android:layout_width="match_parent"
@@ -45,7 +46,8 @@
                 <ImageView
                     android:layout_width="18dp"
                     android:layout_height="18dp"
-                    android:src="@drawable/house_user_solid"/>
+                    android:src="@drawable/house_user_solid"
+                    app:tint="#4338ca"/>
                 <TextView
                     android:id="@+id/tvDataAlamatPelanggan"
                     android:layout_width="match_parent"
@@ -65,7 +67,9 @@
                 <ImageView
                     android:layout_width="18dp"
                     android:layout_height="18dp"
-                    android:src="@drawable/phone_volume_solid"/>
+                    android:src="@drawable/phone_volume_solid"
+                    app:tint="#4338ca"
+                    />
                 <TextView
                     android:id="@+id/tvDataNoHpPelanggan"
                     android:layout_width="match_parent"
@@ -85,7 +89,8 @@
                 <ImageView
                     android:layout_width="18dp"
                     android:layout_height="18dp"
-                    android:src="@drawable/building_circle_check_solid"/>
+                    android:src="@drawable/building_circle_check_solid"
+                    app:tint="#4338ca"/>
                 <TextView
                     android:id="@+id/tvDataCabangPelanggan"
                     android:layout_width="match_parent"
@@ -105,7 +110,8 @@
                 <ImageView
                     android:layout_width="18dp"
                     android:layout_height="18dp"
-                    android:src="@drawable/right_to_bracket_solid"/>
+                    android:src="@drawable/right_to_bracket_solid"
+                    app:tint="#4338ca"/>
                 <TextView
                     android:id="@+id/tvDataTerdaftarPelanggan"
                     android:layout_width="match_parent"
@@ -128,10 +134,10 @@
                     android:id="@+id/btnHubungi"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textColor="#74C0FC"
+                    android:textColor="#4338ca"
                     android:textSize="16sp"
                     android:textAlignment="center"
-                    android:padding="16dp"
+                    android:padding="12dp"
                     android:fontFamily="@font/inter_bold"
                     android:text="@string/card_pelanggan_hubungi"
                     android:layout_marginRight="6dp"
@@ -145,7 +151,7 @@
                     android:textSize="16sp"
                     android:textColor="@color/white"
                     android:textAlignment="center"
-                    android:padding="16dp"
+                    android:padding="12dp"
                     android:fontFamily="@font/inter_bold"
                     android:layout_marginLeft="6dp"
                     android:text="@string/card_pelanggan_lihat"/>

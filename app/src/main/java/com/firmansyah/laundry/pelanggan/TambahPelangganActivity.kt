@@ -3,6 +3,7 @@ package com.firmansyah.laundry.pelanggan
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -24,7 +25,7 @@ class TambahPelangganActivity : AppCompatActivity() {
     private lateinit var etAlamat: EditText
     private lateinit var etNoHP: EditText
     private lateinit var etCabang: EditText
-    private lateinit var btSimpan: Button
+    private lateinit var btSimpan: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
