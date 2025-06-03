@@ -2,6 +2,9 @@ package com.firmansyah.laundry.pelanggan
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.widget.EditText
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -20,11 +23,15 @@ class DataPelangganActivity : AppCompatActivity() {
 
     private lateinit var rvDataPelanggan: RecyclerView
     private lateinit var fabTambahPelanggan: FloatingActionButton
+    private lateinit var etSearchPelanggan: EditText
+
     private lateinit var pelangganList: ArrayList<ModelPelanggan>
+    private lateinit var adapter: DataPelangganAdapter
 
     private fun init() {
         rvDataPelanggan = findViewById(R.id.rvDATA_PELANGGAN)
         fabTambahPelanggan = findViewById(R.id.fab_DATA_PELANGGAN_TAMBAH)
+        etSearchPelanggan = findViewById(R.id.etSearchPelanggan)
 
         rvDataPelanggan.layoutManager = LinearLayoutManager(this)
     }
@@ -38,12 +45,12 @@ class DataPelangganActivity : AppCompatActivity() {
                     for (dataSnapshot in snapshot.children) {
                         val pelanggan = dataSnapshot.getValue(ModelPelanggan::class.java)
                         pelanggan?.let {
-                            // This will now work since idPelanggan is var
                             it.idPelanggan = dataSnapshot.key
                             pelangganList.add(it)
                         }
                     }
-                    val adapter = DataPelangganAdapter(pelangganList,
+
+                    adapter = DataPelangganAdapter(pelangganList,
                         onItemClick = { pelanggan ->
                             val intent = Intent(this@DataPelangganActivity, EditPelangganActivity::class.java)
                             intent.putExtra("PELANGGAN_DATA", pelanggan)
@@ -59,13 +66,10 @@ class DataPelangganActivity : AppCompatActivity() {
                         }
                     )
                     rvDataPelanggan.adapter = adapter
-                    adapter.notifyDataSetChanged()
                 }
             }
 
-            override fun onCancelled(error: DatabaseError) {
-                // Handle error
-            }
+            override fun onCancelled(error: DatabaseError) {}
         })
     }
 
@@ -77,6 +81,14 @@ class DataPelangganActivity : AppCompatActivity() {
         pelangganList = ArrayList()
         init()
         getDATA()
+
+        etSearchPelanggan.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                adapter.filter(s.toString())
+            }
+            override fun afterTextChanged(s: Editable?) {}
+        })
 
         fabTambahPelanggan.setOnClickListener {
             val intent = Intent(this, TambahPelangganActivity::class.java)

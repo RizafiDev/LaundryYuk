@@ -7,12 +7,18 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.firmansyah.laundry.R
 import com.firmansyah.laundry.model.ModelPelanggan
+import java.util.*
+import kotlin.collections.ArrayList
+import android.widget.Filter
+import android.widget.Filterable
 
 class DataPelangganAdapter(
-    private val listPelanggan: ArrayList<ModelPelanggan>,
+    private var listFull: ArrayList<ModelPelanggan>,
     private val onItemClick: (ModelPelanggan) -> Unit,
     private val onHubungiClick: (ModelPelanggan) -> Unit
-) : RecyclerView.Adapter<DataPelangganAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<DataPelangganAdapter.ViewHolder>(), Filterable {
+
+    private var listFiltered = ArrayList<ModelPelanggan>(listFull)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -21,24 +27,49 @@ class DataPelangganAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = listPelanggan[position]
+        val item = listFiltered[position]
         holder.tvNama.text = item.namaPelanggan ?: ""
         holder.tvAlamat.text = item.alamatPelanggan ?: ""
         holder.tvNoHP.text = item.noHPPelanggan ?: ""
         holder.tvTerdaftar.text = "Bergabung pada ${item.tanggalTerdaftar ?: "-"}"
         holder.tvCabang.text = "Cabang ${item.cabangPelanggan ?: "Tidak Terdaftar"}"
 
-        holder.btHubungi.setOnClickListener {
-            onHubungiClick(item)
-        }
-
-        holder.btLihat.setOnClickListener {
-            onItemClick(item)
-        }
+        holder.btHubungi.setOnClickListener { onHubungiClick(item) }
+        holder.btLihat.setOnClickListener { onItemClick(item) }
     }
 
-    override fun getItemCount(): Int {
-        return listPelanggan.size
+    override fun getItemCount(): Int = listFiltered.size
+
+    fun filter(keyword: String) {
+        this.filter.filter(keyword)
+    }
+
+    override fun getFilter(): Filter {
+        return object : Filter() {
+            override fun performFiltering(constraint: CharSequence?): FilterResults {
+                val keyword = constraint.toString().lowercase(Locale.ROOT)
+                val filtered = if (keyword.isEmpty()) {
+                    listFull
+                } else {
+                    listFull.filter {
+                        it.namaPelanggan?.lowercase()?.contains(keyword) == true ||
+                                it.alamatPelanggan?.lowercase()?.contains(keyword) == true ||
+                                it.noHPPelanggan?.contains(keyword) == true ||
+                                it.cabangPelanggan?.lowercase()?.contains(keyword) == true ||
+                                it.tanggalTerdaftar?.contains(keyword) == true
+                    } as ArrayList<ModelPelanggan>
+                }
+
+                val result = FilterResults()
+                result.values = filtered
+                return result
+            }
+
+            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+                listFiltered = results?.values as ArrayList<ModelPelanggan>
+                notifyDataSetChanged()
+            }
+        }
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
