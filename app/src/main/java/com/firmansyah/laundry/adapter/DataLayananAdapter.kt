@@ -20,10 +20,8 @@ class DataLayananAdapter(private val listLayanan: ArrayList<ModelLayanan>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = listLayanan[position]
-        holder.tvDataIDLayanan.text = item.idLayanan ?: ""
-        holder.tvNama.text = item.namaLayanan ?: ""
-        holder.tvHarga.text = item.hargaLayanan ?: ""
-        holder.tvTerdaftar.text = "Terdaftar: ${item.tanggalTerdaftar ?: "-"}"
+        holder.tvNama.text = "Layanan ${item.namaLayanan ?: "Tidak Layanan"}"
+        holder.tvHarga.text = "Rp. ${item.hargaLayanan ?: "-"}"
         holder.tvCabang.text = "Cabang ${item.cabangLayanan ?: "Tidak Ada Cabang"}"
 
     }
@@ -33,10 +31,8 @@ class DataLayananAdapter(private val listLayanan: ArrayList<ModelLayanan>) :
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val tvDataIDLayanan: TextView = itemView.findViewById(R.id.tvDataIDLayanan)
         val tvNama: TextView = itemView.findViewById(R.id.tvDataNamaLayanan)
         val tvHarga: TextView = itemView.findViewById(R.id.tvDataHargaLayanan)
         val tvCabang: TextView = itemView.findViewById(R.id.tvDataCabangLayanan)
-        val tvTerdaftar: TextView = itemView.findViewById(R.id.tvDataTerdaftarLayanan)
     }
 }

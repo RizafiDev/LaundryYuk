@@ -3,6 +3,7 @@ package com.firmansyah.laundry.pegawai
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.firmansyah.laundry.R
@@ -21,7 +22,7 @@ class TambahPegawaiActivity : AppCompatActivity() {
     private lateinit var etAlamat: EditText
     private lateinit var etNoHP: EditText
     private lateinit var etCabang: EditText
-    private lateinit var btSimpan: Button
+    private lateinit var btSimpan: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

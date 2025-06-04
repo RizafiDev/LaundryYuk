@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.CheckBox
 import androidx.recyclerview.widget.RecyclerView
 import com.firmansyah.laundry.R
 import com.firmansyah.laundry.model.ModelPelanggan
@@ -11,14 +12,18 @@ import java.util.*
 import kotlin.collections.ArrayList
 import android.widget.Filter
 import android.widget.Filterable
+import android.widget.LinearLayout
 
 class DataPelangganAdapter(
     private var listFull: ArrayList<ModelPelanggan>,
     private val onItemClick: (ModelPelanggan) -> Unit,
-    private val onHubungiClick: (ModelPelanggan) -> Unit
+    private val onHubungiClick: (ModelPelanggan) -> Unit,
+    private val onSelectionChanged: (Int) -> Unit // Callback untuk perubahan selection
 ) : RecyclerView.Adapter<DataPelangganAdapter.ViewHolder>(), Filterable {
 
     private var listFiltered = ArrayList<ModelPelanggan>(listFull)
+    private var isEditMode = false
+    private val selectedItems = HashSet<String>() // Menyimpan ID item yang dipilih
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -34,14 +39,81 @@ class DataPelangganAdapter(
         holder.tvTerdaftar.text = "Bergabung pada ${item.tanggalTerdaftar ?: "-"}"
         holder.tvCabang.text = "Cabang ${item.cabangPelanggan ?: "Tidak Terdaftar"}"
 
-        holder.btHubungi.setOnClickListener { onHubungiClick(item) }
-        holder.btLihat.setOnClickListener { onItemClick(item) }
+        // Show/hide checkbox based on edit mode
+        if (isEditMode) {
+            holder.checkBox.visibility = View.VISIBLE
+            holder.ctaContainer.visibility = View.GONE
+
+            // Set checkbox state
+            val itemId = item.idPelanggan ?: ""
+            holder.checkBox.isChecked = selectedItems.contains(itemId)
+
+            // Handle checkbox click
+            holder.checkBox.setOnCheckedChangeListener { _, isChecked ->
+                if (isChecked) {
+                    selectedItems.add(itemId)
+                } else {
+                    selectedItems.remove(itemId)
+                }
+                onSelectionChanged(selectedItems.size)
+            }
+
+            // Handle card click in edit mode
+            holder.itemView.setOnClickListener {
+                holder.checkBox.isChecked = !holder.checkBox.isChecked
+            }
+        } else {
+            holder.checkBox.visibility = View.GONE
+            holder.ctaContainer.visibility = View.VISIBLE
+
+            holder.btHubungi.setOnClickListener { onHubungiClick(item) }
+            holder.btLihat.setOnClickListener { onItemClick(item) }
+
+            // Remove card click listener in normal mode
+            holder.itemView.setOnClickListener(null)
+        }
     }
 
     override fun getItemCount(): Int = listFiltered.size
 
     fun filter(keyword: String) {
         this.filter.filter(keyword)
+    }
+
+    fun updateData(newList: ArrayList<ModelPelanggan>) {
+        listFull = ArrayList(newList)
+        listFiltered = ArrayList(newList)
+        notifyDataSetChanged()
+    }
+
+    // Method untuk mengubah mode edit
+    fun setEditMode(editMode: Boolean) {
+        isEditMode = editMode
+        if (!editMode) {
+            selectedItems.clear()
+        }
+        notifyDataSetChanged()
+    }
+
+    // Method untuk mendapatkan jumlah item yang dipilih
+    fun getSelectedCount(): Int {
+        return selectedItems.size
+    }
+
+    // Method untuk mendapatkan ID item yang dipilih
+    fun getSelectedItemIds(): List<String> {
+        return selectedItems.toList()
+    }
+
+    // Method untuk mendapatkan item yang dipilih
+    fun getSelectedItems(): List<ModelPelanggan> {
+        return listFiltered.filter { selectedItems.contains(it.idPelanggan) }
+    }
+
+    // Method untuk clear selection
+    fun clearSelection() {
+        selectedItems.clear()
+        notifyDataSetChanged()
     }
 
     override fun getFilter(): Filter {
@@ -80,5 +152,7 @@ class DataPelangganAdapter(
         val tvTerdaftar: TextView = itemView.findViewById(R.id.tvDataTerdaftarPelanggan)
         val btHubungi: TextView = itemView.findViewById(R.id.btnHubungi)
         val btLihat: TextView = itemView.findViewById(R.id.btnLihat)
+        val checkBox: CheckBox = itemView.findViewById(R.id.checkBoxPelanggan)
+        val ctaContainer: LinearLayout = itemView.findViewById(R.id.ctaContainer)
     }
 }

@@ -3,6 +3,7 @@ package com.firmansyah.laundry.layanan
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.firmansyah.laundry.R
@@ -20,7 +21,7 @@ class TambahLayananActivity : AppCompatActivity() {
     private lateinit var etNama: EditText
     private lateinit var etHarga: EditText
     private lateinit var etCabang: EditText
-    private lateinit var btSimpan: Button
+    private lateinit var btSimpan: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

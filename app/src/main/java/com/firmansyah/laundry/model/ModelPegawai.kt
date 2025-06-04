@@ -1,10 +1,14 @@
 package com.firmansyah.laundry.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class ModelPegawai(
-    val idPegawai: String = "",
-    val namaPegawai: String = "",
-    val alamatPegawai: String = "",
-    val noHPPegawai: String = "",
-    val cabangPegawai: String = "",
-    val tanggalTerdaftar: String? = ""
-)
+    var idPegawai: String? = null,
+    var namaPegawai: String? = null,
+    var alamatPegawai: String? = null,
+    var noHPPegawai: String? = null,
+    var cabangPegawai: String? = null,
+    var tanggalTerdaftar: String? = null
+) : Parcelable

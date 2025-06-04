@@ -2,6 +2,8 @@ package com.firmansyah.laundry.layanan
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.animation.TranslateAnimation
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -10,27 +12,134 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.firmansyah.laundry.R
 import com.firmansyah.laundry.adapter.DataLayananAdapter
+import com.firmansyah.laundry.adapter.DataTambahanAdapter
 import com.firmansyah.laundry.model.ModelLayanan
+import com.firmansyah.laundry.model.ModelTambahan
+import com.firmansyah.laundry.tambahan.TambahTambahanActivity
 import com.google.firebase.database.*
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class DataLayananActivity : AppCompatActivity() {
     private val database = FirebaseDatabase.getInstance()
-    private val myRef = database.getReference("layanan")
+    private val layananRef = database.getReference("layanan")
+    private val tambahanRef = database.getReference("tambahan")
 
     private lateinit var rvDataLayanan: RecyclerView
     private lateinit var fabTambahLayanan: FloatingActionButton
+    private lateinit var tvLayananUtama: TextView
+    private lateinit var tvLayananTambahan: TextView
+
     private lateinit var layananList: ArrayList<ModelLayanan>
+    private lateinit var tambahanList: ArrayList<ModelTambahan>
+
+    private var isShowingTambahan = false
 
     private fun init() {
         rvDataLayanan = findViewById(R.id.rvDATA_LAYANAN)
         fabTambahLayanan = findViewById(R.id.fabTambahLayanan)
 
+        // Assuming you have these TextViews in your layout for the category buttons
+        tvLayananUtama = findViewById(R.id.tvLayananUtama) // You'll need to add IDs to your TextViews
+        tvLayananTambahan = findViewById(R.id.tvLayananTambahan)
+
         rvDataLayanan.layoutManager = LinearLayoutManager(this)
+
+        // Set click listeners for category toggle
+        tvLayananUtama.setOnClickListener {
+            if (isShowingTambahan) {
+                switchToLayananUtama()
+            }
+        }
+
+        tvLayananTambahan.setOnClickListener {
+            if (!isShowingTambahan) {
+                switchToLayananTambahan()
+            }
+        }
     }
 
-    private fun getDATA() {
-        val query = myRef.orderByChild("idLayanan").limitToLast(100)
+    private fun switchToLayananUtama() {
+        isShowingTambahan = false
+        updateCategoryButtons()
+        // Animate from right to left (tambahan -> utama)
+        animateRecyclerView(slideToLeft = true) {
+            val adapter = DataLayananAdapter(layananList)
+            rvDataLayanan.adapter = adapter
+        }
+    }
+
+    private fun switchToLayananTambahan() {
+        isShowingTambahan = true
+        updateCategoryButtons()
+        // Animate from left to right (utama -> tambahan)
+        animateRecyclerView(slideToLeft = false) {
+            val adapter = DataTambahanAdapter(tambahanList)
+            rvDataLayanan.adapter = adapter
+        }
+    }
+
+    private fun animateRecyclerView(slideToLeft: Boolean, onAnimationEnd: () -> Unit) {
+        val width = rvDataLayanan.width.toFloat()
+
+        if (slideToLeft) {
+            // Moving from tambahan to utama: slide out to left, slide in from right
+            val slideOut = TranslateAnimation(0f, -width, 0f, 0f)
+            slideOut.duration = 200
+            slideOut.setAnimationListener(object : android.view.animation.Animation.AnimationListener {
+                override fun onAnimationStart(animation: android.view.animation.Animation?) {}
+                override fun onAnimationRepeat(animation: android.view.animation.Animation?) {}
+                override fun onAnimationEnd(animation: android.view.animation.Animation?) {
+                    // Change adapter
+                    onAnimationEnd()
+
+                    // Slide in from right
+                    val slideIn = TranslateAnimation(width, 0f, 0f, 0f)
+                    slideIn.duration = 200
+                    rvDataLayanan.startAnimation(slideIn)
+                }
+            })
+            rvDataLayanan.startAnimation(slideOut)
+        } else {
+            // Moving from utama to tambahan: slide out to right, slide in from left
+            val slideOut = TranslateAnimation(0f, width, 0f, 0f)
+            slideOut.duration = 200
+            slideOut.setAnimationListener(object : android.view.animation.Animation.AnimationListener {
+                override fun onAnimationStart(animation: android.view.animation.Animation?) {}
+                override fun onAnimationRepeat(animation: android.view.animation.Animation?) {}
+                override fun onAnimationEnd(animation: android.view.animation.Animation?) {
+                    // Change adapter
+                    onAnimationEnd()
+
+                    // Slide in from left
+                    val slideIn = TranslateAnimation(-width, 0f, 0f, 0f)
+                    slideIn.duration = 200
+                    rvDataLayanan.startAnimation(slideIn)
+                }
+            })
+            rvDataLayanan.startAnimation(slideOut)
+        }
+    }
+
+    private fun updateCategoryButtons() {
+        if (isShowingTambahan) {
+            // Update button styles for "Layanan Tambahan" selected
+            tvLayananUtama.setBackgroundResource(R.drawable.button_background_outlined)
+            tvLayananUtama.setTextColor(getColor(R.color.primary_color))
+
+            tvLayananTambahan.setBackgroundResource(R.drawable.button_background)
+            tvLayananTambahan.setTextColor(getColor(R.color.white))
+        } else {
+            // Update button styles for "Layanan Utama" selected
+            tvLayananUtama.setBackgroundResource(R.drawable.button_background)
+            tvLayananUtama.setTextColor(getColor(R.color.white))
+
+            tvLayananTambahan.setBackgroundResource(R.drawable.button_background_outlined)
+            tvLayananTambahan.setTextColor(getColor(R.color.primary_color))
+        }
+    }
+
+    private fun getLayananData() {
+        val query = layananRef.orderByChild("idLayanan").limitToLast(100)
         query.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
@@ -39,7 +148,34 @@ class DataLayananActivity : AppCompatActivity() {
                         val layanan = dataSnapshot.getValue(ModelLayanan::class.java)
                         layanan?.let { layananList.add(it) }
                     }
-                    val adapter = DataLayananAdapter(layananList)
+                    // Update adapter if currently showing layanan utama
+                    if (!isShowingTambahan) {
+                        val adapter = DataLayananAdapter(layananList)
+                        rvDataLayanan.adapter = adapter
+                        adapter.notifyDataSetChanged()
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Handle error
+            }
+        })
+    }
+
+    private fun getTambahanData() {
+        tambahanRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                tambahanList.clear()
+                for (data in snapshot.children) {
+                    val item = data.getValue(ModelTambahan::class.java)
+                    if (item != null) {
+                        tambahanList.add(item)
+                    }
+                }
+                // Update adapter if currently showing layanan tambahan
+                if (isShowingTambahan) {
+                    val adapter = DataTambahanAdapter(tambahanList)
                     rvDataLayanan.adapter = adapter
                     adapter.notifyDataSetChanged()
                 }
@@ -57,11 +193,18 @@ class DataLayananActivity : AppCompatActivity() {
         setContentView(R.layout.activity_data_layanan)
 
         layananList = ArrayList()
+        tambahanList = ArrayList()
+
         init()
-        getDATA()
+        getLayananData()
+        getTambahanData()
 
         fabTambahLayanan.setOnClickListener {
-            val intent = Intent(this, TambahLayananActivity::class.java)
+            val intent = if (isShowingTambahan) {
+                Intent(this, TambahTambahanActivity::class.java)
+            } else {
+                Intent(this, TambahLayananActivity::class.java)
+            }
             startActivity(intent)
         }
 

@@ -11,6 +11,7 @@ import com.firmansyah.laundry.auth.LoginActivity
 import com.firmansyah.laundry.databinding.ActivityRegistrationBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -77,23 +78,36 @@ class RegistrationActivity : AppCompatActivity() {
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
                         val user = firebaseAuth.currentUser
-                        user?.let {
-                            val userData = hashMapOf(
-                                "uid" to it.uid,
-                                "username" to it.displayName,
-                                "email" to it.email,
-                                "createdAt" to ServerValue.TIMESTAMP
-                            )
-                            val userRef = FirebaseDatabase.getInstance().getReference("users").child(it.uid)
-                            userRef.setValue(userData)
-                                .addOnSuccessListener {
-                                    Toast.makeText(this, "Google Sign-In berhasil!", Toast.LENGTH_SHORT).show()
-                                    startActivity(Intent(this, MainActivity::class.java))
-                                    finish()
-                                }
-                                .addOnFailureListener {
-                                    Toast.makeText(this, "Gagal menyimpan data pengguna", Toast.LENGTH_SHORT).show()
-                                }
+                        user?.let { firebaseUser ->
+                            // Update profile dengan nama dari Google Account
+                            val displayName = account.displayName ?: account.email?.substringBefore("@") ?: "User"
+                            val profileUpdates = UserProfileChangeRequest.Builder()
+                                .setDisplayName(displayName)
+                                .build()
+
+                            firebaseUser.updateProfile(profileUpdates).addOnCompleteListener { profileTask ->
+                                // Simpan data user ke database
+                                val userData = hashMapOf(
+                                    "uid" to firebaseUser.uid,
+                                    "username" to displayName,
+                                    "email" to firebaseUser.email,
+                                    "createdAt" to ServerValue.TIMESTAMP
+                                )
+
+                                val userRef = FirebaseDatabase.getInstance().getReference("users").child(firebaseUser.uid)
+                                userRef.setValue(userData)
+                                    .addOnSuccessListener {
+                                        Toast.makeText(this, "Google Sign-In berhasil!", Toast.LENGTH_SHORT).show()
+                                        startActivity(Intent(this, MainActivity::class.java))
+                                        finish()
+                                    }
+                                    .addOnFailureListener { exception ->
+                                        Toast.makeText(this, "Gagal menyimpan data pengguna: ${exception.message}", Toast.LENGTH_SHORT).show()
+                                        // Tetap pindah ke MainActivity meskipun gagal simpan ke database
+                                        startActivity(Intent(this, MainActivity::class.java))
+                                        finish()
+                                    }
+                            }
                         }
                     } else {
                         Toast.makeText(this, "Gagal Sign-In dengan Google: ${task.exception?.message}", Toast.LENGTH_SHORT).show()

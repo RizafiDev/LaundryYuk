@@ -1,32 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:id="@+id/CVDATA_PELANGGAN"
-        android:layout_height="wrap_content"
-        app:cardElevation="1dp"
-        android:orientation="vertical"
-        app:layout_constraintTop_toTopOf="parent"
-        app:cardCornerRadius="8dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:id="@+id/CVDATA_PELANGGAN"
+    android:layout_height="wrap_content"
+    app:cardElevation="1dp"
+    android:orientation="vertical"
+    app:layout_constraintTop_toTopOf="parent"
+    app:cardCornerRadius="8dp"
     android:layout_marginHorizontal="12dp"
-    android:layout_marginBottom="12dp"
-        >
+    android:layout_marginBottom="12dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- Checkbox untuk mode edit -->
+
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:padding="18dp"
             android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="horizontal">
+
                 <ImageView
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:src="@drawable/user_solid"
                     app:tint="#4338ca"/>
+
                 <TextView
                     android:id="@+id/tvDataNamaPelanggan"
                     android:layout_width="match_parent"
@@ -34,20 +45,23 @@
                     android:fontFamily="@font/inter_semibold"
                     android:text="@string/card_pelanggan_nama"
                     android:textSize="16sp"
-                    android:layout_marginLeft="12dp"
-                    />
+                    android:layout_marginLeft="12dp" />
+
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:layout_marginTop="12dp">
+
                 <ImageView
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:src="@drawable/house_user_solid"
                     app:tint="#4338ca"/>
+
                 <TextView
                     android:id="@+id/tvDataAlamatPelanggan"
                     android:layout_width="match_parent"
@@ -55,21 +69,23 @@
                     android:fontFamily="@font/inter_semibold"
                     android:text="@string/card_pelanggan_alamat"
                     android:textSize="16sp"
-                    android:layout_marginLeft="12dp"
-                    />
+                    android:layout_marginLeft="12dp" />
+
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:layout_marginTop="12dp">
+
                 <ImageView
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:src="@drawable/phone_volume_solid"
-                    app:tint="#4338ca"
-                    />
+                    app:tint="#4338ca" />
+
                 <TextView
                     android:id="@+id/tvDataNoHpPelanggan"
                     android:layout_width="match_parent"
@@ -77,20 +93,23 @@
                     android:fontFamily="@font/inter_semibold"
                     android:text="@string/card_pelanggan_nohp"
                     android:textSize="16sp"
-                    android:layout_marginLeft="12dp"
-                    />
+                    android:layout_marginLeft="12dp" />
+
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:layout_marginTop="12dp">
+
                 <ImageView
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:src="@drawable/building_circle_check_solid"
                     app:tint="#4338ca"/>
+
                 <TextView
                     android:id="@+id/tvDataCabangPelanggan"
                     android:layout_width="match_parent"
@@ -98,20 +117,23 @@
                     android:fontFamily="@font/inter_semibold"
                     android:text="@string/card_pelanggan_cabang"
                     android:textSize="16sp"
-                    android:layout_marginLeft="12dp"
-                    />
+                    android:layout_marginLeft="12dp" />
+
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:layout_marginTop="12dp">
+
                 <ImageView
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:src="@drawable/right_to_bracket_solid"
                     app:tint="#4338ca"/>
+
                 <TextView
                     android:id="@+id/tvDataTerdaftarPelanggan"
                     android:layout_width="match_parent"
@@ -119,16 +141,18 @@
                     android:fontFamily="@font/inter_semibold"
                     android:text="Terdaftar"
                     android:textSize="16sp"
-                    android:layout_marginLeft="12dp"
-                    />
+                    android:layout_marginLeft="12dp" />
+
             </LinearLayout>
+
             <LinearLayout
+                android:id="@+id/ctaContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:weightSum="2"
-                android:layout_marginTop="16dp"
-                >
+                android:layout_marginTop="16dp">
+
                 <TextView
                     android:layout_weight="1"
                     android:id="@+id/btnHubungi"
@@ -142,6 +166,7 @@
                     android:text="@string/card_pelanggan_hubungi"
                     android:layout_marginRight="6dp"
                     android:background="@drawable/button_background_outlined"/>
+
                 <TextView
                     android:layout_weight="1"
                     android:id="@+id/btnLihat"
@@ -155,7 +180,20 @@
                     android:fontFamily="@font/inter_bold"
                     android:layout_marginLeft="6dp"
                     android:text="@string/card_pelanggan_lihat"/>
-            </LinearLayout>
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
 
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/checkBoxPelanggan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="12dp"
+            android:visibility="gone"
+            android:buttonTint="#4338ca" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

@@ -1,145 +1,284 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:id="@+id/main"
-    android:background="#FFF4F9">
-
-    <!-- Scrollable Content -->
-    <androidx.core.widget.NestedScrollView
+    android:background="#f9fafb">
+    <androidx.cardview.widget.CardView
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:cardElevation="1dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Buat Transaksi"
+            android:fontFamily="@font/inter_bold"
+            android:textSize="18sp"
+            android:padding="20dp" />
+    </androidx.cardview.widget.CardView>
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
 
         <LinearLayout
-            android:orientation="vertical"
+            android:id="@+id/main"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <!-- Data Pelanggan -->
-            <TextView
-                android:text="Data Pelanggan"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="#333"
-                android:fontFamily="@font/inter_bold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-            <TextView
-                android:id="@+id/tv_nama_pelanggan"
-                android:text="Nama Pelanggan:"
-                android:fontFamily="@font/inter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-            <TextView
-                android:id="@+id/tv_no_hp"
-                android:text="No HP:"
-                android:fontFamily="@font/inter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:context=".transaksi.DataTransaksiActivity">
 
 
-            <Button
+
+            <!--informasi pelanggan-->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/containerPelanggan"
+                android:layout_width="match_parent"
+                android:layout_margin="12dp"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="1dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="18dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Informasi Pelanggan"
+                            android:fontFamily="@font/inter_bold"
+                            android:textSize="18sp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- RecyclerView for selected customer -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_selected_pelanggan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:visibility="gone"
+                tools:visibility="visible" />
+
+            <LinearLayout
                 android:id="@+id/btn_pilih_pelanggan"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:text="Pilih Pelanggan"
-                android:fontFamily="@font/inter_bold"
-                android:textColor="#fff"
-                android:backgroundTint="#4CCEFF"
-                android:layout_marginTop="8dp"
-                />
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:background="@drawable/button_background_outlined"
 
-            <!-- Layanan Utama -->
-            <TextView
-                android:text="Layanan Utama"
-                android:fontFamily="@font/inter_bold"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="#333"
-                android:layout_marginTop="16dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:padding="12dp"
+                android:layout_margin="12dp">
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/plus_solid"
+                    app:tint="@color/primary_color"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pilih Pelanggan"
+                    android:fontFamily="@font/inter_semibold"
+                    android:textColor="@color/primary_color"
+                    android:textSize="16sp"
+                    android:layout_marginLeft="8dp" />
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/tv_nama_layanan"
-                android:text="Nama Layanan:"
-                android:fontFamily="@font/inter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/containerLayanan"
+                android:layout_width="match_parent"
+                android:layout_marginHorizontal="12dp"
+                android:layout_marginTop="18dp"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="1dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="18dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Informasi Layanan"
+                            android:fontFamily="@font/inter_bold"
+                            android:textSize="18sp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
-            <TextView
-                android:id="@+id/tv_harga_layanan"
-                android:text="Harga:"
-                android:fontFamily="@font/inter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+            <!-- RecyclerView for selected service -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_selected_layanan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:visibility="gone"
+                tools:visibility="visible" />
 
-            <Button
+            <LinearLayout
                 android:id="@+id/btn_pilih_layanan"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:text="Pilih Layanan"
-                android:textColor="#fff"
-                android:backgroundTint="#4CCEFF"
-                android:layout_marginTop="8dp"
-                android:fontFamily="@font/inter_bold"
-                />
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:background="@drawable/button_background_outlined"
+                android:padding="12dp"
+                android:layout_margin="12dp">
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/plus_solid"
+                    app:tint="@color/primary_color"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pilih Layanan"
+                    android:fontFamily="@font/inter_semibold"
+                    android:textColor="@color/primary_color"
+                    android:textSize="16sp"
+                    android:layout_marginLeft="8dp" />
+            </LinearLayout>
 
-            <!-- Layanan Tambahan -->
-            <TextView
-                android:text="Layanan Tambahan"
-                android:fontFamily="@font/inter_bold"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="#333"
-                android:layout_marginTop="16dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/containerLayananTambahan"
+                android:layout_width="match_parent"
+                android:layout_marginHorizontal="12dp"
+                android:layout_marginTop="18dp"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="1dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="18dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Informasi Layanan Tambahan"
+                            android:fontFamily="@font/inter_bold"
+                            android:textSize="18sp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
-            <!-- RecyclerView -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_layanan_tambahan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:nestedScrollingEnabled="false"/>
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
+                android:nestedScrollingEnabled="false" />
 
-    <!-- Tombol Bawah -->
-    <LinearLayout
+            <LinearLayout
+                android:id="@+id/btn_tambahan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:background="@drawable/button_background_outlined"
+                android:padding="12dp"
+                android:layout_margin="12dp">
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/plus_solid"
+                    app:tint="@color/primary_color"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pilih Layanan Tambahan"
+                    android:fontFamily="@font/inter_semibold"
+                    android:textColor="@color/primary_color"
+                    android:textSize="16sp"
+                    android:layout_marginLeft="8dp" />
+            </LinearLayout>
+
+            <!-- Hidden TextViews for backward compatibility -->
+            <TextView
+                android:id="@+id/tv_nama_pelanggan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_no_hp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_nama_layanan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_harga_layanan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <!-- Button fixed at bottom -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/containerCheckout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_marginTop="8dp"
-        android:weightSum="2">
+        android:background="@color/white"
+        app:cardElevation="1dp">
 
-        <Button
-            android:id="@+id/btn_tambahan"
-            android:layout_width="0dp"
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Tambahan"
-            android:textColor="#fff"
-            android:backgroundTint="#f59e0b"
-            />
+            android:layout_gravity="center">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+                <TextView
+                    android:id="@+id/btn_proses"
+                    android:textAlignment="center"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Proses"
+                    android:fontFamily="@font/inter_bold"
+                    android:textSize="16sp"
+                    android:padding="14dp"
+                    android:background="@drawable/button_background" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
-        <Button
-            android:id="@+id/btn_proses"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Proses"
-            android:textColor="#fff"
-            android:backgroundTint="#22c55e"
-            android:layout_marginStart="8dp"/>
-    </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
 </LinearLayout>

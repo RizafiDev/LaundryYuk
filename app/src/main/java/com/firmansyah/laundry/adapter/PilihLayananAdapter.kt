@@ -1,3 +1,4 @@
+// Fixed PilihLayananAdapter
 package com.firmansyah.laundry.adapter
 
 import android.view.LayoutInflater
@@ -12,18 +13,26 @@ class PilihLayananAdapter(
     private val list: List<ModelLayanan>,
     private val onItemClick: (ModelLayanan) -> Unit
 ) : RecyclerView.Adapter<PilihLayananAdapter.ViewHolder>() {
+
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvNama: TextView = itemView.findViewById(R.id.tvDataNamaLayanan)
-        val tvID: TextView = itemView.findViewById(R.id.tvDataIDLayanan)
         val tvHarga: TextView = itemView.findViewById(R.id.tvDataHargaLayanan)
+        val tvCabang: TextView = itemView.findViewById(R.id.tvDataCabangLayanan)
 
         fun bind(layanan: ModelLayanan) {
-            tvNama.text = layanan.namaLayanan
-            tvID.text = "ID: ${layanan.idLayanan}"
-            tvHarga.text = "Harga: ${layanan.hargaLayanan}"
+            try {
+                tvNama.text = "Layanan ${layanan.namaLayanan ?: "-"}"
+                tvHarga.text = "Rp. ${layanan.hargaLayanan ?: "0"},-"
+                tvCabang.text = "Cabang ${layanan.cabangLayanan ?: "-"}"
 
-            itemView.setOnClickListener {
-                onItemClick(layanan)
+                itemView.setOnClickListener {
+                    onItemClick(layanan)
+                }
+            } catch (e: Exception) {
+                // Handle binding error gracefully
+                tvNama.text = "Error loading data"
+                tvHarga.text = "Rp. 0,-"
+                tvCabang.text = "Unknown"
             }
         }
     }
@@ -37,6 +46,8 @@ class PilihLayananAdapter(
     override fun getItemCount(): Int = list.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(list[position])
+        if (position >= 0 && position < list.size) {
+            holder.bind(list[position])
+        }
     }
 }

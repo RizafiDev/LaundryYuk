@@ -12,7 +12,8 @@
         android:textSize="14sp"
         android:textColor="#666"
         android:fontFamily="@font/inter"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="8dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvPilihTambahan"

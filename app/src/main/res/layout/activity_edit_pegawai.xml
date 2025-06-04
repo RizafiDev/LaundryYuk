@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/main"
-    tools:context=".tambahan.TambahTambahanActivity"
+    tools:context=".pegawai.EditPegawaiActivity"
     android:background="#f9fafb">
 
     <!-- Background Ilustrasi -->
@@ -22,7 +22,7 @@
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Tambah Layanan"
+        android:text="Edit Pegawai"
         android:fontFamily="@font/inter_semibold"
         android:textSize="18sp"
         android:textAlignment="center"
@@ -55,7 +55,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Data Layanan Tambahan Baru"
+                    android:text="Edit Data Pegawai"
                     android:textSize="20sp"
                     android:fontFamily="@font/inter_bold"
                     android:textColor="#000000"
@@ -65,7 +65,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Lengkapi data dibawah untuk menambahkan layanan tambahan baru"
+                    android:text="Edit data dengan benar untuk mengubah data pegawai"
                     android:textSize="14sp"
                     android:textColor="#666666"
                     android:fontFamily="@font/inter_medium"
@@ -75,52 +75,101 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Nama Layanan Tambahan"
+                    android:text="@string/activity_layanan_namalengkap"
+                    android:fontFamily="@font/inter_semibold"
+                    android:textSize="16sp"
+                    android:textColor="#666666"
+                    android:layout_marginBottom="8dp"
+                    />
+
+                <EditText
+                    android:id="@+id/etTambahNamaPegawai"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/activity_layanan_namalengkap"
+                    android:fontFamily="@font/inter_medium"
+                    android:textSize="16sp"
+                    android:textAlignment="textStart"
+                    android:padding="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/edittext_background_enabled"
+                    />
+
+                <!-- Container Alamat -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/activity_layanan_alamat"
                     android:fontFamily="@font/inter_semibold"
                     android:textSize="16sp"
                     android:textColor="#666666"
                     android:layout_marginBottom="8dp"/>
 
                 <EditText
-                    android:id="@+id/etNamaLayananTambahan"
+                    android:id="@+id/etTambahAlamatPegawai"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Nama Layanan Tambahan"
+                    android:hint="@string/activity_layanan_alamat"
                     android:fontFamily="@font/inter_medium"
                     android:textSize="16sp"
                     android:textAlignment="textStart"
                     android:padding="16dp"
                     android:layout_marginBottom="16dp"
-                    android:background="@drawable/edittext_background"/>
+                    android:minLines="2"
+                    android:gravity="top"
+                    android:background="@drawable/edittext_background_enabled"/>
 
                 <!-- Container No HP -->
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Harga Layanan Tambahan"
+                    android:text="@string/activity_layanan_nohp"
                     android:fontFamily="@font/inter_semibold"
                     android:textSize="16sp"
                     android:textColor="#666666"
                     android:layout_marginBottom="8dp"/>
 
                 <EditText
-                    android:id="@+id/etHargaLayananTambahan"
+                    android:id="@+id/etTambahNoHpPegawai"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Harga Layanan Tambahan"
-                    android:inputType="number"
+                    android:hint="@string/activity_layanan_nohp"
+                    android:inputType="phone"
                     android:fontFamily="@font/inter_medium"
                     android:textSize="16sp"
                     android:textAlignment="textStart"
                     android:padding="16dp"
                     android:layout_marginBottom="16dp"
-                    android:background="@drawable/edittext_background"/>
-                <!-- Tombol Simpan -->
+                    android:background="@drawable/edittext_background_enabled"/>
+
+                <!-- Container Cabang -->
                 <TextView
-                    android:id="@+id/btnSimpanTambahan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/activity_layanan_simpan"
+                    android:text="@string/activity_layanan_cabang"
+                    android:fontFamily="@font/inter_semibold"
+                    android:textSize="16sp"
+                    android:textColor="#666666"
+                    android:layout_marginBottom="8dp"/>
+
+                <EditText
+                    android:id="@+id/etTambahCabangPegawai"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/activity_layanan_cabang"
+                    android:fontFamily="@font/inter_medium"
+                    android:textSize="16sp"
+                    android:textAlignment="textStart"
+                    android:padding="16dp"
+                    android:layout_marginBottom="24dp"
+                    android:background="@drawable/edittext_background_enabled"/>
+
+                <!-- Tombol Simpan -->
+                <TextView
+                    android:id="@+id/btnSimpanPegawai"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Edit Data"
                     android:fontFamily="@font/inter_bold"
                     android:textSize="16sp"
                     android:textAlignment="center"

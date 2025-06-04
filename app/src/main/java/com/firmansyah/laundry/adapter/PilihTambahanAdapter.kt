@@ -15,18 +15,20 @@ class PilihTambahanAdapter(
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvNama: TextView = itemView.findViewById(R.id.tvDataNamaLayanan)
-        val tvID: TextView = itemView.findViewById(R.id.tvDataIDLayanan)
         val tvHarga: TextView = itemView.findViewById(R.id.tvDataHargaLayanan)
 
         fun bind(tambahan: ModelTambahan) {
-            tambahan.apply {
-                tvNama.text = namaLayanan ?: "-"
-                tvID.text = "ID: ${idLayanan ?: "-"}"
-                tvHarga.text = "Harga: Rp ${hargaLayanan ?: "0"}"
-            }
+            try {
+                tvNama.text = tambahan.namaLayanan ?: "-"
+                tvHarga.text = "Harga: Rp ${tambahan.hargaLayanan ?: "0"}"
 
-            itemView.setOnClickListener {
-                onItemClick(tambahan)
+                itemView.setOnClickListener {
+                    onItemClick(tambahan)
+                }
+            } catch (e: Exception) {
+                // Handle binding error gracefully
+                tvNama.text = "Error loading data"
+                tvHarga.text = "Harga: Rp 0"
             }
         }
     }
@@ -40,7 +42,7 @@ class PilihTambahanAdapter(
     override fun getItemCount(): Int = list.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        if (position in 0 until list.size) {
+        if (position >= 0 && position < list.size) {
             holder.bind(list[position])
         }
     }

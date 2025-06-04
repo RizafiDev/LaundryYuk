@@ -13,10 +13,10 @@ import com.firmansyah.laundry.R
 import com.firmansyah.laundry.databinding.ActivityLoginBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-
 
 class LoginActivity : AppCompatActivity() {
 
@@ -87,9 +87,32 @@ class LoginActivity : AppCompatActivity() {
         firebaseAuth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    // Login berhasil, pindah ke MainActivity
-                    startActivity(Intent(this, MainActivity::class.java))
-                    finish()
+                    // Login berhasil
+                    val user = firebaseAuth.currentUser
+
+                    // Jika user tidak memiliki displayName, set dari email
+                    if (user?.displayName.isNullOrEmpty()) {
+                        val displayName = email.substringBefore("@")
+                        val profileUpdates = UserProfileChangeRequest.Builder()
+                            .setDisplayName(displayName)
+                            .build()
+
+                        user?.updateProfile(profileUpdates)?.addOnCompleteListener { profileTask ->
+                            if (profileTask.isSuccessful) {
+                                // Profile updated, pindah ke MainActivity
+                                startActivity(Intent(this, MainActivity::class.java))
+                                finish()
+                            } else {
+                                // Profile update gagal, tetapi tetap pindah ke MainActivity
+                                startActivity(Intent(this, MainActivity::class.java))
+                                finish()
+                            }
+                        }
+                    } else {
+                        // User sudah memiliki displayName, langsung pindah ke MainActivity
+                        startActivity(Intent(this, MainActivity::class.java))
+                        finish()
+                    }
                 } else {
                     // Login gagal
                     Toast.makeText(this, "Login gagal: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
@@ -121,9 +144,20 @@ class LoginActivity : AppCompatActivity() {
             firebaseAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
-                        // Login berhasil, pindah ke MainActivity
-                        startActivity(Intent(this, MainActivity::class.java))
-                        finish()
+                        // Login berhasil dengan Google
+                        val user = firebaseAuth.currentUser
+
+                        // Update profile dengan nama dari Google Account
+                        val displayName = account.displayName ?: account.email?.substringBefore("@") ?: "User"
+                        val profileUpdates = UserProfileChangeRequest.Builder()
+                            .setDisplayName(displayName)
+                            .build()
+
+                        user?.updateProfile(profileUpdates)?.addOnCompleteListener { profileTask ->
+                            // Pindah ke MainActivity terlepas dari hasil update profile
+                            startActivity(Intent(this, MainActivity::class.java))
+                            finish()
+                        }
                     } else {
                         // Login gagal
                         Toast.makeText(this, "Google Login gagal: ${task.exception?.message}", Toast.LENGTH_SHORT).show()

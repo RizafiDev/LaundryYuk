@@ -15,18 +15,29 @@ class PilihPelangganAdapter(
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvNama: TextView = itemView.findViewById(R.id.tvDataNamaPelanggan)
-        val tvID: TextView = itemView.findViewById(R.id.tvDataIDPelanggan)
         val tvNoHp: TextView = itemView.findViewById(R.id.tvDataNoHpPelanggan)
         val tvAlamat: TextView = itemView.findViewById(R.id.tvDataAlamatPelanggan)
+        val tvCabang: TextView = itemView.findViewById(R.id.tvDataCabangPelanggan)
+        val tvTerdaftar: TextView = itemView.findViewById(R.id.tvDataTerdaftarPelanggan)
 
         fun bind(pelanggan: ModelPelanggan) {
-            tvNama.text = pelanggan.namaPelanggan
-            tvID.text = "ID: ${pelanggan.idPelanggan}"
-            tvNoHp.text = "No HP: ${pelanggan.noHPPelanggan}"
-            tvAlamat.text = "Alamat: ${pelanggan.alamatPelanggan}"
+            try {
+                tvNama.text = pelanggan.namaPelanggan ?: "-"
+                tvNoHp.text = pelanggan.noHPPelanggan ?: "-"
+                tvAlamat.text = pelanggan.alamatPelanggan ?: "-"
+                tvCabang.text = "Cabang ${pelanggan.cabangPelanggan ?: "-"}"
+                tvTerdaftar.text = "Bergabung pada ${pelanggan.tanggalTerdaftar ?: "-"}"
 
-            itemView.setOnClickListener {
-                onItemClick(pelanggan)
+                itemView.setOnClickListener {
+                    onItemClick(pelanggan)
+                }
+            } catch (e: Exception) {
+                // Handle binding error gracefully
+                tvNama.text = "Error loading data"
+                tvNoHp.text = "-"
+                tvAlamat.text = "-"
+                tvCabang.text = "Unknown"
+                tvTerdaftar.text = "-"
             }
         }
     }
@@ -40,6 +51,8 @@ class PilihPelangganAdapter(
     override fun getItemCount(): Int = list.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(list[position])
+        if (position >= 0 && position < list.size) {
+            holder.bind(list[position])
+        }
     }
 }

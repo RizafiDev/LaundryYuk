@@ -5,7 +5,6 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
     android:background="#f9fafb">
 
     <!-- Background Ilustrasi -->
@@ -61,47 +60,32 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="20dp">
+            android:padding="16dp">
 
             <!-- Header -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
+                android:orientation="horizontal"
+                android:weightSum="2">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical">
-                    <ImageView
-                        android:layout_width="14dp"
-                        android:layout_height="14dp"
-                        android:src="@drawable/wallet_solid"
-                        app:tint="@color/primary_color"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Pemasukan Bulan Ini"
-                        android:textSize="16sp"
-                        android:layout_marginLeft="8dp"
-                        android:fontFamily="@font/inter_bold" />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
+                    android:text="Estimasi Bulan Ini"
+                    android:textSize="16sp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/inter_bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="textEnd"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Rp. 1.500.000"
-                        android:fontFamily="@font/inter_bold"
-                        android:textSize="16dp"
-                        />
-                </LinearLayout>
-
-
-
+                    android:text="Rp. 40.000,-"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/inter_bold"
+                    android:textColor="@android:color/holo_red_dark" />
             </LinearLayout>
 
             <!-- Icon Grid -->
@@ -184,9 +168,8 @@
     <!-- Main Content Container -->
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
-        >
+        android:layout_height="match_parent"
+        android:layout_marginTop="200dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -414,130 +397,4 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
-    <!-- Bottom Navigation Bar -->
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        app:cardElevation="8dp"
-        app:cardCornerRadius="0dp"
-        android:background="@color/white"
-        >
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <!-- Background untuk bottom navigation -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:weightSum="3"
-                android:padding="14dp">
-
-                <!-- Beranda -->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-                        <ImageView
-                            android:layout_width="18dp"
-                            android:layout_height="18dp"
-                            android:src="@drawable/house_solid"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="1dp"
-                            app:tint="@color/primary_color"/>
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Beranda"
-                            android:fontFamily="@font/inter_bold"
-                            android:textAlignment="center"
-                            android:layout_marginTop="4dp"
-                            />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <!-- Space untuk FAB (tengah) -->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-                    <!-- Space kosong untuk FAB -->
-                </LinearLayout>
-
-                <!-- Profile -->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-                        <ImageView
-                            android:layout_width="18dp"
-                            android:layout_height="18dp"
-                            android:src="@drawable/user_solid"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="1dp"
-                            app:tint="#9D9D9D"/>
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Profile"
-                            android:fontFamily="@font/inter_medium"
-                            android:textAlignment="center"
-                            android:textColor="#9D9D9D"
-                            android:layout_marginTop="4dp"
-                            />
-                    </LinearLayout>
-                </LinearLayout>
-            </LinearLayout>
-
-            <!-- Floating Action Button Container -->
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="-28dp"
-                android:orientation="vertical"
-                android:gravity="center">
-
-                <!-- FAB Circle -->
-                <androidx.cardview.widget.CardView
-                    android:layout_width="56dp"
-                    android:layout_height="56dp"
-                    app:cardCornerRadius="28dp"
-                    android:backgroundTint="@color/primary_color">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center">
-
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:src="@drawable/plus_solid"
-                            app:tint="@color/white"/>
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
-
-                <!-- Text Label di bawah lingkaran -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Buat Transaksi"
-                    android:fontFamily="@font/inter_bold"
-                    android:textColor="@color/primary_color"
-                    android:layout_marginTop="8dp"/>
-
-            </LinearLayout>
-
-        </RelativeLayout>
-    </androidx.cardview.widget.CardView>
 </FrameLayout>
