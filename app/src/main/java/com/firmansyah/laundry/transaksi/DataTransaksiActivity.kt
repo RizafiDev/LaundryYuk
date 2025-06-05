@@ -55,6 +55,7 @@ class DataTransaksiActivity : AppCompatActivity() {
                 val data = result.data
                 selectedPelangganNama = data?.getStringExtra("namaPelanggan") ?: ""
                 selectedPelangganHP = data?.getStringExtra("noHPPelanggan") ?: ""
+                // Now properly get the additional data
                 selectedPelangganAlamat = data?.getStringExtra("alamatPelanggan") ?: ""
                 selectedPelangganCabang = data?.getStringExtra("cabangPelanggan") ?: ""
 
@@ -69,6 +70,7 @@ class DataTransaksiActivity : AppCompatActivity() {
                 val data = result.data
                 selectedLayananNama = data?.getStringExtra("namaLayanan") ?: ""
                 selectedLayananHarga = data?.getStringExtra("hargaLayanan") ?: ""
+                // Now properly get the additional data
                 selectedLayananCabang = data?.getStringExtra("cabangLayanan") ?: ""
 
                 // Show selected service card
@@ -180,7 +182,6 @@ class DataTransaksiActivity : AppCompatActivity() {
             val tvNoHp: TextView = view.findViewById(R.id.tvDataNoHpPelanggan)
             val tvAlamat: TextView = view.findViewById(R.id.tvDataAlamatPelanggan)
             val tvCabang: TextView = view.findViewById(R.id.tvDataCabangPelanggan)
-            val tvTerdaftar: TextView = view.findViewById(R.id.tvDataTerdaftarPelanggan)
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -190,11 +191,10 @@ class DataTransaksiActivity : AppCompatActivity() {
         }
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            holder.tvNama.text = nama.ifEmpty { "-" }
-            holder.tvNoHp.text = hp.ifEmpty { "-" }
-            holder.tvAlamat.text = alamat.ifEmpty { "-" }
-            holder.tvCabang.text = "Cabang ${cabang.ifEmpty { "-" }}"
-            holder.tvTerdaftar.text = "Terdaftar"
+            holder.tvNama.text = if (nama.isNotEmpty()) nama else "-"
+            holder.tvNoHp.text = if (hp.isNotEmpty()) hp else "-"
+            holder.tvAlamat.text = if (alamat.isNotEmpty()) alamat else "-"
+            holder.tvCabang.text = if (cabang.isNotEmpty()) "Cabang $cabang" else "Cabang -"
         }
 
         override fun getItemCount(): Int = 1
@@ -220,9 +220,9 @@ class DataTransaksiActivity : AppCompatActivity() {
         }
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            holder.tvNama.text = "Layanan ${nama.ifEmpty { "-" }}"
-            holder.tvHarga.text = "Rp. ${harga.ifEmpty { "0" }},-"
-            holder.tvCabang.text = "Cabang ${cabang.ifEmpty { "-" }}"
+            holder.tvNama.text = if (nama.isNotEmpty()) "Layanan $nama" else "Layanan -"
+            holder.tvHarga.text = if (harga.isNotEmpty()) "Rp. $harga,-" else "Rp. 0,-"
+            holder.tvCabang.text = if (cabang.isNotEmpty()) "Cabang $cabang" else "Cabang -"
         }
 
         override fun getItemCount(): Int = 1

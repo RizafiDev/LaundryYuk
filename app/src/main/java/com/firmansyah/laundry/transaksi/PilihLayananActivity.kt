@@ -40,10 +40,12 @@ class PilihLayananActivity : AppCompatActivity() {
                     intent.putExtra("idLayanan", selectedLayanan.idLayanan)
                     intent.putExtra("namaLayanan", selectedLayanan.namaLayanan)
                     intent.putExtra("hargaLayanan", selectedLayanan.hargaLayanan)
+                    // Add the missing data
+                    intent.putExtra("cabangLayanan", selectedLayanan.cabangLayanan)
+                    intent.putExtra("tanggalTerdaftar", selectedLayanan.tanggalTerdaftar)
                     setResult(RESULT_OK, intent)
                     finish()
                 }
-
 
                 recyclerView.adapter = adapter
             }

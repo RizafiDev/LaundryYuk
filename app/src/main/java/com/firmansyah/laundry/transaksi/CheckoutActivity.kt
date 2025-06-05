@@ -52,6 +52,7 @@ class CheckoutActivity : AppCompatActivity() {
     private var namaPelanggan = ""
     private var noHpPelanggan = ""
     private var namaLayanan = ""
+    private var cabangLayanan = "" // Tambahan untuk data cabang
 
     private val apiService by lazy { RetrofitClient.instance }
     private lateinit var firebaseAuth: FirebaseAuth
@@ -128,6 +129,7 @@ class CheckoutActivity : AppCompatActivity() {
             tvNoHp.text = noHpPelanggan
 
             namaLayanan = bundle.getString("namaLayanan") ?: ""
+            cabangLayanan = bundle.getString("cabangLayanan") ?: "" // Ambil data cabang dari intent
             tvNamaLayanan.text = namaLayanan
             val harga = bundle.getString("hargaLayanan") ?: "0"
             tvHargaLayanan.text = "Rp $harga"
@@ -279,6 +281,7 @@ class CheckoutActivity : AppCompatActivity() {
 
         return "TRX$year$month$day$uniqueId"
     }
+
     private fun savePendapatanKaryawan(totalAmount: Int, transactionId: String, timestamp: Long) {
         val currentUser = firebaseAuth.currentUser ?: return
 
@@ -298,6 +301,7 @@ class CheckoutActivity : AppCompatActivity() {
             "tanggalTransaksi" to formattedDate,
             "pelangganNama" to namaPelanggan,
             "layananNama" to namaLayanan,
+            "cabangLayanan" to cabangLayanan, // Tambahkan data cabang
             "metodePembayaran" to actualPaymentMethod,
             "status" to "completed"
         )
@@ -314,6 +318,7 @@ class CheckoutActivity : AppCompatActivity() {
                 Log.e("Firebase", "Failed to save pendapatan karyawan", exception)
             }
     }
+
     private fun saveTransactionToDatabase(onSuccess: (String) -> Unit) {
         val currentUser = firebaseAuth.currentUser ?: return
 
@@ -333,7 +338,7 @@ class CheckoutActivity : AppCompatActivity() {
                 "id" to (tambahan.idLayanan ?: ""),
                 "nama" to (tambahan.namaLayanan ?: ""),
                 "harga" to parseHarga(tambahan.hargaLayanan ?: "0"),
-                "quantity" to 1
+                "quantity" to 1,
             )
         } ?: emptyList()
 
@@ -349,6 +354,7 @@ class CheckoutActivity : AppCompatActivity() {
                 "nama" to namaLayanan,
                 "hargaPerKg" to baseServicePrice,
                 "kilogram" to kilogram,
+                "cabang" to cabangLayanan, // Tambahkan data cabang untuk layanan utama
                 "layananTambahan" to layananTambahanData
             ),
             "pembayaran" to mapOf(
@@ -362,6 +368,7 @@ class CheckoutActivity : AppCompatActivity() {
                 "nama" to (currentUser.displayName ?: "Admin"),
                 "email" to (currentUser.email ?: "")
             ),
+            "cabang" to cabangLayanan, // Tambahkan data cabang di level root
             "status" to "completed"
         )
 
@@ -373,7 +380,7 @@ class CheckoutActivity : AppCompatActivity() {
                 // Simpan pendapatan karyawan
                 savePendapatanKaryawan(total, transactionId, timestamp)
 
-                // Simpan laporan bulanan
+                // Simpan laporan bulanan berdasarkan cabang
                 saveMonthlyReport(total, timestamp)
 
                 onSuccess(transactionId)
@@ -390,6 +397,7 @@ class CheckoutActivity : AppCompatActivity() {
         intent.putExtra("namaPelanggan", namaPelanggan)
         intent.putExtra("noHpPelanggan", noHpPelanggan)
         intent.putExtra("namaLayanan", namaLayanan)
+        intent.putExtra("cabangLayanan", cabangLayanan) // Tambahkan data cabang ke intent
         intent.putExtra("kilogram", kilogram)
         intent.putExtra("metodePembayaran", actualPaymentMethod)
         intent.putExtra("namaPegawai", firebaseAuth.currentUser?.displayName ?: "Admin")
@@ -422,8 +430,10 @@ class CheckoutActivity : AppCompatActivity() {
 
         val currentUser = firebaseAuth.currentUser ?: return
 
+        // Simpan laporan bulanan per cabang
         val monthlyRef = database.reference
             .child("monthly_reports")
+            .child(cabangLayanan.ifEmpty { "default" }) // Gunakan cabang atau "default" jika kosong
             .child(monthKey)
 
         monthlyRef.get().addOnSuccessListener { snapshot ->
@@ -434,6 +444,7 @@ class CheckoutActivity : AppCompatActivity() {
             val updatedData = mapOf(
                 "tahun" to year,
                 "bulan" to month,
+                "cabang" to cabangLayanan, // Tambahkan data cabang
                 "totalPendapatan" to (currentTotal + totalAmount),
                 "jumlahTransaksi" to (currentCount + 1),
                 "lastUpdated" to timestamp,
@@ -446,7 +457,7 @@ class CheckoutActivity : AppCompatActivity() {
 
             monthlyRef.setValue(updatedData)
                 .addOnSuccessListener {
-                    Log.d("Firebase", "Monthly report updated successfully")
+                    Log.d("Firebase", "Monthly report updated successfully for branch: $cabangLayanan")
                 }
                 .addOnFailureListener { exception ->
                     Log.e("Firebase", "Failed to update monthly report", exception)

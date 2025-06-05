@@ -18,7 +18,6 @@ class PilihPelangganAdapter(
         val tvNoHp: TextView = itemView.findViewById(R.id.tvDataNoHpPelanggan)
         val tvAlamat: TextView = itemView.findViewById(R.id.tvDataAlamatPelanggan)
         val tvCabang: TextView = itemView.findViewById(R.id.tvDataCabangPelanggan)
-        val tvTerdaftar: TextView = itemView.findViewById(R.id.tvDataTerdaftarPelanggan)
 
         fun bind(pelanggan: ModelPelanggan) {
             try {
@@ -26,7 +25,6 @@ class PilihPelangganAdapter(
                 tvNoHp.text = pelanggan.noHPPelanggan ?: "-"
                 tvAlamat.text = pelanggan.alamatPelanggan ?: "-"
                 tvCabang.text = "Cabang ${pelanggan.cabangPelanggan ?: "-"}"
-                tvTerdaftar.text = "Bergabung pada ${pelanggan.tanggalTerdaftar ?: "-"}"
 
                 itemView.setOnClickListener {
                     onItemClick(pelanggan)
@@ -37,7 +35,6 @@ class PilihPelangganAdapter(
                 tvNoHp.text = "-"
                 tvAlamat.text = "-"
                 tvCabang.text = "Unknown"
-                tvTerdaftar.text = "-"
             }
         }
     }

@@ -121,30 +121,6 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:layout_marginTop="12dp">
-
-                <ImageView
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:src="@drawable/right_to_bracket_solid"
-                    app:tint="#4338ca"/>
-
-                <TextView
-                    android:id="@+id/tvDataTerdaftarPelanggan"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/inter_semibold"
-                    android:text="Terdaftar"
-                    android:textSize="16sp"
-                    android:layout_marginLeft="12dp" />
-
-            </LinearLayout>
-
         </LinearLayout>
 
         <CheckBox
