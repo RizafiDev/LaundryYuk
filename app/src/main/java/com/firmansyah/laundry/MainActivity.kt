@@ -10,6 +10,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 import android.content.Intent
 import android.widget.LinearLayout
+import android.widget.Toast
+import com.firmansyah.laundry.cabang.DataCabangActivity
 import com.firmansyah.laundry.auth.AkunActivity
 import com.firmansyah.laundry.pelanggan.DataPelangganActivity
 import com.firmansyah.laundry.pegawai.DataPegawaiActivity
@@ -19,12 +21,19 @@ import com.firmansyah.laundry.tambahan.DataTambahanActivity
 import com.firmansyah.laundry.transaksi.DataTransaksiActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import java.text.NumberFormat
+import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var tvWaktu: TextView
     private lateinit var tvNamaUser: TextView
+    private lateinit var tvSaldo: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,10 +46,13 @@ class MainActivity : AppCompatActivity() {
         // Inisialisasi TextView
         tvWaktu = findViewById(R.id.tvWaktu)
         tvNamaUser = findViewById(R.id.tvNamaUser)
-
+        tvSaldo = findViewById(R.id.saldo)
 
         // Set greeting dengan nama user
         setDynamicGreeting()
+
+        // Load saldo dari database pendapatan karyawan
+        loadSaldoFromPendapatanKaryawan()
 
         // redirect to pelanggan
         val appDataPelanggan = findViewById<LinearLayout>(R.id.AppDataPelanggan)
@@ -77,17 +89,17 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        // redirect to tambahan
-        val appDataTambahan = findViewById<LinearLayout>(R.id.AppDataTambahan)
-        appDataTambahan.setOnClickListener{
-            val intent = Intent(this, DataTambahanActivity::class.java)
-            startActivity(intent)
-        }
-
         // redirect to akun
         val appDataAkun = findViewById<LinearLayout>(R.id.AppDataAkun)
         appDataAkun.setOnClickListener{
             val intent = Intent(this, AkunActivity::class.java)
+            startActivity(intent)
+        }
+
+        // redirect to cabang
+        val appDataCabang = findViewById<LinearLayout>(R.id.AppDataCabang)
+        appDataCabang.setOnClickListener{
+            val intent = Intent(this, DataCabangActivity::class.java)
             startActivity(intent)
         }
 
@@ -118,6 +130,162 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun loadSaldoFromPendapatanKaryawan() {
+        val currentUser = firebaseAuth.currentUser
+        if (currentUser != null) {
+            val currentUserUid = currentUser.uid
+
+            // Set loading text sementara
+            tvSaldo.text = "Loading..."
+
+            // Dapatkan bulan dan tahun saat ini
+            val calendar = Calendar.getInstance()
+            val currentMonth = calendar.get(Calendar.MONTH) + 1 // +1 karena Calendar.MONTH dimulai dari 0
+            val currentYear = calendar.get(Calendar.YEAR)
+
+            // Reference ke node pendapatan_karyawan di database
+            val pendapatanRef = FirebaseDatabase.getInstance().getReference("pendapatan_karyawan")
+
+            // Query untuk mendapatkan pendapatan karyawan berdasarkan UID
+            pendapatanRef.orderByChild("karyawanUid").equalTo(currentUserUid)
+                .addValueEventListener(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        var totalSaldo = 0.0
+                        var jumlahTransaksi = 0
+
+                        // Loop melalui semua pendapatan karyawan
+                        for (pendapatanSnapshot in snapshot.children) {
+                            // Ambil timestamp dari data
+                            val timestamp = pendapatanSnapshot.child("timestamp").getValue(Long::class.java)
+
+                            if (timestamp != null) {
+                                // Konversi timestamp ke Calendar untuk mendapatkan bulan dan tahun
+                                val transactionCalendar = Calendar.getInstance()
+                                transactionCalendar.timeInMillis = timestamp
+
+                                val transactionMonth = transactionCalendar.get(Calendar.MONTH) + 1
+                                val transactionYear = transactionCalendar.get(Calendar.YEAR)
+
+                                // Filter hanya transaksi bulan dan tahun ini
+                                if (transactionMonth == currentMonth && transactionYear == currentYear) {
+                                    val jumlahPendapatan = pendapatanSnapshot.child("jumlahPendapatan").getValue(Double::class.java)
+                                        ?: pendapatanSnapshot.child("jumlahPendapatan").getValue(Long::class.java)?.toDouble()
+                                        ?: pendapatanSnapshot.child("jumlahPendapatan").getValue(Int::class.java)?.toDouble()
+
+                                    if (jumlahPendapatan != null) {
+                                        totalSaldo += jumlahPendapatan
+                                        jumlahTransaksi++
+                                    }
+                                }
+                            }
+                        }
+
+                        // Update TextView dengan format mata uang Indonesia
+                        updateSaldoDisplay(totalSaldo, jumlahTransaksi, currentMonth, currentYear)
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        // Handle error
+                        tvSaldo.text = "Rp. 0"
+                        Toast.makeText(this@MainActivity, "Gagal memuat saldo: ${error.message}", Toast.LENGTH_SHORT).show()
+                    }
+                })
+        } else {
+            // Jika tidak ada user yang login, redirect ke login
+            startActivity(Intent(this, com.firmansyah.laundry.auth.LoginActivity::class.java))
+            finish()
+        }
+    }
+
+    private fun updateSaldoDisplay(saldo: Double, jumlahTransaksi: Int, bulan: Int, tahun: Int) {
+        // Format saldo ke mata uang Indonesia
+        val formatter = NumberFormat.getInstance(Locale("id", "ID"))
+        val formattedSaldo = "Rp. ${formatter.format(saldo.toLong())}"
+
+        // Nama bulan dalam bahasa Indonesia
+        val namaBulan = arrayOf(
+            "", "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+            "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+        )
+
+        // Update TextView dengan informasi bulan
+        tvSaldo.text = formattedSaldo
+
+        // Optional: Log untuk debugging dengan info bulan
+        println("Pendapatan ${namaBulan[bulan]} $tahun: $formattedSaldo dari $jumlahTransaksi transaksi")
+    }
+
+    // Fungsi tambahan untuk mendapatkan pendapatan bulan tertentu
+    private fun getPendapatanByMonth(month: Int, year: Int, callback: (Double, Int) -> Unit) {
+        val currentUser = firebaseAuth.currentUser
+        if (currentUser != null) {
+            val pendapatanRef = FirebaseDatabase.getInstance().getReference("pendapatan_karyawan")
+
+            pendapatanRef.orderByChild("karyawanUid").equalTo(currentUser.uid)
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        var totalSaldo = 0.0
+                        var jumlahTransaksi = 0
+
+                        for (pendapatanSnapshot in snapshot.children) {
+                            val timestamp = pendapatanSnapshot.child("timestamp").getValue(Long::class.java)
+
+                            if (timestamp != null) {
+                                val transactionCalendar = Calendar.getInstance()
+                                transactionCalendar.timeInMillis = timestamp
+
+                                val transactionMonth = transactionCalendar.get(Calendar.MONTH) + 1
+                                val transactionYear = transactionCalendar.get(Calendar.YEAR)
+
+                                if (transactionMonth == month && transactionYear == year) {
+                                    val jumlahPendapatan = pendapatanSnapshot.child("jumlahPendapatan").getValue(Double::class.java)
+                                        ?: pendapatanSnapshot.child("jumlahPendapatan").getValue(Long::class.java)?.toDouble()
+                                        ?: pendapatanSnapshot.child("jumlahPendapatan").getValue(Int::class.java)?.toDouble()
+
+                                    if (jumlahPendapatan != null) {
+                                        totalSaldo += jumlahPendapatan
+                                        jumlahTransaksi++
+                                    }
+                                }
+                            }
+                        }
+
+                        callback(totalSaldo, jumlahTransaksi)
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        callback(0.0, 0)
+                    }
+                })
+        }
+    }
+
+    // Fungsi untuk menampilkan nama bulan
+    private fun getMonthName(month: Int): String {
+        val months = arrayOf(
+            "", "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+            "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+        )
+        return months[month]
+    }
+
+    private fun updateSaldoDisplay(saldo: Double, jumlahTransaksi: Int) {
+        // Format saldo ke mata uang Indonesia
+        val formatter = NumberFormat.getInstance(Locale("id", "ID"))
+        val formattedSaldo = "Rp. ${formatter.format(saldo.toLong())}"
+
+        // Update TextView
+        tvSaldo.text = formattedSaldo
+
+        // Optional: Log untuk debugging
+        println("Total Saldo Karyawan: $formattedSaldo dari $jumlahTransaksi transaksi")
+    }
+
+    // Fungsi untuk refresh saldo secara manual jika diperlukan
+    private fun refreshSaldo() {
+        loadSaldoFromPendapatanKaryawan()
+    }
+
     private fun getGreetingByTime(): String {
         val calendar = Calendar.getInstance()
         val hour = calendar.get(Calendar.HOUR_OF_DAY)
@@ -127,6 +295,47 @@ class MainActivity : AppCompatActivity() {
             in 12..14 -> "Selamat Siang"
             in 15..17 -> "Selamat Sore"
             else -> "Selamat Malam"
+        }
+    }
+
+    // Fungsi untuk dipanggil saat activity kembali terlihat (optional)
+    override fun onResume() {
+        super.onResume()
+        // Refresh saldo ketika kembali ke activity ini
+        refreshSaldo()
+    }
+
+    // Fungsi tambahan untuk mendapatkan detail pendapatan (opsional)
+    private fun getDetailPendapatan() {
+        val currentUser = firebaseAuth.currentUser
+        if (currentUser != null) {
+            val pendapatanRef = FirebaseDatabase.getInstance().getReference("pendapatan_karyawan")
+
+            pendapatanRef.orderByChild("karyawanUid").equalTo(currentUser.uid)
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        val pendapatanList = mutableListOf<Map<String, Any>>()
+
+                        for (pendapatanSnapshot in snapshot.children) {
+                            val pendapatanData = pendapatanSnapshot.value as? Map<String, Any>
+                            if (pendapatanData != null) {
+                                pendapatanList.add(pendapatanData)
+                            }
+                        }
+
+                        // Urutkan berdasarkan timestamp terbaru
+                        pendapatanList.sortByDescending {
+                            (it["timestamp"] as? Long) ?: 0L
+                        }
+
+                        // Log atau gunakan data sesuai kebutuhan
+                        println("Detail Pendapatan: $pendapatanList")
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        println("Error loading detail pendapatan: ${error.message}")
+                    }
+                })
         }
     }
 }

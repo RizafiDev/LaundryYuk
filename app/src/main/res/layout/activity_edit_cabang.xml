@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main"
+    tools:context=".cabang.EditCabangActivity"
+    android:background="#f9fafb">
+
+    <!-- Background Ilustrasi -->
+    <ImageView
+        android:id="@+id/illustrationImage"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/buat_pelanggan_ilustration"
+        android:contentDescription="Tambah Pelanggan Illustration" />
+
+    <!-- Header yang mengambang di atas ilustrasi -->
+    <TextView
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Edit Cabang"
+        android:fontFamily="@font/inter_semibold"
+        android:textSize="18sp"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:layout_marginTop="28dp"
+        />
+
+    <!-- Form Tambah Pelanggan Mengambang -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="16dp"
+        card_view:cardCornerRadius="8dp"
+        card_view:cardElevation="1dp"
+        android:background="@android:color/white">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="24dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Judul Form -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Edit Data Cabang"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/inter_bold"
+                    android:textColor="#000000"
+                    android:layout_marginBottom="8dp" />
+
+                <!-- Subjudul -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Edit data dengan benar untuk mengubah data cabang"
+                    android:textSize="14sp"
+                    android:textColor="#666666"
+                    android:fontFamily="@font/inter_medium"
+                    android:layout_marginBottom="24dp" />
+
+                <!-- Container Nama -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Nama Cabang"
+                    android:fontFamily="@font/inter_semibold"
+                    android:textSize="16sp"
+                    android:textColor="#666666"
+                    android:layout_marginBottom="8dp"
+                    />
+
+                <EditText
+                    android:id="@+id/etTambahNamaCabang"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Nama Cabang"
+                    android:fontFamily="@font/inter_medium"
+                    android:textSize="16sp"
+                    android:textAlignment="textStart"
+                    android:padding="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/edittext_background_enabled"
+                    />
+
+                <!-- Container Alamat -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/activity_layanan_alamat"
+                    android:fontFamily="@font/inter_semibold"
+                    android:textSize="16sp"
+                    android:textColor="#666666"
+                    android:layout_marginBottom="8dp"/>
+
+                <EditText
+                    android:id="@+id/etTambahAlamatCabang"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/activity_layanan_alamat"
+                    android:fontFamily="@font/inter_medium"
+                    android:textSize="16sp"
+                    android:textAlignment="textStart"
+                    android:padding="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:minLines="2"
+                    android:gravity="top"
+                    android:background="@drawable/edittext_background_enabled"/>
+                <!-- Container Provinsi (Dropdown) -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Provinsi"
+                    android:fontFamily="@font/inter_semibold"
+                    android:textSize="16sp"
+                    android:textColor="#666666"
+                    android:layout_marginBottom="8dp"/>
+
+                <Spinner
+                    android:id="@+id/spinnerProvinsi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/edittext_background"
+                    android:padding="16dp"
+                    android:spinnerMode="dropdown"/>
+
+                <!-- Container Kab/Kota (Dropdown) -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Kab/Kota"
+                    android:fontFamily="@font/inter_semibold"
+                    android:textSize="16sp"
+                    android:textColor="#666666"
+                    android:layout_marginBottom="8dp"/>
+
+                <Spinner
+                    android:id="@+id/spinnerKabKota"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/edittext_background"
+                    android:padding="16dp"
+                    android:spinnerMode="dropdown"
+                    android:enabled="false"/>
+
+                <!-- Container No HP -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/activity_layanan_nohp"
+                    android:fontFamily="@font/inter_semibold"
+                    android:textSize="16sp"
+                    android:textColor="#666666"
+                    android:layout_marginBottom="8dp"/>
+
+                <EditText
+                    android:id="@+id/etTambahNoHpCabang"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/activity_layanan_nohp"
+                    android:inputType="phone"
+                    android:fontFamily="@font/inter_medium"
+                    android:textSize="16sp"
+                    android:textAlignment="textStart"
+                    android:padding="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/edittext_background"/>
+
+                <!-- Tombol Simpan -->
+                <TextView
+                    android:id="@+id/btnSimpanCabang"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Edit Data"
+                    android:fontFamily="@font/inter_bold"
+                    android:textSize="16sp"
+                    android:textAlignment="center"
+                    android:background="@drawable/button_background"
+                    android:textColor="#FFFFFF"
+                    android:padding="16dp"
+                    android:layout_marginBottom="16dp" />
+
+            </LinearLayout>
+        </ScrollView>
+    </androidx.cardview.widget.CardView>
+</FrameLayout>

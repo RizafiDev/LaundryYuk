@@ -16,6 +16,21 @@
         android:theme="@style/Theme.Laundry"
         tools:targetApi="31">
         <activity
+            android:name=".cabang.EditCabangActivity"
+            android:exported="false" />
+        <activity
+            android:name=".cabang.TambahCabangActivity"
+            android:exported="false" />
+        <activity
+            android:name=".cabang.DataCabangActivity"
+            android:exported="false" />
+        <activity
+            android:name=".tambahan.EditTambahanActivity"
+            android:exported="false" />
+        <activity
+            android:name=".layanan.EditLayananActivity"
+            android:exported="false" />
+        <activity
             android:name=".pegawai.EditPegawaiActivity"
             android:exported="false" />
         <activity

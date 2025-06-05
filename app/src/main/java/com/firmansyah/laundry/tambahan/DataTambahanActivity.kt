@@ -32,26 +32,38 @@ class DataTambahanActivity : AppCompatActivity() {
 
         databaseReference = FirebaseDatabase.getInstance().getReference("tambahan")
 
-        // Ambil data dari Firebase
+        getTambahanData()
+
+        fabTambah.setOnClickListener {
+            startActivity(Intent(this, TambahTambahanActivity::class.java))
+        }
+    }
+
+    private fun getTambahanData() {
         databaseReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 tambahanList.clear()
-                for (data in snapshot.children) {
-                    val item = data.getValue(ModelTambahan::class.java)
+                for (dataSnapshot in snapshot.children) {
+                    val item = dataSnapshot.getValue(ModelTambahan::class.java)
                     if (item != null) {
+                        // PENTING: Set ID dari Firebase key
+                        item.idLayanan = dataSnapshot.key
                         tambahanList.add(item)
                     }
                 }
-                adapter.notifyDataSetChanged()
+                // Menggunakan updateData() untuk konsistensi dengan adapter
+                adapter.updateData(tambahanList)
             }
 
             override fun onCancelled(error: DatabaseError) {
                 // Handle error
             }
         })
+    }
 
-        fabTambah.setOnClickListener {
-            startActivity(Intent(this, TambahTambahanActivity::class.java))
-        }
+    override fun onResume() {
+        super.onResume()
+        // Refresh data ketika kembali dari edit activity
+        getTambahanData()
     }
 }

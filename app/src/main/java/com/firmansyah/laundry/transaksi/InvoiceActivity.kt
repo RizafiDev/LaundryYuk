@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.firmansyah.laundry.MainActivity
 import com.firmansyah.laundry.R
 import com.firmansyah.laundry.model.ModelTambahan
 import java.text.SimpleDateFormat
@@ -147,29 +148,29 @@ class InvoiceActivity : AppCompatActivity() {
 
         return """🧺 *INVOICE LAUNDRY*
 
-        📅 *Tanggal:* $currentDate
-        🆔 *ID Transaksi:* $transactionId
+📅 *Tanggal:* $currentDate
+🆔 *ID Transaksi:* $transactionId
 
-        👤 *Pelanggan:*
-        Nama: $namaPelanggan
-        No. HP: $noHpPelanggan
+👤 *Pelanggan:*
+Nama: $namaPelanggan
+No. HP: $noHpPelanggan
 
-        💼 *Layanan Utama:*
-        $namaLayanan (${kilogram} Kg) - Rp ${formatRupiah(servicePrice)}
+💼 *Layanan Utama:*
+$namaLayanan (${kilogram} Kg) - Rp ${formatRupiah(servicePrice)}
 
-        ➕ *Layanan Tambahan:*
-        $tambahanText
+➕ *Layanan Tambahan:*
+$tambahanText
 
-        💰 *Rincian Pembayaran:*
-        Subtotal : Rp ${formatRupiah(subtotal)}
-        Pajak (12%) : Rp ${formatRupiah(pajak)}
-        *Total : Rp ${formatRupiah(totalPembayaran)}*
+💰 *Rincian Pembayaran:*
+Subtotal : Rp ${formatRupiah(subtotal)}
+Pajak (12%) : Rp ${formatRupiah(pajak)}
+*Total : Rp ${formatRupiah(totalPembayaran)}*
 
-        💳 *Metode Pembayaran:* $metodePembayaran
-        👨‍💼 *Dilayani oleh:* $namaPegawai
+💳 *Metode Pembayaran:* $metodePembayaran
+👨‍💼 *Dilayani oleh:* $namaPegawai
 
-        Terima kasih telah menggunakan layanan kami! 🙏
-    """.trimIndent()
+Terima kasih telah menggunakan layanan kami! 🙏
+""".trimIndent()
     }
 
 
@@ -199,7 +200,9 @@ class InvoiceActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
+        val intent = Intent(this, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
         finish()
     }
 }

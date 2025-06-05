@@ -2,7 +2,10 @@ package com.firmansyah.laundry.layanan
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.animation.TranslateAnimation
+import android.widget.EditText
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -28,21 +31,33 @@ class DataLayananActivity : AppCompatActivity() {
     private lateinit var fabTambahLayanan: FloatingActionButton
     private lateinit var tvLayananUtama: TextView
     private lateinit var tvLayananTambahan: TextView
+    private lateinit var etSearchLayanan: EditText
 
     private lateinit var layananList: ArrayList<ModelLayanan>
     private lateinit var tambahanList: ArrayList<ModelTambahan>
+    private lateinit var layananAdapter: DataLayananAdapter
+    private lateinit var tambahanAdapter: DataTambahanAdapter
 
     private var isShowingTambahan = false
 
     private fun init() {
         rvDataLayanan = findViewById(R.id.rvDATA_LAYANAN)
         fabTambahLayanan = findViewById(R.id.fabTambahLayanan)
-
-        // Assuming you have these TextViews in your layout for the category buttons
-        tvLayananUtama = findViewById(R.id.tvLayananUtama) // You'll need to add IDs to your TextViews
+        tvLayananUtama = findViewById(R.id.tvLayananUtama)
         tvLayananTambahan = findViewById(R.id.tvLayananTambahan)
+        etSearchLayanan = findViewById(R.id.etSearchLayanan)
 
         rvDataLayanan.layoutManager = LinearLayoutManager(this)
+
+        // Initialize adapters
+        layananAdapter = DataLayananAdapter(layananList)
+        tambahanAdapter = DataTambahanAdapter(tambahanList)
+
+        // Set initial adapter
+        rvDataLayanan.adapter = layananAdapter
+
+        // Setup search functionality
+        setupSearch()
 
         // Set click listeners for category toggle
         tvLayananUtama.setOnClickListener {
@@ -58,24 +73,57 @@ class DataLayananActivity : AppCompatActivity() {
         }
     }
 
+    private fun setupSearch() {
+        etSearchLayanan.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val searchText = s.toString()
+                if (isShowingTambahan) {
+                    tambahanAdapter.filter(searchText)
+                } else {
+                    layananAdapter.filter(searchText)
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
+    }
+
     private fun switchToLayananUtama() {
         isShowingTambahan = false
         updateCategoryButtons()
+        updateSearchHint()
+        clearSearchText()
+
         // Animate from right to left (tambahan -> utama)
         animateRecyclerView(slideToLeft = true) {
-            val adapter = DataLayananAdapter(layananList)
-            rvDataLayanan.adapter = adapter
+            rvDataLayanan.adapter = layananAdapter
         }
     }
 
     private fun switchToLayananTambahan() {
         isShowingTambahan = true
         updateCategoryButtons()
+        updateSearchHint()
+        clearSearchText()
+
         // Animate from left to right (utama -> tambahan)
         animateRecyclerView(slideToLeft = false) {
-            val adapter = DataTambahanAdapter(tambahanList)
-            rvDataLayanan.adapter = adapter
+            rvDataLayanan.adapter = tambahanAdapter
         }
+    }
+
+    private fun updateSearchHint() {
+        etSearchLayanan.hint = if (isShowingTambahan) {
+            "Cari layanan tambahan..."
+        } else {
+            "Cari layanan utama..."
+        }
+    }
+
+    private fun clearSearchText() {
+        etSearchLayanan.setText("")
     }
 
     private fun animateRecyclerView(slideToLeft: Boolean, onAnimationEnd: () -> Unit) {
@@ -146,14 +194,13 @@ class DataLayananActivity : AppCompatActivity() {
                     layananList.clear()
                     for (dataSnapshot in snapshot.children) {
                         val layanan = dataSnapshot.getValue(ModelLayanan::class.java)
-                        layanan?.let { layananList.add(it) }
+                        layanan?.let {
+                            // Pastikan ID tersimpan
+                            it.idLayanan = dataSnapshot.key
+                            layananList.add(it)
+                        }
                     }
-                    // Update adapter if currently showing layanan utama
-                    if (!isShowingTambahan) {
-                        val adapter = DataLayananAdapter(layananList)
-                        rvDataLayanan.adapter = adapter
-                        adapter.notifyDataSetChanged()
-                    }
+                    layananAdapter.updateData(layananList)
                 }
             }
 
@@ -167,18 +214,15 @@ class DataLayananActivity : AppCompatActivity() {
         tambahanRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 tambahanList.clear()
-                for (data in snapshot.children) {
-                    val item = data.getValue(ModelTambahan::class.java)
+                for (dataSnapshot in snapshot.children) {
+                    val item = dataSnapshot.getValue(ModelTambahan::class.java)
                     if (item != null) {
+                        // Pastikan ID tersimpan
+                        item.idLayanan = dataSnapshot.key
                         tambahanList.add(item)
                     }
                 }
-                // Update adapter if currently showing layanan tambahan
-                if (isShowingTambahan) {
-                    val adapter = DataTambahanAdapter(tambahanList)
-                    rvDataLayanan.adapter = adapter
-                    adapter.notifyDataSetChanged()
-                }
+                tambahanAdapter.updateData(tambahanList)
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -213,5 +257,12 @@ class DataLayananActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // Refresh data when returning from edit activity
+        getLayananData()
+        getTambahanData()
     }
 }

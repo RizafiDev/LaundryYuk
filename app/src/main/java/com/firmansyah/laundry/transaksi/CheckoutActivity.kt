@@ -279,7 +279,41 @@ class CheckoutActivity : AppCompatActivity() {
 
         return "TRX$year$month$day$uniqueId"
     }
+    private fun savePendapatanKaryawan(totalAmount: Int, transactionId: String, timestamp: Long) {
+        val currentUser = firebaseAuth.currentUser ?: return
 
+        val dateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault())
+        val formattedDate = dateFormat.format(Date(timestamp))
+
+        val pendapatanId = "${currentUser.uid}_${System.currentTimeMillis()}"
+
+        val pendapatanData = mapOf(
+            "id" to pendapatanId,
+            "karyawanUid" to currentUser.uid,
+            "karyawanNama" to (currentUser.displayName ?: "Admin"),
+            "karyawanEmail" to (currentUser.email ?: ""),
+            "transactionId" to transactionId,
+            "jumlahPendapatan" to totalAmount,
+            "timestamp" to timestamp,
+            "tanggalTransaksi" to formattedDate,
+            "pelangganNama" to namaPelanggan,
+            "layananNama" to namaLayanan,
+            "metodePembayaran" to actualPaymentMethod,
+            "status" to "completed"
+        )
+
+        // Simpan ke database pendapatan_karyawan
+        database.reference
+            .child("pendapatan_karyawan")
+            .child(pendapatanId)
+            .setValue(pendapatanData)
+            .addOnSuccessListener {
+                Log.d("Firebase", "Pendapatan karyawan saved successfully")
+            }
+            .addOnFailureListener { exception ->
+                Log.e("Firebase", "Failed to save pendapatan karyawan", exception)
+            }
+    }
     private fun saveTransactionToDatabase(onSuccess: (String) -> Unit) {
         val currentUser = firebaseAuth.currentUser ?: return
 
@@ -336,7 +370,12 @@ class CheckoutActivity : AppCompatActivity() {
             .child(transactionId)
             .setValue(transactionData)
             .addOnSuccessListener {
+                // Simpan pendapatan karyawan
+                savePendapatanKaryawan(total, transactionId, timestamp)
+
+                // Simpan laporan bulanan
                 saveMonthlyReport(total, timestamp)
+
                 onSuccess(transactionId)
             }
             .addOnFailureListener { exception ->
