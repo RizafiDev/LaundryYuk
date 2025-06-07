@@ -152,7 +152,7 @@
                     android:textColor="#666666"
                     android:layout_marginBottom="8dp"/>
 
-                <EditText
+                <Spinner
                     android:id="@+id/etTambahCabangPelanggan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -162,7 +162,8 @@
                     android:textAlignment="textStart"
                     android:padding="16dp"
                     android:layout_marginBottom="24dp"
-                    android:background="@drawable/edittext_background_enabled"/>
+                    android:background="@drawable/edittext_background_enabled"
+                    android:spinnerMode="dropdown"/>
 
                 <!-- Tombol Simpan -->
                 <TextView

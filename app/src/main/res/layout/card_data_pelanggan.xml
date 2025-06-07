@@ -10,7 +10,8 @@
     app:layout_constraintTop_toTopOf="parent"
     app:cardCornerRadius="8dp"
     android:layout_marginHorizontal="12dp"
-    android:layout_marginBottom="12dp">
+    android:layout_marginBottom="12dp"
+    android:backgroundTint="@color/card_color_white">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -45,7 +46,8 @@
                     android:fontFamily="@font/inter_semibold"
                     android:text="@string/card_pelanggan_nama"
                     android:textSize="16sp"
-                    android:layout_marginLeft="12dp" />
+                    android:layout_marginLeft="12dp"
+                    android:textColor="@color/text_color_white"/>
 
             </LinearLayout>
 
@@ -69,7 +71,8 @@
                     android:fontFamily="@font/inter_semibold"
                     android:text="@string/card_pelanggan_alamat"
                     android:textSize="16sp"
-                    android:layout_marginLeft="12dp" />
+                    android:layout_marginLeft="12dp"
+                    android:textColor="@color/text_color_white"/>
 
             </LinearLayout>
 
@@ -93,7 +96,8 @@
                     android:fontFamily="@font/inter_semibold"
                     android:text="@string/card_pelanggan_nohp"
                     android:textSize="16sp"
-                    android:layout_marginLeft="12dp" />
+                    android:layout_marginLeft="12dp"
+                    android:textColor="@color/text_color_white"/>
 
             </LinearLayout>
 
@@ -117,7 +121,8 @@
                     android:fontFamily="@font/inter_semibold"
                     android:text="@string/card_pelanggan_cabang"
                     android:textSize="16sp"
-                    android:layout_marginLeft="12dp" />
+                    android:layout_marginLeft="12dp"
+                    android:textColor="@color/text_color_white"/>
 
             </LinearLayout>
 
@@ -141,7 +146,8 @@
                     android:fontFamily="@font/inter_semibold"
                     android:text="Terdaftar"
                     android:textSize="16sp"
-                    android:layout_marginLeft="12dp" />
+                    android:layout_marginLeft="12dp"
+                    android:textColor="@color/text_color_white"/>
 
             </LinearLayout>
 
@@ -158,14 +164,15 @@
                     android:id="@+id/btnHubungi"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textColor="#4338ca"
+                    android:textColor="@color/primary_color"
                     android:textSize="16sp"
                     android:textAlignment="center"
                     android:padding="12dp"
                     android:fontFamily="@font/inter_bold"
                     android:text="@string/card_pelanggan_hubungi"
                     android:layout_marginRight="6dp"
-                    android:background="@drawable/button_background_outlined"/>
+                    android:background="@drawable/button_background_outlined"
+                    />
 
                 <TextView
                     android:layout_weight="1"
@@ -174,7 +181,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/button_background"
                     android:textSize="16sp"
-                    android:textColor="@color/white"
+                    android:textColor="@color/text_color_dark"
                     android:textAlignment="center"
                     android:padding="12dp"
                     android:fontFamily="@font/inter_bold"

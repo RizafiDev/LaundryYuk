@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">laundry</string>
+    <string name="app_name">LaundryYuk!</string>
     <string name="card_pelanggan_id">Customer ID</string>
     <string name="card_pelanggan_nama">Customer Name</string>
     <string name="card_pelanggan_alamat">Customer Addres</string>
@@ -30,4 +30,14 @@
     <string name="validasi_nama">Name cannot be empty</string>
     <string name="validasi_harga">Price cannor be empty</string>
     <string name="validasi_cabang">Branch cannot be empty</string>
+    <string name="default_web_client_id">348486120489-96t7e54je1ckrg5s40dncf8g943eo9nu.apps.googleusercontent.com</string>
+    <string name="pendapatan_bulanan">Monthly Income</string>
+    <string name="laporan">Report</string>
+    <string name="layanan">Services</string>
+    <string name="pelanggan">Customers</string>
+    <string name="pegawai">Employees</string>
+    <string name="cabang">Branches</string>
+    <string name="beranda">Homepage</string>
+    <string name="transaksi_baru">New Transaction</string>
+    <string name="profil">Profile</string>
 </resources>

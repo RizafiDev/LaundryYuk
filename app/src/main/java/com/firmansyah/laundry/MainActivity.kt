@@ -93,7 +93,9 @@ class MainActivity : AppCompatActivity() {
         val appDataAkun = findViewById<LinearLayout>(R.id.AppDataAkun)
         appDataAkun.setOnClickListener{
             val intent = Intent(this, AkunActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
             startActivity(intent)
+            overridePendingTransition(0, 0) // Menghilangkan transisi
         }
 
         // redirect to cabang
@@ -303,6 +305,11 @@ class MainActivity : AppCompatActivity() {
         super.onResume()
         // Refresh saldo ketika kembali ke activity ini
         refreshSaldo()
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(0, 0)
     }
 
     // Fungsi tambahan untuk mendapatkan detail pendapatan (opsional)

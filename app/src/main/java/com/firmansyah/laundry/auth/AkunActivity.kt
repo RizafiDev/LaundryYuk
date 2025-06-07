@@ -3,12 +3,16 @@ package com.firmansyah.laundry.auth
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.firmansyah.laundry.MainActivity
 import com.firmansyah.laundry.R
+import com.firmansyah.laundry.pelanggan.DataPelangganActivity
+import com.firmansyah.laundry.transaksi.DataTransaksiActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
@@ -18,11 +22,27 @@ class AkunActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_akun)
+        enableEdgeToEdge()
+        val appDataMain = findViewById<LinearLayout>(R.id.AppDataMain)
+        appDataMain.setOnClickListener{
+            val intent = Intent(this, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+            startActivity(intent)
+            overridePendingTransition(0, 0) // Menghilangkan transisi
+        }
+
+        // redirect to transaksi
+        val appDataTransaksi = findViewById<LinearLayout>(R.id.AppDataTransaksi)
+        appDataTransaksi.setOnClickListener{
+            val intent = Intent(this, DataTransaksiActivity::class.java)
+            startActivity(intent)
+        }
+
 
         // Inisialisasi FirebaseAuth
         firebaseAuth = FirebaseAuth.getInstance()
+
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -30,8 +50,10 @@ class AkunActivity : AppCompatActivity() {
             insets
         }
 
+
+
         // Tombol logout
-        val logoutButton = findViewById<Button>(R.id.logout)
+        val logoutButton = findViewById<LinearLayout>(R.id.logout)
         logoutButton.setOnClickListener {
             logoutUser()
         }
@@ -56,5 +78,8 @@ class AkunActivity : AppCompatActivity() {
             finish()
         }
     }
-
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(0, 0)
+    }
 }

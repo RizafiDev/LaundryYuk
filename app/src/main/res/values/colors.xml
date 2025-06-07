@@ -6,4 +6,10 @@
     <color name="primary_blue">#4338CA</color>
     <color name="primary_color">#4338ca</color>
     <color name="gray_light">#f3f4f6</color>
+    <color name="activity_color_white">#f9fafb</color>
+    <color name="activity_color_dark">#000000</color>
+    <color name="card_color_white">#FFFFFF</color>
+    <color name="card_color_dark">#232323</color>
+    <color name="text_color_white">#000000</color>
+    <color name="text_color_dark">#E9E9E9</color>
 </resources>

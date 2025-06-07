@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "348486120489",
+    "firebase_url": "https://rizafidevlaundryfix-default-rtdb.firebaseio.com",
     "project_id": "rizafidevlaundryfix",
     "storage_bucket": "rizafidevlaundryfix.firebasestorage.app"
   },
@@ -12,7 +13,20 @@
           "package_name": "com.firmansyah.laundry"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "348486120489-pda9r7sh1osuh4l5catqsv5e3bhc575c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.firmansyah.laundry",
+            "certificate_hash": "37877cf606a20260eead3dd380be7f44f8ade899"
+          }
+        },
+        {
+          "client_id": "348486120489-96t7e54je1ckrg5s40dncf8g943eo9nu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAdnE0J3gC5WowZhxbh4-gnun3phD4vD6Y"
@@ -20,7 +34,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "348486120489-96t7e54je1ckrg5s40dncf8g943eo9nu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

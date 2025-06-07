@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="#f9fafb">
+    android:background="@color/white">
 
     <!-- Background Ilustrasi -->
     <ImageView
@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/header"
+        android:src="@drawable/buat_pelanggan_ilustration"
         android:contentDescription="Main Illustration" />
 
     <!-- Header yang mengambang di atas ilustrasi -->
@@ -28,7 +28,6 @@
             android:id="@+id/tvWaktu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Selamat Pagi"
             android:fontFamily="@font/inter_medium"
             android:textSize="14sp"
             android:textAlignment="textStart"
@@ -38,7 +37,6 @@
             android:id="@+id/tvNamaUser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="FIRMANSYAH RIZA AFIFUDIN"
             android:fontFamily="@font/inter_semibold"
             android:textColor="@color/white"
             android:textSize="16sp"
@@ -54,7 +52,7 @@
         android:layout_marginTop="110dp"
         android:layout_marginHorizontal="16dp"
         app:cardCornerRadius="12dp"
-        app:cardElevation="8dp"
+        app:cardElevation="1dp"
         android:background="@android:color/white">
 
         <LinearLayout
@@ -88,7 +86,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Pendapatan Bulanan"
+                            android:text="@string/pendapatan_bulanan"
                             android:textSize="16sp"
                             android:layout_marginLeft="8dp"
                             android:fontFamily="@font/inter_bold" />
@@ -101,7 +99,6 @@
                             android:id="@+id/saldo"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Rp. 1.500.000"
                             android:fontFamily="@font/inter_bold"
                             android:textSize="16dp"
                             />
@@ -127,7 +124,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Laporan"
+                        android:text="@string/laporan"
                         android:textColor="@color/black"
                         android:fontFamily="@font/inter_semibold"
                         android:textSize="14sp"/>
@@ -148,202 +145,152 @@
         android:layout_marginBottom="120dp"
         >
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/white"
-            android:paddingTop="100dp"
-            android:paddingBottom="40dp">
+            android:paddingTop="58dp"
+            android:paddingHorizontal="12dp">
 
-            <!--quotes-->
-            <TextView
-                android:id="@+id/Quotes"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/inter_bold"
-                android:layout_marginTop="24dp"
-                android:textSize="18sp"
-                android:text="Siap melayani dengan setulus hati"
-                android:textAlignment="textStart"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginHorizontal="16dp"/>
-
-            <TextView
-                android:id="@+id/SubQuotes"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/inter_medium"
-                android:textSize="16sp"
-                android:text="Jangan kecewakan pelanggan"
-                android:textAlignment="textStart"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/Quotes"
-                android:layout_marginHorizontal="16dp"/>
-
-            <!--    feature card-->
-            <GridLayout
+            <!-- Feature card dengan 4 item horizontal -->
+            <LinearLayout
                 android:id="@+id/feature_card"
-                app:layout_constraintTop_toBottomOf="@id/SubQuotes"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:rowCount="3"
+                android:orientation="horizontal"
                 android:layout_marginTop="8dp"
-                android:columnCount="3"
-                android:layout_marginBottom="24dp">
+                android:layout_marginBottom="24dp"
+                android:weightSum="4">
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="110dp"
-                    android:layout_height="110dp"
-                    android:background="@color/white"
-                    app:cardCornerRadius="12dp"
-                    app:cardElevation="4dp"
-                    android:layout_margin="10dp"
-                    android:padding="40dp">
+                <!-- Item 1: Layanan -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_marginEnd="8dp">
+
                     <LinearLayout
                         android:id="@+id/AppDataLayanan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_gravity="center"
-                        android:gravity="center">
+                        android:padding="18dp"
+                        android:background="@drawable/purple_gradient_background">
                         <ImageView
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            android:layout_marginTop="6dp"
-                            android:src="@drawable/mesincuci"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/inter_medium"
-                            android:text="Layanan"
-                            android:layout_marginTop="12dp"/>
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/bolt_solid"
+                            app:tint="@color/white" />
                     </LinearLayout>
-                </androidx.cardview.widget.CardView>
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="110dp"
-                    android:layout_height="110dp"
-                    android:background="@color/white"
-                    app:cardCornerRadius="12dp"
-                    app:cardElevation="4dp"
-                    android:layout_margin="10dp"
-                    android:padding="40dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter_medium"
+                        android:text="@string/layanan"
+                        android:textSize="12sp"
+                        android:layout_marginTop="8dp"/>
+                </LinearLayout>
+
+                <!-- Item 2: Pelanggan -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp">
+
                     <LinearLayout
                         android:id="@+id/AppDataPelanggan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_gravity="center"
-                        android:gravity="center">
+                        android:padding="18dp"
+                        android:background="@drawable/orange_gradient_background">
                         <ImageView
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            android:layout_marginTop="6dp"
-                            android:src="@drawable/pelanggan"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/inter_medium"
-                            android:text="Pelanggan"
-                            android:layout_marginTop="12dp"/>
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/user_solid"
+                            app:tint="@color/white" />
                     </LinearLayout>
-                </androidx.cardview.widget.CardView>
 
-                <!--        baris kedua-->
-                <androidx.cardview.widget.CardView
-                    android:layout_width="110dp"
-                    android:layout_height="110dp"
-                    android:background="@color/white"
-                    app:cardCornerRadius="12dp"
-                    app:cardElevation="4dp"
-                    android:layout_margin="10dp"
-                    android:padding="40dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter_medium"
+                        android:text="@string/pelanggan"
+                        android:textSize="12sp"
+                        android:layout_marginTop="8dp"/>
+                </LinearLayout>
+
+                <!-- Item 3: Pegawai -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp">
+
                     <LinearLayout
                         android:id="@+id/AppDataPegawai"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_gravity="center"
-                        android:gravity="center">
+                        android:padding="18dp"
+                        android:background="@drawable/red_gradient_background">
                         <ImageView
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            android:layout_marginTop="6dp"
-                            android:src="@drawable/pegawai"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/inter_medium"
-                            android:text="Pegawai"
-                            android:layout_marginTop="12dp"/>
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/users_gear_solid"
+                            app:tint="@color/white" />
                     </LinearLayout>
-                </androidx.cardview.widget.CardView>
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="110dp"
-                    android:layout_height="110dp"
-                    android:background="@color/white"
-                    app:cardCornerRadius="12dp"
-                    app:cardElevation="4dp"
-                    android:layout_margin="10dp"
-                    android:padding="40dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter_medium"
+                        android:text="@string/pegawai"
+                        android:textSize="12sp"
+                        android:layout_marginTop="8dp"/>
+                </LinearLayout>
+
+                <!-- Item 4: Cabang -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_marginStart="8dp">
+
                     <LinearLayout
                         android:id="@+id/AppDataCabang"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_gravity="center"
-                        android:gravity="center">
+                        android:padding="18dp"
+                        android:background="@drawable/pink_gradient_background">
                         <ImageView
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            android:layout_marginTop="6dp"
-                            android:src="@drawable/cabang"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/inter_medium"
-                            android:text="Cabang"
-                            android:layout_marginTop="12dp"/>
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/map_location_dot_solid"
+                            app:tint="@color/white" />
                     </LinearLayout>
-                </androidx.cardview.widget.CardView>
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="110dp"
-                    android:layout_height="110dp"
-                    android:background="@color/white"
-                    app:cardCornerRadius="12dp"
-                    app:cardElevation="4dp"
-                    android:layout_margin="10dp"
-                    android:padding="40dp">
-                    <LinearLayout
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_gravity="center"
-                        android:gravity="center">
-                        <ImageView
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            android:layout_marginTop="6dp"
-                            android:src="@drawable/printer"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/inter_medium"
-                            android:text="Printer"
-                            android:layout_marginTop="12dp"/>
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
+                        android:fontFamily="@font/inter_medium"
+                        android:text="@string/cabang"
+                        android:textSize="12sp"
+                        android:layout_marginTop="8dp"/>
+                </LinearLayout>
 
-            </GridLayout>
+            </LinearLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
     </ScrollView>
 
     <!-- Bottom Navigation Bar -->
@@ -377,7 +324,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Beranda"
+                    android:text="@string/beranda"
                     android:fontFamily="@font/inter_bold"
                     android:layout_marginTop="4dp"
                     android:textSize="12sp"/>
@@ -408,7 +355,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Profile"
+                    android:text="@string/profil"
                     android:fontFamily="@font/inter_medium"
                     android:textColor="#9D9D9D"
                     android:layout_marginTop="4dp"
@@ -433,13 +380,15 @@
             android:layout_width="52dp"
             android:layout_height="52dp"
             app:cardCornerRadius="28dp"
-            android:backgroundTint="@color/primary_color">
+            android:elevation="1dp"
+            >
 
             <LinearLayout
                 android:id="@+id/AppDataTransaksi"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center">
+                android:gravity="center"
+                android:background="@drawable/blue_gradient_background">
 
                 <ImageView
                     android:layout_width="24dp"
@@ -453,7 +402,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Buat Transaksi"
+            android:text="@string/transaksi_baru"
             android:fontFamily="@font/inter_bold"
             android:textColor="@color/primary_color"
             android:layout_marginTop="8dp"

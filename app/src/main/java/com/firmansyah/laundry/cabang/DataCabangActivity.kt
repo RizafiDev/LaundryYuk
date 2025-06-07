@@ -188,7 +188,6 @@ class DataCabangActivity : AppCompatActivity() {
 
         // Update FAB icon
         fabPilihCabang.setImageResource(R.drawable.xmark_solid)
-        Toast.makeText(this, "Mode edit aktif. Pilih cabang untuk dihapus.", Toast.LENGTH_SHORT).show()
     }
 
     private fun exitEditMode() {
@@ -197,7 +196,6 @@ class DataCabangActivity : AppCompatActivity() {
 
         // Reset FAB icon
         fabPilihCabang.setImageResource(R.drawable.pen_solid)
-        Toast.makeText(this, "Mode edit dinonaktifkan.", Toast.LENGTH_SHORT).show()
     }
 
     private fun updateFabPilihCabang(selectedCount: Int) {
