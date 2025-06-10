@@ -36,7 +36,7 @@
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:src="@drawable/user_solid"
-                    app:tint="#4338ca"/>
+                    app:tint="@color/primary_color"/>
 
                 <TextView
                     android:id="@+id/tvDataNamaPelanggan"
@@ -60,7 +60,7 @@
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:src="@drawable/house_user_solid"
-                    app:tint="#4338ca"/>
+                    app:tint="@color/primary_color"/>
 
                 <TextView
                     android:id="@+id/tvDataAlamatPelanggan"
@@ -84,7 +84,7 @@
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:src="@drawable/phone_volume_solid"
-                    app:tint="#4338ca" />
+                    app:tint="@color/primary_color"/>
 
                 <TextView
                     android:id="@+id/tvDataNoHpPelanggan"
@@ -108,7 +108,7 @@
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:src="@drawable/building_circle_check_solid"
-                    app:tint="#4338ca"/>
+                    app:tint="@color/primary_color"/>
 
                 <TextView
                     android:id="@+id/tvDataCabangPelanggan"

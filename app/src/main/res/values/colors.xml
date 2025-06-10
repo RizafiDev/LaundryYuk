@@ -5,7 +5,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="selected_card_background">#E3F2FD</color>
     <color name="primary_blue">#4338CA</color>
-    <color name="primary_color">#4338ca</color>
+    <color name="primary_color">#14B8A6</color>
     <color name="gray_light">#f3f4f6</color>
 
     <!-- Dynamic colors untuk light mode (default) -->

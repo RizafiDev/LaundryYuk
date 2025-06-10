@@ -53,7 +53,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="12dp"
                 android:contentDescription="Search Icon"
-                app:tint="#4338ca"/>
+                app:tint="@color/primary_color"/>
 
             <EditText
                 android:id="@+id/etSearchCabang"
@@ -90,7 +90,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/pen_solid"
-        app:tint="#4338ca"
+        app:tint="@color/primary_color"
         app:layout_constraintBottom_toTopOf="@id/fabTambahCabang"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="32dp"
@@ -105,7 +105,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/user_plus_solid"
-        app:tint="#4338ca"
+        app:tint="@color/primary_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="32dp"

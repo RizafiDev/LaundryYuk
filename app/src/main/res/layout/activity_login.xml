@@ -106,8 +106,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/masuk"
                     android:fontFamily="@font/inter_bold"
-                    android:backgroundTint="#4338ca"
-                    android:textColor="#FFFFFF"
+                    android:backgroundTint="@color/primary_color"
+                    android:textColor="@color/white"
                     android:padding="14dp" />
 
                 <!-- Divider -->

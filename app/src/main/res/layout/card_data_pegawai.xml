@@ -37,7 +37,7 @@
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:src="@drawable/user_solid"
-                    app:tint="#4338ca"/>
+                    app:tint="@color/primary_color"/>
 
                 <TextView
                     android:id="@+id/tvDataNamaPegawai"
@@ -61,7 +61,7 @@
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:src="@drawable/house_user_solid"
-                    app:tint="#4338ca"/>
+                    app:tint="@color/primary_color"/>
 
                 <TextView
                     android:id="@+id/tvDataAlamatPegawai"
@@ -85,7 +85,7 @@
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:src="@drawable/phone_volume_solid"
-                    app:tint="#4338ca" />
+                    app:tint="@color/primary_color"/>
 
                 <TextView
                     android:id="@+id/tvDataNoHpPegawai"
@@ -109,7 +109,7 @@
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:src="@drawable/building_circle_check_solid"
-                    app:tint="#4338ca"/>
+                    app:tint="@color/primary_color"/>
 
                 <TextView
                     android:id="@+id/tvDataCabangPegawai"
@@ -133,7 +133,7 @@
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:src="@drawable/right_to_bracket_solid"
-                    app:tint="#4338ca"/>
+                    app:tint="@color/primary_color"/>
 
                 <TextView
                     android:id="@+id/tvDataTerdaftarPegawai"
@@ -159,7 +159,7 @@
                     android:id="@+id/btnHubungi"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textColor="#4338ca"
+                    android:textColor="@color/primary_color"
                     android:textSize="16sp"
                     android:textAlignment="center"
                     android:padding="12dp"

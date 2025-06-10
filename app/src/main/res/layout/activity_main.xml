@@ -326,7 +326,7 @@
                     android:layout_height="18dp"
                     android:src="@drawable/house_solid"
                     android:layout_marginTop="1dp"
-                    app:tint="@color/primary_color"/>
+                    app:tint="@color/text_primary_color"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -410,7 +410,7 @@
             android:layout_height="wrap_content"
             android:text="@string/transaksi_baru"
             android:fontFamily="@font/inter_bold"
-            android:textColor="@color/primary_color"
+            android:textColor="@color/text_primary_color"
             android:layout_marginTop="8dp"
             android:textSize="12sp"/>
 

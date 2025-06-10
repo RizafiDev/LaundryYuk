@@ -379,7 +379,7 @@
                     android:textAlignment="center"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:textColor="#4338ca"
+                    android:textColor="@color/primary_color"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="WhatsApp"

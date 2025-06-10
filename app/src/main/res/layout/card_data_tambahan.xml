@@ -36,7 +36,7 @@
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:src="@drawable/bolt_solid"
-                    app:tint="#4338ca"/>
+                    app:tint="@color/primary_color"/>
 
                 <TextView
                     android:id="@+id/tv_nama_tambahan"
@@ -60,7 +60,7 @@
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:src="@drawable/tag_solid"
-                    app:tint="#4338ca"/>
+                    app:tint="@color/primary_color"/>
 
                 <TextView
                     android:id="@+id/tv_harga_tambahan"
@@ -88,7 +88,7 @@
                     android:id="@+id/btnHapus"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textColor="#4338ca"
+                    android:textColor="@color/primary_color"
                     android:textSize="16sp"
                     android:textAlignment="center"
                     android:padding="12dp"

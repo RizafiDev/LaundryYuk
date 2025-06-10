@@ -9,8 +9,11 @@ import android.graphics.BitmapFactory
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import android.graphics.drawable.Drawable
+import android.graphics.drawable.VectorDrawable
 import android.util.Log
 import androidx.core.content.ContextCompat
+import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
 import com.firmansyah.laundry.R
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -177,14 +180,15 @@ class PrintService(private val context: Context) {
         sendCommand(ALIGN_CENTER)
         sendCommand(SIZE_LARGE)
         sendCommand(BOLD_ON)
-        printText("LAUNDRY EXPRESS")
+        printText("LAUNDRY YUK!")
         sendCommand(BOLD_OFF)
         sendCommand(SIZE_NORMAL)
 
         // Print business info
-        printText("Jl. Contoh No. 123, Surakarta")
-        printText("Telp: 0271-123456")
-        printText("Instagram: @laundryexpress")
+        printText("Jl. Walanda Maramis No.28")
+        printText("Surakarta")
+        printText("Telp: 082133289048")
+        printText("Instagram: @laundry.yuk")
 
         // Print separator
         sendCommand(ALIGN_LEFT)
@@ -206,6 +210,7 @@ class PrintService(private val context: Context) {
             // Create logo bitmap from drawable
             val logoBitmap = createLogoBitmap()
             if (logoBitmap != null) {
+                sendCommand(ALIGN_CENTER)
                 printBitmap(logoBitmap)
                 sendCommand(FEED_LINE)
             }
@@ -216,9 +221,43 @@ class PrintService(private val context: Context) {
 
     private fun createLogoBitmap(): Bitmap? {
         return try {
-            // Create a simple text-based logo since we're using drawable
+            // Load drawable logo
+            val drawable = ContextCompat.getDrawable(context, R.drawable.logoapp)
+
+            if (drawable == null) {
+                Log.w(TAG, "App logo drawable not found")
+                return createFallbackLogoBitmap()
+            }
+
+            // Set appropriate size for thermal printer (max width ~200px for 58mm printer)
+            val logoWidth = 200
+            val logoHeight = 114
+
+            // Create bitmap with appropriate size
+            val bitmap = Bitmap.createBitmap(logoWidth, logoHeight, Bitmap.Config.ARGB_8888)
+            val canvas = Canvas(bitmap)
+
+            // Fill with white background
+            canvas.drawColor(Color.WHITE)
+
+            // Set drawable bounds and draw to canvas
+            drawable.setBounds(0, 0, logoWidth, logoHeight)
+            drawable.draw(canvas)
+
+            // Convert to monochrome for better printing
+            convertToMonochrome(bitmap)
+
+        } catch (e: Exception) {
+            Log.e(TAG, "Error creating logo bitmap from drawable", e)
+            createFallbackLogoBitmap()
+        }
+    }
+
+    private fun createFallbackLogoBitmap(): Bitmap? {
+        return try {
+            // Fallback text-based logo if drawable fails to load
             val width = 200
-            val height = 60
+            val height = 114
             val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
             val canvas = Canvas(bitmap)
 
@@ -228,49 +267,71 @@ class PrintService(private val context: Context) {
             // Draw logo text
             val paint = Paint().apply {
                 color = Color.BLACK
-                textSize = 24f
+                textSize = 20f
                 isAntiAlias = true
                 textAlign = Paint.Align.CENTER
+                isFakeBoldText = true
             }
 
-            canvas.drawText("🧺 LAUNDRY", width / 2f, height / 2f, paint)
+            canvas.drawText("🧺 LAUNDRY YUK!", width / 2f, height / 2f + 5f, paint)
             bitmap
         } catch (e: Exception) {
-            Log.e(TAG, "Error creating logo bitmap", e)
+            Log.e(TAG, "Error creating fallback logo bitmap", e)
             null
         }
     }
 
+    private fun convertToMonochrome(bitmap: Bitmap): Bitmap {
+        val width = bitmap.width
+        val height = bitmap.height
+
+        for (x in 0 until width) {
+            for (y in 0 until height) {
+                val pixel = bitmap.getPixel(x, y)
+                val gray = (Color.red(pixel) * 0.299 + Color.green(pixel) * 0.587 + Color.blue(pixel) * 0.114).toInt()
+                val bw = if (gray > 128) Color.WHITE else Color.BLACK
+                bitmap.setPixel(x, y, bw)
+            }
+        }
+
+        return bitmap
+    }
+
     private fun printBitmap(bitmap: Bitmap) {
         try {
-            // Convert bitmap to monochrome and print
             val width = bitmap.width
             val height = bitmap.height
 
-            sendCommand(ALIGN_CENTER)
+            // ESC/POS raster bit image command
+            val widthBytes = (width + 7) / 8
 
-            // ESC/POS bitmap printing command
+            // Send bitmap header
             sendCommand(byteArrayOf(GS, 'v'.code.toByte(), '0'.code.toByte(), 0))
-
-            // Send bitmap dimensions
-            sendCommand(byteArrayOf((width / 8).toByte(), 0, height.toByte(), 0))
+            sendCommand(byteArrayOf(
+                (widthBytes and 0xFF).toByte(),
+                ((widthBytes shr 8) and 0xFF).toByte(),
+                (height and 0xFF).toByte(),
+                ((height shr 8) and 0xFF).toByte()
+            ))
 
             // Convert and send bitmap data
             for (y in 0 until height) {
-                for (x in 0 until width step 8) {
-                    var byte = 0
-                    for (bit in 0 until 8) {
-                        if (x + bit < width) {
-                            val pixel = bitmap.getPixel(x + bit, y)
-                            val gray = (Color.red(pixel) + Color.green(pixel) + Color.blue(pixel)) / 3
-                            if (gray < 128) { // Black pixel
-                                byte = byte or (1 shl (7 - bit))
-                            }
-                        }
+                val lineData = ByteArray(widthBytes)
+
+                for (x in 0 until width) {
+                    val pixel = bitmap.getPixel(x, y)
+                    val gray = (Color.red(pixel) + Color.green(pixel) + Color.blue(pixel)) / 3
+
+                    if (gray < 128) { // Black pixel
+                        val byteIndex = x / 8
+                        val bitIndex = 7 - (x % 8)
+                        lineData[byteIndex] = (lineData[byteIndex].toInt() or (1 shl bitIndex)).toByte()
                     }
-                    outputStream?.write(byte)
                 }
+
+                outputStream?.write(lineData)
             }
+
             outputStream?.flush()
 
         } catch (e: Exception) {
@@ -345,17 +406,10 @@ class PrintService(private val context: Context) {
     private fun printFooter() {
         printText("")
         sendCommand(ALIGN_CENTER)
-        printText("Terima kasih atas kepercayaan Anda")
-        printText("Barang yang sudah dicuci")
-        printText("tidak dapat dikembalikan")
+        printText("Terima kasih atas")
+        printText("kepercayaan Anda")
         printText("")
-        printText("Follow IG: @laundryexpress")
-        printText("WA: 0271-123456")
-        printText("")
-
-        // Print barcode/QR placeholder
-        printText("Scan untuk review:")
-        printText("*** QR CODE ***")
+        printText("~ Laundry Yuk! ~")
         printText("")
 
         sendCommand(ALIGN_LEFT)
