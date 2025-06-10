@@ -11,10 +11,10 @@
 [![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)](https://firebase.google.com/)
 [![Android Studio](https://img.shields.io/badge/Android%20Studio-3DDC84?style=for-the-badge&logo=androidstudio&logoColor=white)](https://developer.android.com/studio)
 
-[![GitHub forks](https://img.shields.io/github/forks/yourusername/LaundryYuk?style=for-the-badge&color=ff69b4)](https://github.com/yourusername/LaundryYuk/network)
-[![GitHub stars](https://img.shields.io/github/stars/yourusername/LaundryYuk?style=for-the-badge&color=yellow)](https://github.com/yourusername/LaundryYuk/stargazers)
-[![GitHub last commit](https://img.shields.io/github/last-commit/yourusername/LaundryYuk?style=for-the-badge&color=brightgreen)](https://github.com/yourusername/LaundryYuk/commits/main)
-[![License](https://img.shields.io/github/license/yourusername/LaundryYuk?style=for-the-badge&color=blue)](LICENSE)
+[![GitHub forks](https://img.shields.io/github/forks/RizafiDev/LaundryYuk?style=for-the-badge&color=ff69b4)](https://github.com/RizafiDev/LaundryYuk/network)
+[![GitHub stars](https://img.shields.io/github/stars/RizafiDev/LaundryYuk?style=for-the-badge&color=yellow)](https://github.com/RizafiDev/LaundryYuk/stargazers)
+[![GitHub last commit](https://img.shields.io/github/last-commit/RizafiDev/LaundryYuk?style=for-the-badge&color=brightgreen)](https://github.com/RizafiDev/LaundryYuk/commits/main)
+[![License](https://img.shields.io/github/license/RizafiDev/LaundryYuk?style=for-the-badge&color=blue)](LICENSE)
 
 </div>
 
