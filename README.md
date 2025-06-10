@@ -2,7 +2,7 @@
   
 # 🧺 LaundryYuk!
 
-<img src="https://github.com/yourusername/LaundryYuk/blob/main/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" alt="LaundryYuk Logo" width="120" height="120">
+<img src="https://github.com/RizafiDev/LaundryYuk/app/src/main/res/drawable/logoapp.xml" alt="LaundryYuk Logo" width="120" height="120">
 
 ### *Solusi Digital untuk UMKM Laundry* ✨
 
@@ -74,7 +74,7 @@
 
 ### Login & Dashboard
 <!-- Tambahkan screenshot login dan dashboard di sini -->
-*Screenshot Login Page*
+(./DocReadme/main.png)
 
 *Screenshot Dashboard Utama*
 
