@@ -74,35 +74,26 @@
 ## 📱 Screenshots Aplikasi
 
 ### Login & Dashboard
-*Screenshot Login*
-![login](https://github.com/user-attachments/assets/7fe7182b-23fb-44d8-ab47-d0c016439b67)
-
-*Screenshot Dashboard Utama*
-![main](https://github.com/user-attachments/assets/76f392b0-bf38-4c55-acfa-413273f32e0a)
-
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/7fe7182b-23fb-44d8-ab47-d0c016439b67" width="300"/>
+  <img src="https://github.com/user-attachments/assets/76f392b0-bf38-4c55-acfa-413273f32e0a" width="300"/>
+</div>
 
 ### Manajemen Data
-*Screenshot Data Pegawai*
-![pegawai](https://github.com/user-attachments/assets/c2970a0a-accd-4756-b1cf-255c2ef637d6)
-
-*Screenshot Data Pelanggan*
-![pelanggan](https://github.com/user-attachments/assets/da4f23a3-3b69-4a10-96e3-6281ab98c339)
-
-*Screenshot Data Layanan Utama*
-![layanan](https://github.com/user-attachments/assets/3d729dca-0e4e-4d54-87e6-552e364f903e)
-
-*Screenshot Data Layanan Tambahan*
-![layanantambahan](https://github.com/user-attachments/assets/b3a47765-86ff-4667-8c5f-6872a6c0e57f)
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/c2970a0a-accd-4756-b1cf-255c2ef637d6" width="300"/>
+  <img src="https://github.com/user-attachments/assets/da4f23a3-3b69-4a10-96e3-6281ab98c339" width="300"/>
+  <img src="https://github.com/user-attachments/assets/3d729dca-0e4e-4d54-87e6-552e364f903e" width="300"/>
+  <img src="https://github.com/user-attachments/assets/b3a47765-86ff-4667-8c5f-6872a6c0e57f" width="300"/>
+</div>
 
 ### Transaksi & Laporan
-*Screenshot Buat Transaksi*
-![checkout](https://github.com/user-attachments/assets/7613f2c1-d5b8-46fe-b3a6-7d67f16cb39d)
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/7613f2c1-d5b8-46fe-b3a6-7d67f16cb39d" width="300"/>
+  <img src="https://github.com/user-attachments/assets/d9a53882-bf38-4c68-a59f-250a8c25ea19" width="300"/>
+  <img src="https://github.com/user-attachments/assets/8643729b-52a1-4979-bedb-c406c1d96113" width="300"/>
+</div>
 
-*Screenshot Laporan Keuangan*
-![laporan](https://github.com/user-attachments/assets/d9a53882-bf38-4c68-a59f-250a8c25ea19)
-
-*Screenshot Data Cabang*
-![cabang](https://github.com/user-attachments/assets/8643729b-52a1-4979-bedb-c406c1d96113)
 
 ## 🚀 Cara Instalasi & Setup
 
