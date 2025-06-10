@@ -2,7 +2,7 @@
   
 # 🧺 LaundryYuk!
 
-<img src="https://github.com/RizafiDev/LaundryYuk/app/src/main/res/drawable/logoapp.xml" alt="LaundryYuk Logo" width="120" height="120">
+<img src="https://github.com/RizafiDev/LaundryYuk/DocReadme/logo.png" alt="LaundryYuk Logo" width="120" height="120">
 
 ### *Solusi Digital untuk UMKM Laundry* ✨
 
@@ -73,10 +73,11 @@
 ## 📱 Screenshots Aplikasi
 
 ### Login & Dashboard
-<!-- Tambahkan screenshot login dan dashboard di sini -->
-(./DocReadme/main.png)
+*Screenshot Login*
+(DocReadme/login.jpg)
 
 *Screenshot Dashboard Utama*
+(DocReadme/main.jpg)
 
 ### Manajemen Data
 <!-- Tambahkan screenshot fitur manajemen data di sini -->
