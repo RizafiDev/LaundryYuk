@@ -43,7 +43,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/inter_semibold"
-                    android:text="Nama Layanan"
+                    android:text="@string/nama_layanan"
                     android:textSize="16sp"
                     android:layout_marginLeft="12dp" />
 
@@ -67,7 +67,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/inter_semibold"
-                    android:text="Harga Layanan"
+                    android:text="@string/harga_layanan"
                     android:textSize="16sp"
                     android:layout_marginLeft="12dp" />
 
@@ -116,7 +116,7 @@
                     android:textAlignment="center"
                     android:padding="12dp"
                     android:fontFamily="@font/inter_bold"
-                    android:text="Hapus"
+                    android:text="@string/hapus"
                     android:layout_marginRight="6dp"
                     android:background="@drawable/button_background_outlined"/>
 
@@ -132,7 +132,7 @@
                     android:padding="12dp"
                     android:fontFamily="@font/inter_bold"
                     android:layout_marginLeft="6dp"
-                    android:text="@string/card_pelanggan_lihat"/>
+                    android:text="@string/lihat"/>
 
             </LinearLayout>
 

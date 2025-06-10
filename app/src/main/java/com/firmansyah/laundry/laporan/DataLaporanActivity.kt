@@ -12,6 +12,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.firmansyah.laundry.BaseActivity
 import com.firmansyah.laundry.R
 import com.firmansyah.laundry.adapter.DataTransaksiAdapter
 import com.google.firebase.database.*
@@ -19,7 +20,7 @@ import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
-class DataLaporanActivity : AppCompatActivity() {
+class DataLaporanActivity : BaseActivity() {
 
     private lateinit var rvDataLaporan: RecyclerView
     private lateinit var etSearchLaporan: EditText

@@ -6,25 +6,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".pegawai.DataPegawaiActivity"
-    android:background="#f9fafb">
+    android:background="@color/background_color">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:backgroundTint="@color/card_background_color"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:cardElevation="1dp">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Data Pegawai"
+            android:text="@string/pegawai"
             android:fontFamily="@font/inter_bold"
             android:textSize="18sp"
+            android:textColor="@color/text_primary_color"
             android:padding="20dp" />
     </androidx.cardview.widget.CardView>
+
     <androidx.cardview.widget.CardView
         android:id="@+id/searchCardView"
         android:layout_width="match_parent"
@@ -35,7 +38,8 @@
         app:cardElevation="1dp"
         app:layout_constraintTop_toBottomOf="@id/header"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
+        app:layout_constraintRight_toRightOf="parent"
+        android:backgroundTint="@color/card_background_color">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -51,7 +55,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="12dp"
                 android:contentDescription="Search Icon"
-                app:tint="#4338ca"/>
+                app:tint="@color/primary_blue"/>
 
             <EditText
                 android:id="@+id/etSearchPegawai"
@@ -59,16 +63,15 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
-                android:hint="Cari nama pegawai..."
+                android:hint="@string/search_pegawai"
                 android:textSize="16sp"
                 android:fontFamily="@font/inter_medium"
-                android:textColorHint="#9CA3AF"
+                android:textColorHint="@color/text_tertiary_color"
+                android:textColor="@color/text_primary_color"
                 android:inputType="text"
                 android:imeOptions="actionSearch"
                 android:maxLines="1" />
-
         </LinearLayout>
-
     </androidx.cardview.widget.CardView>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -80,36 +83,32 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginVertical="12dp"
-        android:paddingBottom="140dp"
-        />
+        android:paddingBottom="140dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabPilihPegawai"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/pen_solid"
-        app:tint="#4338ca"
+        app:tint="@color/primary_blue"
         app:layout_constraintBottom_toTopOf="@id/fabTambahPegawai"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="12dp"
-        android:backgroundTint="@color/white"
-        android:contentDescription="Tambah Pegawai"
-        />
-<!--    jika sedang mode edit dan tidak ada data yang dipilih, drawable menjadi android:src="@drawable/xmark_solid"-->
-<!--    dan jika sedang mode edit dan ada data yang dipilih, drawable menjadi android:src="@drawable/trash_solid dan tint nya #ff0000-->
+        android:backgroundTint="@color/card_background_color"
+        android:contentDescription="Pilih Pegawai" />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabTambahPegawai"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/user_plus_solid"
-        app:tint="#4338ca"
+        app:tint="@color/primary_blue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="32dp"
-        android:backgroundTint="@color/white"
-        android:contentDescription="Tambah Pegawai"
-        />
+        android:backgroundTint="@color/card_background_color"
+        android:contentDescription="Tambah Pegawai" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

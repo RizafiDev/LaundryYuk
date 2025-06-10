@@ -28,7 +28,7 @@ import com.google.firebase.database.ValueEventListener
 import java.text.NumberFormat
 import java.util.Locale
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var tvWaktu: TextView
@@ -39,6 +39,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         enableEdgeToEdge()
+
+        // Store reference to this activity in BaseActivity
+        BaseActivity.mainActivityInstance = this
 
         // Inisialisasi FirebaseAuth
         firebaseAuth = FirebaseAuth.getInstance()
@@ -137,8 +140,13 @@ class MainActivity : AppCompatActivity() {
         if (currentUser != null) {
             val currentUserUid = currentUser.uid
 
-            // Set loading text sementara
-            tvSaldo.text = "Loading..."
+            // Set loading text based on current language
+            val loadingText = if (LanguageHelper.getCurrentLanguage(this) == "en") {
+                "Loading..."
+            } else {
+                "Memuat..."
+            }
+            tvSaldo.text = loadingText
 
             // Dapatkan bulan dan tahun saat ini
             val calendar = Calendar.getInstance()
@@ -189,7 +197,12 @@ class MainActivity : AppCompatActivity() {
                     override fun onCancelled(error: DatabaseError) {
                         // Handle error
                         tvSaldo.text = "Rp. 0"
-                        Toast.makeText(this@MainActivity, "Gagal memuat saldo: ${error.message}", Toast.LENGTH_SHORT).show()
+                        val errorMessage = if (LanguageHelper.getCurrentLanguage(this@MainActivity) == "en") {
+                            "Failed to load balance: ${error.message}"
+                        } else {
+                            "Gagal memuat saldo: ${error.message}"
+                        }
+                        Toast.makeText(this@MainActivity, errorMessage, Toast.LENGTH_SHORT).show()
                     }
                 })
         } else {
@@ -204,11 +217,19 @@ class MainActivity : AppCompatActivity() {
         val formatter = NumberFormat.getInstance(Locale("id", "ID"))
         val formattedSaldo = "Rp. ${formatter.format(saldo.toLong())}"
 
-        // Nama bulan dalam bahasa Indonesia
-        val namaBulan = arrayOf(
-            "", "Januari", "Februari", "Maret", "April", "Mei", "Juni",
-            "Juli", "Agustus", "September", "Oktober", "November", "Desember"
-        )
+        // Nama bulan berdasarkan bahasa
+        val currentLanguage = LanguageHelper.getCurrentLanguage(this)
+        val namaBulan = if (currentLanguage == "en") {
+            arrayOf(
+                "", "January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"
+            )
+        } else {
+            arrayOf(
+                "", "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+                "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+            )
+        }
 
         // Update TextView dengan informasi bulan
         tvSaldo.text = formattedSaldo
@@ -264,10 +285,18 @@ class MainActivity : AppCompatActivity() {
 
     // Fungsi untuk menampilkan nama bulan
     private fun getMonthName(month: Int): String {
-        val months = arrayOf(
-            "", "Januari", "Februari", "Maret", "April", "Mei", "Juni",
-            "Juli", "Agustus", "September", "Oktober", "November", "Desember"
-        )
+        val currentLanguage = LanguageHelper.getCurrentLanguage(this)
+        val months = if (currentLanguage == "en") {
+            arrayOf(
+                "", "January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"
+            )
+        } else {
+            arrayOf(
+                "", "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+                "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+            )
+        }
         return months[month]
     }
 
@@ -292,24 +321,61 @@ class MainActivity : AppCompatActivity() {
         val calendar = Calendar.getInstance()
         val hour = calendar.get(Calendar.HOUR_OF_DAY)
 
-        return when (hour) {
-            in 0..11 -> "Selamat Pagi"
-            in 12..14 -> "Selamat Siang"
-            in 15..17 -> "Selamat Sore"
-            else -> "Selamat Malam"
+        // Check current language and return appropriate greeting
+        val currentLanguage = LanguageHelper.getCurrentLanguage(this)
+
+        return if (currentLanguage == "en") {
+            when (hour) {
+                in 0..11 -> "Good Morning"
+                in 12..14 -> "Good Afternoon"
+                in 15..17 -> "Good Evening"
+                else -> "Good Night"
+            }
+        } else {
+            when (hour) {
+                in 0..11 -> "Selamat Pagi"
+                in 12..14 -> "Selamat Siang"
+                in 15..17 -> "Selamat Sore"
+                else -> "Selamat Malam"
+            }
         }
     }
 
     // Fungsi untuk dipanggil saat activity kembali terlihat (optional)
     override fun onResume() {
         super.onResume()
+        // Refresh dynamic content when returning to activity
+        refreshDynamicContent()
         // Refresh saldo ketika kembali ke activity ini
         refreshSaldo()
+    }
+
+    // Add this method to refresh language-dependent content
+    private fun refreshDynamicContent() {
+        // Refresh greeting text
+        setDynamicGreeting()
+
+        // Refresh any other dynamic content that depends on language
+        // This ensures that when user changes language and returns to MainActivity,
+        // all dynamic text is updated to the new language
+    }
+
+    // Add this method to be called from AkunActivity when language changes
+    fun refreshLanguageContent() {
+        refreshDynamicContent()
     }
 
     override fun onBackPressed() {
         super.onBackPressed()
         overridePendingTransition(0, 0)
+    }
+
+    // Clear the reference when activity is destroyed
+    override fun onDestroy() {
+        super.onDestroy()
+        if (BaseActivity.mainActivityInstance == this) {
+            BaseActivity.mainActivityInstance = null
+        }
     }
 
     // Fungsi tambahan untuk mendapatkan detail pendapatan (opsional)

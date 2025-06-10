@@ -7,6 +7,7 @@ import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.firmansyah.laundry.BaseActivity
 import com.firmansyah.laundry.R
 import com.firmansyah.laundry.model.ModelCabang
 import com.firmansyah.laundry.model.ModelPegawai
@@ -15,7 +16,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
-class EditPegawaiActivity : AppCompatActivity() {
+class EditPegawaiActivity : BaseActivity() {
     private lateinit var etNama: EditText
     private lateinit var etAlamat: EditText
     private lateinit var etNoHP: EditText

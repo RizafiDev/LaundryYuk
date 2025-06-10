@@ -8,7 +8,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pilih layanan tambahan yang diinginkan:"
+        android:text="@string/pilih_layanan_tambahan"
         android:textSize="14sp"
         android:textColor="#666"
         android:fontFamily="@font/inter"

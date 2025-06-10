@@ -15,11 +15,12 @@ import com.firmansyah.laundry.adapter.DataCabangAdapter
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import com.firmansyah.laundry.BaseActivity
 import com.firmansyah.laundry.model.ModelPegawai
 import com.firmansyah.laundry.pegawai.EditPegawaiActivity
 import com.google.firebase.database.*
 
-class DataCabangActivity : AppCompatActivity() {
+class DataCabangActivity : BaseActivity() {
     private val database = FirebaseDatabase.getInstance()
     private val myRef = database.getReference("cabang")
 

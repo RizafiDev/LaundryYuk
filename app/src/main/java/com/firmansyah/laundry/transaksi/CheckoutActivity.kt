@@ -12,6 +12,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.firmansyah.laundry.BaseActivity
 import com.firmansyah.laundry.R
 import com.firmansyah.laundry.adapter.LayananTambahanAdapter
 import com.firmansyah.laundry.model.ModelTambahan
@@ -26,7 +27,7 @@ import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.*
 
-class CheckoutActivity : AppCompatActivity() {
+class CheckoutActivity : BaseActivity() {
 
     private lateinit var tvNamaPelanggan: TextView
     private lateinit var tvNoHp: TextView

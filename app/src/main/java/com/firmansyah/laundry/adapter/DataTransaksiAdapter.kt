@@ -7,8 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.firmansyah.laundry.R
+import com.firmansyah.laundry.transaksi.InvoiceActivity
+import com.firmansyah.laundry.model.ModelTambahan
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -22,6 +25,7 @@ class DataTransaksiAdapter(
     private val outputDateFormat = SimpleDateFormat("dd MMM yyyy, HH:mm", Locale.getDefault())
 
     class TransaksiViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val cardView: CardView = itemView.findViewById(R.id.CVDATA_LAPORAN)
         val tvDataIdTransaksi: TextView = itemView.findViewById(R.id.tvDataIdTransaksi)
         val tvDataNamaPelanggan: TextView = itemView.findViewById(R.id.tvDataNamaPelanggan)
         val tvDataNoHpPelanggan: TextView = itemView.findViewById(R.id.tvDataNoHpPelanggan)
@@ -42,6 +46,7 @@ class DataTransaksiAdapter(
 
     override fun onBindViewHolder(holder: TransaksiViewHolder, position: Int) {
         val transaksi = transaksiList[position]
+        val context = holder.itemView.context
 
         // Transaction ID
         val transactionId = transaksi["transactionId"] as? String ?: "N/A"
@@ -112,6 +117,11 @@ class DataTransaksiAdapter(
 
         // Hide checkbox for now (can be used for future bulk operations)
         holder.checkBoxPelanggan.visibility = View.GONE
+
+        // Add click listener to the entire card to open InvoiceActivity
+        holder.cardView.setOnClickListener {
+            openInvoiceActivity(context, transaksi)
+        }
     }
 
     override fun getItemCount(): Int = transaksiList.size
@@ -145,6 +155,93 @@ class DataTransaksiAdapter(
             val intent = Intent(Intent.ACTION_VIEW)
             intent.data = Uri.parse("https://web.whatsapp.com/send?phone=$internationalNumber")
             context.startActivity(intent)
+        }
+    }
+
+    private fun openInvoiceActivity(context: android.content.Context, transaksi: Map<String, Any>) {
+        val intent = Intent(context, InvoiceActivity::class.java)
+
+        // Extract data from transaksi map
+        val transactionId = transaksi["transactionId"] as? String ?: ""
+
+        // Customer data
+        val pelangganData = transaksi["pelanggan"] as? Map<String, Any>
+        val namaPelanggan = pelangganData?.get("nama") as? String ?: ""
+        val noHpPelanggan = pelangganData?.get("noHp") as? String ?: ""
+
+        // Employee data
+        val karyawanData = transaksi["karyawan"] as? Map<String, Any>
+        val namaPegawai = karyawanData?.get("nama") as? String ?: "Admin"
+
+        // Service data
+        val layananData = transaksi["layanan"] as? Map<String, Any>
+        var namaLayanan = layananData?.get("nama") as? String ?: ""
+        val kilogram = when (val kg = layananData?.get("kilogram")) {
+            is Number -> kg.toInt()
+            else -> 1
+        }
+        val baseServicePrice = when (val price = layananData?.get("hargaLayanan")) {
+            is Number -> price.toInt()
+            is String -> parseHarga(price)
+            else -> 0
+        }
+
+        // Payment data
+        val pembayaranData = transaksi["pembayaran"] as? Map<String, Any>
+        val metodePembayaran = pembayaranData?.get("metodePembayaran") as? String ?: ""
+        val subtotal = when (val sub = pembayaranData?.get("subtotal")) {
+            is Number -> sub.toInt()
+            else -> 0
+        }
+        val pajak = when (val tax = pembayaranData?.get("pajak")) {
+            is Number -> tax.toInt()
+            else -> 0
+        }
+        val totalPembayaran = when (val total = pembayaranData?.get("totalPembayaran")) {
+            is Number -> total.toInt()
+            else -> 0
+        }
+
+        // Additional services data
+        val tambahanList = ArrayList<ModelTambahan>()
+        val layananTambahanData = transaksi["layananTambahan"] as? List<Map<String, Any>>
+        layananTambahanData?.forEach { tambahan ->
+            val modelTambahan = ModelTambahan().apply {
+                namaLayanan = tambahan["nama"] as? String ?: ""
+                hargaLayanan = tambahan["harga"] as? String ?: "0"
+            }
+            tambahanList.add(modelTambahan)
+        }
+
+        // Put data into intent
+        intent.apply {
+            putExtra("transactionId", transactionId)
+            putExtra("namaPelanggan", namaPelanggan)
+            putExtra("noHpPelanggan", noHpPelanggan)
+            putExtra("namaLayanan", namaLayanan)
+            putExtra("namaPegawai", namaPegawai)
+            putExtra("metodePembayaran", metodePembayaran)
+            putExtra("kilogram", kilogram)
+            putExtra("subtotal", subtotal)
+            putExtra("pajak", pajak)
+            putExtra("totalPembayaran", totalPembayaran)
+            putExtra("baseServicePrice", baseServicePrice)
+            putExtra("tambahanList", tambahanList)
+        }
+
+        context.startActivity(intent)
+    }
+
+    private fun parseHarga(harga: String): Int {
+        return try {
+            harga.replace("Rp", "")
+                .replace(".", "")
+                .replace(",", "")
+                .replace(" ", "")
+                .trim()
+                .toInt()
+        } catch (e: NumberFormatException) {
+            0
         }
     }
 }

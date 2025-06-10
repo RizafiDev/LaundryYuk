@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".auth.AkunActivity"
-    android:background="@color/white">
+    android:background="@color/background_color">
 
     <!-- Background Ilustrasi -->
     <ImageView
@@ -28,42 +28,37 @@
         android:layout_marginHorizontal="16dp"
         app:cardCornerRadius="12dp"
         app:cardElevation="1dp"
-        android:background="@android:color/white">
+        app:cardBackgroundColor="@color/card_background_color">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="20dp"
-            >
+            android:padding="20dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="center_vertical"
-                >
+                android:gravity="center_vertical">
                 <LinearLayout
                     android:layout_width="72dp"
                     android:layout_height="72dp"
                     android:background="@drawable/orange_gradient_background"
-                    android:gravity="center"
-                    >
+                    android:gravity="center">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="FA"
                         android:textColor="@color/white"
                         android:fontFamily="@font/inter_bold"
-                        android:textSize="24sp"
-                        />
+                        android:textSize="24sp" />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_marginLeft="12dp"
-                    >
+                    android:layout_marginLeft="12dp">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -73,6 +68,7 @@
                             android:layout_height="wrap_content"
                             android:text="FIRMANSYAH RIZA AFIFUDIN"
                             android:textSize="18sp"
+                            android:textColor="@color/text_primary_color"
                             android:fontFamily="@font/inter_bold" />
                     </LinearLayout>
                     <LinearLayout
@@ -85,15 +81,12 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/inter_medium"
                             android:textSize="14sp"
-                            android:text="Bergabung pada "
-                            />
+                            android:textColor="@color/text_secondary_color"
+                            android:text="Bergabung pada " />
                     </LinearLayout>
-
                 </LinearLayout>
             </LinearLayout>
             <!-- Header -->
-
-
             <!-- Icon Grid -->
         </LinearLayout>
     </androidx.cardview.widget.CardView>
@@ -103,27 +96,120 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="170dp"
-        android:layout_marginBottom="120dp"
-        >
+        android:layout_marginBottom="120dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/white"
-            android:paddingTop="58dp"
-            android:paddingHorizontal="12dp">
+            android:background="@color/background_color"
+            android:paddingTop="58dp">
 
             <!-- Feature card dengan 4 item horizontal -->
             <LinearLayout
                 android:id="@+id/feature_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:layout_marginTop="8dp"
-                android:layout_marginBottom="24dp"
-                android:weightSum="4">
+                android:layout_marginBottom="24dp">
 
                 <!-- Item 1: Layanan -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/containerPelanggan"
+                    android:layout_width="match_parent"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_height="wrap_content"
+                    app:cardBackgroundColor="@color/card_background_color"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="1dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="18dp">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical">
+
+                            <!-- Bagian kiri: Icon dan Text -->
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical">
+                                <ImageView
+                                    android:layout_width="18dp"
+                                    android:layout_height="18dp"
+                                    android:src="@drawable/language_solid"
+                                    app:tint="@color/icon_tint_color" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/pilih_bahasa"
+                                    android:fontFamily="@font/inter_bold"
+                                    android:textSize="18sp"
+                                    android:textColor="@color/text_primary_color"
+                                    android:layout_marginLeft="12dp"/>
+                            </LinearLayout>
+
+                            <!-- Bagian kanan: Toggle Switch -->
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical">
+
+                                <!-- Label ID -->
+                                <TextView
+                                    android:id="@+id/labelID"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="ID"
+                                    android:fontFamily="@font/inter_medium"
+                                    android:textSize="14sp"
+                                    android:textColor="@color/primary_color"
+                                    android:layout_marginRight="8dp"/>
+
+                                <!-- Toggle Switch Container -->
+                                <FrameLayout
+                                    android:id="@+id/toggleContainer"
+                                    android:layout_width="56dp"
+                                    android:layout_height="28dp"
+                                    android:background="@drawable/toggle_selector"
+                                    android:clickable="true"
+                                    android:focusable="true"
+                                    android:foreground="@drawable/ripple_toggle">
+
+                                    <!-- Toggle Circle/Thumb -->
+                                    <View
+                                        android:id="@+id/toggleThumb"
+                                        android:layout_width="20dp"
+                                        android:layout_height="20dp"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginLeft="4dp"
+                                        android:background="@drawable/toggle_thumb_selector"
+                                        android:elevation="2dp" />
+                                </FrameLayout>
+
+                                <!-- Label EN -->
+                                <TextView
+                                    android:id="@+id/labelEN"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="EN"
+                                    android:fontFamily="@font/inter_medium"
+                                    android:textSize="14sp"
+                                    android:textColor="@color/text_secondary_color"
+                                    android:layout_marginLeft="8dp"/>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
                 <LinearLayout
                     android:id="@+id/logout"
                     android:layout_width="match_parent"
@@ -131,8 +217,9 @@
                     android:gravity="center"
                     android:orientation="horizontal"
                     android:background="@drawable/warning_button"
-
-                    android:padding="12dp">
+                    android:layout_marginTop="12dp"
+                    android:layout_marginHorizontal="12dp"
+                    android:padding="18dp">
                     <ImageView
                         android:layout_width="16dp"
                         android:layout_height="16dp"
@@ -141,7 +228,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Logout"
+                        android:text="@string/keluar"
                         android:fontFamily="@font/inter_semibold"
                         android:textColor="@color/white"
                         android:textSize="16sp"
@@ -160,7 +247,7 @@
         android:layout_gravity="bottom"
         app:cardElevation="8dp"
         app:cardCornerRadius="0dp"
-        android:background="@color/white">
+        app:cardBackgroundColor="@color/card_background_color">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -175,14 +262,13 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical"
-                android:gravity="center"
-                >
+                android:gravity="center">
                 <ImageView
                     android:layout_width="18dp"
                     android:layout_height="18dp"
                     android:src="@drawable/house_solid"
                     android:layout_marginTop="1dp"
-                    app:tint="#9D9D9D"/>
+                    app:tint="@color/nav_icon_inactive"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -190,7 +276,7 @@
                     android:fontFamily="@font/inter_medium"
                     android:layout_marginTop="4dp"
                     android:textSize="12sp"
-                    android:textColor="#9D9D9D"/>
+                    android:textColor="@color/nav_text_inactive"/>
             </LinearLayout>
 
             <!-- Space untuk FAB (tengah) -->
@@ -207,8 +293,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical"
-                android:gravity="center"
-                >
+                android:gravity="center">
                 <ImageView
                     android:layout_width="18dp"
                     android:layout_height="18dp"
@@ -221,7 +306,8 @@
                     android:text="@string/profil"
                     android:fontFamily="@font/inter_bold"
                     android:layout_marginTop="4dp"
-                    android:textSize="12sp"/>
+                    android:textSize="12sp"
+                    android:textColor="@color/text_primary_color"/>
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
@@ -242,8 +328,7 @@
             android:layout_width="52dp"
             android:layout_height="52dp"
             app:cardCornerRadius="28dp"
-            android:elevation="1dp"
-            >
+            android:elevation="1dp">
 
             <LinearLayout
                 android:id="@+id/AppDataTransaksi"

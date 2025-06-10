@@ -15,6 +15,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import com.firmansyah.laundry.BaseActivity
 import com.firmansyah.laundry.adapter.LayananTambahanAdapter
 import com.firmansyah.laundry.adapter.PilihTambahanAdapter
 import com.firmansyah.laundry.model.ModelTambahan
@@ -22,7 +23,7 @@ import com.firmansyah.laundry.model.ModelPelanggan
 import com.firmansyah.laundry.model.ModelLayanan
 import com.google.firebase.database.*
 
-class DataTransaksiActivity : AppCompatActivity() {
+class DataTransaksiActivity : BaseActivity() {
 
     private lateinit var tvNamaPelanggan: TextView
     private lateinit var tvNoHp: TextView

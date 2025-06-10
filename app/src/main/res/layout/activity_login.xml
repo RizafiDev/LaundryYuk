@@ -40,7 +40,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Selamat Datang LaundryYuk!"
+                    android:text="@string/welcome"
                     android:textSize="20sp"
                     android:fontFamily="@font/inter_bold"
                     android:textColor="#000000" />
@@ -49,7 +49,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Login sekarang! untuk menikmati Semua fitur yang tersedia di LaundryYuk"
+                    android:text="@string/subheader_login"
                     android:textSize="14sp"
                     android:layout_marginTop="8dp"
                     android:textColor="#666666"
@@ -59,7 +59,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Email :"
+                    android:text="@string/email"
                     android:layout_marginTop="16dp"
                     android:textColor="#666666"
                     android:fontFamily="@font/inter_semibold" />
@@ -70,7 +70,7 @@
                     android:id="@+id/editTextPhone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Masukkan Email Anda"
+                    android:hint="@string/hint_email"
                     android:fontFamily="@font/inter_semibold"
                     android:textSize="16dp"
                     android:layout_marginBottom="16dp"
@@ -81,7 +81,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Password :"
+                    android:text="@string/password"
                     android:textColor="#666666"
                     android:fontFamily="@font/inter_semibold" />
 
@@ -91,7 +91,7 @@
                     android:id="@+id/editTextPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Masukkan Password Anda"
+                    android:hint="@string/hint_password"
                     android:inputType="textPassword"
                     android:fontFamily="@font/inter_semibold"
                     android:textSize="16dp"
@@ -104,7 +104,7 @@
                     android:id="@+id/btnLogin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="LANJUTKAN"
+                    android:text="@string/masuk"
                     android:fontFamily="@font/inter_bold"
                     android:backgroundTint="#4338ca"
                     android:textColor="#FFFFFF"
@@ -115,7 +115,7 @@
                     android:layout_width="match_parent"
                     android:textAlignment="center"
                     android:layout_height="wrap_content"
-                    android:text="Atau gunakan akun"
+                    android:text="@string/login_lain"
                     android:layout_marginTop="24dp"
                     android:fontFamily="@font/inter_medium"
                     android:textColor="#999999" />
@@ -140,7 +140,7 @@
                     android:textAlignment="center"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Belum memiliki akun? Daftar"
+                    android:text="@string/belum_memiliki_akun"
                     android:textColor="#1E88E5"
                     android:layout_marginTop="24dp"
                     android:fontFamily="@font/inter_medium"/>

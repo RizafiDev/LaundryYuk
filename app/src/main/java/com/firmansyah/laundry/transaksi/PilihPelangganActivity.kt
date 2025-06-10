@@ -6,12 +6,13 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.firmansyah.laundry.BaseActivity
 import com.firmansyah.laundry.R
 import com.firmansyah.laundry.adapter.PilihPelangganAdapter
 import com.firmansyah.laundry.model.ModelPelanggan
 import com.google.firebase.database.*
 
-class PilihPelangganActivity : AppCompatActivity() {
+class PilihPelangganActivity : BaseActivity() {
     private lateinit var dbRef: DatabaseReference
     private lateinit var recyclerView: RecyclerView
     private val listPelanggan = mutableListOf<ModelPelanggan>()

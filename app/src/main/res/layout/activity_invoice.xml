@@ -52,7 +52,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Transaksi Berhasil!"
+                    android:text="@string/transaksi_berhasil"
                     android:fontFamily="@font/inter_bold"
                     android:textSize="18sp"
                     android:textAlignment="center"
@@ -96,7 +96,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Detail Transaksi"
+                    android:text="@string/detail_transaksi"
                     android:fontFamily="@font/inter_bold"
                     android:textSize="16sp"
                     />
@@ -115,7 +115,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Nama Pelanggan"
+                    android:text="@string/card_pelanggan_nama"
                     android:textColor="@color/black"
                     android:fontFamily="@font/inter_medium"
                     android:textSize="14sp"/>
@@ -143,7 +143,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="No Hp Pelanggan"
+                    android:text="@string/card_pelanggan_nohp"
                     android:textColor="@color/black"
                     android:fontFamily="@font/inter_medium"
                     android:textSize="14sp"/>
@@ -172,7 +172,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Nama Pengawai"
+                    android:text="@string/nama_pegawai"
                     android:textColor="@color/black"
                     android:fontFamily="@font/inter_medium"
                     android:textSize="14sp"/>
@@ -214,7 +214,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Detail Harga"
+                    android:text="@string/detail_harga"
                     android:fontFamily="@font/inter_bold"
                     android:textSize="16sp"
                      />
@@ -233,7 +233,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Layanan"
+                    android:text="@string/layanan"
                     android:textColor="@color/black"
                     android:fontFamily="@font/inter_medium"
                     android:textSize="14sp"/>
@@ -257,7 +257,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Tambahan"
+                    android:text="@string/tambahan"
                     android:textColor="@color/black"
                     android:fontFamily="@font/inter_medium"
                     android:textSize="14sp"/>
@@ -281,7 +281,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Pajak 12%"
+                    android:text="@string/pajak"
                     android:textColor="#4b5563"
                     android:fontFamily="@font/inter_medium"
                     android:textSize="14sp"/>
@@ -305,7 +305,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Total Pembayaran"
+                    android:text="@string/total_pembayaran"
                     android:textColor="@color/black"
                     android:fontFamily="@font/inter_medium"
                     android:textSize="14sp"/>
@@ -333,7 +333,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Metode pembayaran"
+                    android:text="@string/metode_pembayaran"
                     android:fontFamily="@font/inter_bold"
                     android:textSize="16sp"
                     />
@@ -398,7 +398,7 @@
                     android:textColor="@color/white"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Cetak"
+                    android:text="@string/cetak"
                     android:fontFamily="@font/inter_bold"
                     android:textSize="16sp"
                     android:padding="14dp"

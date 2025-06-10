@@ -7,6 +7,7 @@ import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.firmansyah.laundry.BaseActivity
 import com.firmansyah.laundry.R
 import com.firmansyah.laundry.model.ModelCabang
 import com.firmansyah.laundry.model.ModelLayanan
@@ -18,7 +19,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class TambahLayananActivity : AppCompatActivity() {
+class TambahLayananActivity : BaseActivity() {
 
     private val database = FirebaseDatabase.getInstance()
     private val myRef = database.getReference("layanan")

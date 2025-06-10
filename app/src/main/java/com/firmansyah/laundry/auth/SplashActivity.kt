@@ -9,11 +9,12 @@ import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.firmansyah.laundry.BaseActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.firmansyah.laundry.MainActivity
 import com.firmansyah.laundry.R
 
-class SplashActivity : AppCompatActivity() {
+class SplashActivity : BaseActivity() {
 
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var appLogo: ImageView

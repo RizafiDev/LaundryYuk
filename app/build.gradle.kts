@@ -93,4 +93,10 @@ dependencies {
 
     // CardView
     implementation("androidx.cardview:cardview:1.0.0")
+    // Coroutines untuk async operations
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+
+    // Vector drawable support untuk compatibility
+    implementation("androidx.vectordrawable:vectordrawable:1.1.0")
 }

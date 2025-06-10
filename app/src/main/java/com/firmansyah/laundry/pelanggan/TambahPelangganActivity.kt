@@ -10,6 +10,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.firmansyah.laundry.BaseActivity
 import com.firmansyah.laundry.R
 import com.firmansyah.laundry.model.ModelCabang
 import com.firmansyah.laundry.model.ModelPelanggan
@@ -21,7 +22,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class TambahPelangganActivity : AppCompatActivity() {
+class TambahPelangganActivity : BaseActivity() {
     private val database = FirebaseDatabase.getInstance()
     private val myRef = database.getReference("pelanggan")
     private val cabangRef = database.getReference("cabang")

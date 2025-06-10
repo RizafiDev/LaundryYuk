@@ -5,9 +5,10 @@ import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
+import com.firmansyah.laundry.BaseActivity
 import com.firmansyah.laundry.R
 
-class MetodePembayaranActivity : AppCompatActivity() {
+class MetodePembayaranActivity : BaseActivity() {
 
     private lateinit var cardCash: CardView
     private lateinit var cardEMoney: CardView

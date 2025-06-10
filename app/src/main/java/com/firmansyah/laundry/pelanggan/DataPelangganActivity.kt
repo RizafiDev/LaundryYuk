@@ -14,13 +14,14 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.firmansyah.laundry.BaseActivity
 import com.firmansyah.laundry.R
 import com.firmansyah.laundry.adapter.DataPelangganAdapter
 import com.firmansyah.laundry.model.ModelPelanggan
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.database.*
 
-class DataPelangganActivity : AppCompatActivity() {
+class DataPelangganActivity : BaseActivity() {
     private val database = FirebaseDatabase.getInstance()
     private val myRef = database.getReference("pelanggan")
 

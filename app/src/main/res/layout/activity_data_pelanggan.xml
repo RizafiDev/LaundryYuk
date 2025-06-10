@@ -6,13 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".pelanggan.DataPelangganActivity"
-    android:background="@color/activity_color_white">
+    android:background="@color/background_color">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/card_color_white"
+        android:backgroundTint="@color/card_background_color"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -20,11 +20,11 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Data Pelanggan"
+            android:text="@string/pelanggan"
             android:fontFamily="@font/inter_bold"
             android:textSize="18sp"
             android:padding="20dp"
-            android:textColor="@color/text_color_white"/>
+            android:textColor="@color/text_primary_color"/>
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
@@ -38,7 +38,7 @@
         app:layout_constraintTop_toBottomOf="@id/header"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:backgroundTint="@color/card_color_white">
+        android:backgroundTint="@color/card_background_color">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -62,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
-                android:hint="Cari nama pelanggan..."
+                android:hint="@string/search_pelanggan"
                 android:textSize="16sp"
                 android:fontFamily="@font/inter_medium"
                 android:textColorHint="#9CA3AF"
@@ -95,7 +95,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="12dp"
-        android:backgroundTint="@color/card_color_white"
+        android:backgroundTint="@color/card_background_color"
         android:contentDescription="Edit Pelanggan" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -108,7 +108,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="32dp"
-        android:backgroundTint="@color/card_color_white"
+        android:backgroundTint="@color/card_background_color"
         android:contentDescription="Tambah Pelanggan" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

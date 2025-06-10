@@ -13,6 +13,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.firmansyah.laundry.BaseActivity
 import com.firmansyah.laundry.R
 import com.firmansyah.laundry.adapter.DataLayananAdapter
 import com.firmansyah.laundry.adapter.DataTambahanAdapter
@@ -22,7 +23,7 @@ import com.firmansyah.laundry.tambahan.TambahTambahanActivity
 import com.google.firebase.database.*
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class DataLayananActivity : AppCompatActivity() {
+class DataLayananActivity : BaseActivity() {
     private val database = FirebaseDatabase.getInstance()
     private val layananRef = database.getReference("layanan")
     private val tambahanRef = database.getReference("tambahan")

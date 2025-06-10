@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/main"
     tools:context=".cabang.EditCabangActivity"
-    android:background="#f9fafb">
+    android:background="@color/background_color">
 
     <!-- Background Ilustrasi -->
     <ImageView
@@ -22,7 +22,7 @@
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Edit Cabang"
+        android:text="@string/edit_cabang"
         android:fontFamily="@font/inter_semibold"
         android:textSize="18sp"
         android:textAlignment="center"
@@ -39,7 +39,7 @@
         android:layout_marginBottom="16dp"
         card_view:cardCornerRadius="8dp"
         card_view:cardElevation="1dp"
-        android:background="@android:color/white">
+        android:backgroundTint="@color/card_background_color">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -55,19 +55,19 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Edit Data Cabang"
+                    android:text="@string/edit_data_cabang"
                     android:textSize="20sp"
                     android:fontFamily="@font/inter_bold"
-                    android:textColor="#000000"
+                    android:textColor="@color/text_primary_color"
                     android:layout_marginBottom="8dp" />
 
                 <!-- Subjudul -->
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Edit data dengan benar untuk mengubah data cabang"
+                    android:text="@string/subheader_edit_cabang"
                     android:textSize="14sp"
-                    android:textColor="#666666"
+                    android:textColor="@color/text_primary_color"
                     android:fontFamily="@font/inter_medium"
                     android:layout_marginBottom="24dp" />
 
@@ -75,10 +75,10 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Nama Cabang"
+                    android:text="@string/nama_cabang"
                     android:fontFamily="@font/inter_semibold"
                     android:textSize="16sp"
-                    android:textColor="#666666"
+                    android:textColor="@color/text_primary_color"
                     android:layout_marginBottom="8dp"
                     />
 
@@ -86,7 +86,7 @@
                     android:id="@+id/etTambahNamaCabang"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Nama Cabang"
+                    android:hint="@string/nama_cabang"
                     android:fontFamily="@font/inter_medium"
                     android:textSize="16sp"
                     android:textAlignment="textStart"
@@ -102,7 +102,7 @@
                     android:text="@string/activity_layanan_alamat"
                     android:fontFamily="@font/inter_semibold"
                     android:textSize="16sp"
-                    android:textColor="#666666"
+                    android:textColor="@color/text_primary_color"
                     android:layout_marginBottom="8dp"/>
 
                 <EditText
@@ -122,10 +122,10 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Provinsi"
+                    android:text="@string/provinsi"
                     android:fontFamily="@font/inter_semibold"
                     android:textSize="16sp"
-                    android:textColor="#666666"
+                    android:textColor="@color/text_primary_color"
                     android:layout_marginBottom="8dp"/>
 
                 <Spinner
@@ -141,10 +141,10 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Kab/Kota"
+                    android:text="@string/kab_kota"
                     android:fontFamily="@font/inter_semibold"
                     android:textSize="16sp"
-                    android:textColor="#666666"
+                    android:textColor="@color/text_primary_color"
                     android:layout_marginBottom="8dp"/>
 
                 <Spinner
@@ -164,7 +164,7 @@
                     android:text="@string/activity_layanan_nohp"
                     android:fontFamily="@font/inter_semibold"
                     android:textSize="16sp"
-                    android:textColor="#666666"
+                    android:textColor="@color/text_primary_color"
                     android:layout_marginBottom="8dp"/>
 
                 <EditText
@@ -185,7 +185,7 @@
                     android:id="@+id/btnSimpanCabang"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Edit Data"
+                    android:text="@string/edit_data"
                     android:fontFamily="@font/inter_bold"
                     android:textSize="16sp"
                     android:textAlignment="center"

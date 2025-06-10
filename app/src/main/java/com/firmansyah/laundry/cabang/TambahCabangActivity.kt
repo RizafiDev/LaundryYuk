@@ -7,6 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.firmansyah.laundry.BaseActivity
 import com.firmansyah.laundry.R
 import com.firmansyah.laundry.model.KabupatenKota
 import com.firmansyah.laundry.model.ModelCabang
@@ -20,7 +21,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class TambahCabangActivity : AppCompatActivity() {
+class TambahCabangActivity : BaseActivity() {
 
     // Firebase Database
     private val database = FirebaseDatabase.getInstance()

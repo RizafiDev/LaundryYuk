@@ -179,7 +179,7 @@
                     android:padding="12dp"
                     android:fontFamily="@font/inter_bold"
                     android:layout_marginLeft="6dp"
-                    android:text="@string/card_pelanggan_lihat"/>
+                    android:text="@string/lihat"/>
 
             </LinearLayout>
 

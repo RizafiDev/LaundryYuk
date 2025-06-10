@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="@color/white">
+    android:background="@color/background_color">
 
     <!-- Background Ilustrasi -->
     <ImageView
@@ -53,7 +53,7 @@
         android:layout_marginHorizontal="16dp"
         app:cardCornerRadius="12dp"
         app:cardElevation="1dp"
-        android:background="@android:color/white">
+        app:cardBackgroundColor="@color/card_background_color">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -89,7 +89,8 @@
                             android:text="@string/pendapatan_bulanan"
                             android:textSize="16sp"
                             android:layout_marginLeft="8dp"
-                            android:fontFamily="@font/inter_bold" />
+                            android:fontFamily="@font/inter_bold"
+                            android:textColor="@color/text_primary_color"/>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -101,6 +102,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/inter_bold"
                             android:textSize="16dp"
+                            android:textColor="@color/text_primary_color"
                             />
                     </LinearLayout>
 
@@ -125,7 +127,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/laporan"
-                        android:textColor="@color/black"
+                        android:textColor="@color/text_primary_color"
                         android:fontFamily="@font/inter_semibold"
                         android:textSize="14sp"/>
                 </LinearLayout>
@@ -148,7 +150,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/white"
+            android:background="@color/background_color"
             android:paddingTop="58dp"
             android:paddingHorizontal="12dp">
 
@@ -190,7 +192,8 @@
                         android:fontFamily="@font/inter_medium"
                         android:text="@string/layanan"
                         android:textSize="12sp"
-                        android:layout_marginTop="8dp"/>
+                        android:layout_marginTop="8dp"
+                        android:textColor="@color/text_primary_color"/>
                 </LinearLayout>
 
                 <!-- Item 2: Pelanggan -->
@@ -222,7 +225,8 @@
                         android:fontFamily="@font/inter_medium"
                         android:text="@string/pelanggan"
                         android:textSize="12sp"
-                        android:layout_marginTop="8dp"/>
+                        android:layout_marginTop="8dp"
+                        android:textColor="@color/text_primary_color"/>
                 </LinearLayout>
 
                 <!-- Item 3: Pegawai -->
@@ -254,7 +258,8 @@
                         android:fontFamily="@font/inter_medium"
                         android:text="@string/pegawai"
                         android:textSize="12sp"
-                        android:layout_marginTop="8dp"/>
+                        android:layout_marginTop="8dp"
+                        android:textColor="@color/text_primary_color"/>
                 </LinearLayout>
 
                 <!-- Item 4: Cabang -->
@@ -285,7 +290,8 @@
                         android:fontFamily="@font/inter_medium"
                         android:text="@string/cabang"
                         android:textSize="12sp"
-                        android:layout_marginTop="8dp"/>
+                        android:layout_marginTop="8dp"
+                        android:textColor="@color/text_primary_color"/>
                 </LinearLayout>
 
             </LinearLayout>
@@ -300,7 +306,7 @@
         android:layout_gravity="bottom"
         app:cardElevation="8dp"
         app:cardCornerRadius="0dp"
-        android:background="@color/white">
+        app:cardBackgroundColor="@color/card_background_color">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -351,13 +357,13 @@
                     android:layout_height="18dp"
                     android:src="@drawable/user_solid"
                     android:layout_marginTop="1dp"
-                    app:tint="#9D9D9D"/>
+                    app:tint="@color/nav_icon_inactive"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/profil"
                     android:fontFamily="@font/inter_medium"
-                    android:textColor="#9D9D9D"
+                    android:textColor="@color/nav_text_inactive"
                     android:layout_marginTop="4dp"
                     android:textSize="12sp"/>
             </LinearLayout>

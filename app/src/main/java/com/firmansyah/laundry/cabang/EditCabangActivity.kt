@@ -7,6 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.firmansyah.laundry.BaseActivity
 import com.firmansyah.laundry.R
 import com.firmansyah.laundry.model.KabupatenKota
 import com.firmansyah.laundry.model.ModelCabang
@@ -17,7 +18,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class EditCabangActivity : AppCompatActivity() {
+class EditCabangActivity : BaseActivity() {
 
     // Firebase Database
     private val database = FirebaseDatabase.getInstance()

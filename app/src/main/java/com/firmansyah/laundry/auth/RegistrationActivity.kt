@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import com.firmansyah.laundry.BaseActivity
 import com.firmansyah.laundry.MainActivity
 import com.firmansyah.laundry.R
 import com.firmansyah.laundry.auth.LoginActivity
@@ -19,7 +20,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ServerValue
 
-class RegistrationActivity : AppCompatActivity() {
+class RegistrationActivity : BaseActivity() {
 
     private lateinit var binding: ActivityRegistrationBinding
     private lateinit var firebaseAuth: FirebaseAuth

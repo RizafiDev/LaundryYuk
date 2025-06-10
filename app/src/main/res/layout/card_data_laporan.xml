@@ -239,7 +239,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="@font/inter_semibold"
-                    android:text="Total Bayar"
+                    android:text="@string/total_bayar"
                     android:textSize="18sp"
                      />
                 <TextView

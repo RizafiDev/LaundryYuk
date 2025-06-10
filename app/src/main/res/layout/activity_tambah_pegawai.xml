@@ -22,7 +22,7 @@ android:background="#f9fafb">
     android:id="@+id/header"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="Tambah Pegawai"
+    android:text="@string/tambah_pegawai"
     android:fontFamily="@font/inter_semibold"
     android:textSize="18sp"
     android:textAlignment="center"
@@ -55,7 +55,7 @@ android:background="#f9fafb">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Data Pegawai Baru"
+                android:text="@string/data_pegawai_baru"
                 android:textSize="20sp"
                 android:fontFamily="@font/inter_bold"
                 android:textColor="#000000"
@@ -65,7 +65,7 @@ android:background="#f9fafb">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Lengkapi data dibawah untuk menambahkan pegawai baru"
+                android:text="@string/subheader_pegawai"
                 android:textSize="14sp"
                 android:textColor="#666666"
                 android:fontFamily="@font/inter_medium"

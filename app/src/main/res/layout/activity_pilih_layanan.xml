@@ -20,7 +20,7 @@ android:background="#f9fafb">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Pilih Layanan"
+        android:text="@string/pilih_layanan"
         android:fontFamily="@font/inter_bold"
         android:textSize="18sp"
         android:padding="20dp" />
@@ -60,7 +60,7 @@ android:background="#f9fafb">
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:hint="Cari layanan..."
+            android:hint="@string/search_layanan"
             android:textSize="16sp"
             android:fontFamily="@font/inter_medium"
             android:textColorHint="#9CA3AF"

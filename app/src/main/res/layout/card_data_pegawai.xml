@@ -44,7 +44,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/inter_semibold"
-                    android:text="Nama Pegawai"
+                    android:text="@string/nama_pegawai"
                     android:textSize="16sp"
                     android:layout_marginLeft="12dp" />
 
@@ -68,7 +68,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/inter_semibold"
-                    android:text="Alamat Pegawai"
+                    android:text="@string/alamat_pegawai"
                     android:textSize="16sp"
                     android:layout_marginLeft="12dp" />
 
@@ -140,7 +140,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/inter_semibold"
-                    android:text="Terdaftar"
+                    android:text="@string/bergabung_pada"
                     android:textSize="16sp"
                     android:layout_marginLeft="12dp" />
 
@@ -180,7 +180,7 @@
                     android:padding="12dp"
                     android:fontFamily="@font/inter_bold"
                     android:layout_marginLeft="6dp"
-                    android:text="@string/card_pelanggan_lihat"/>
+                    android:text="@string/lihat"/>
 
             </LinearLayout>
 

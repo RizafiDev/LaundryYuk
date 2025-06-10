@@ -11,13 +11,14 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.firmansyah.laundry.BaseActivity
 import com.firmansyah.laundry.R
 import com.firmansyah.laundry.adapter.DataPegawaiAdapter
 import com.firmansyah.laundry.model.ModelPegawai
 import com.google.firebase.database.*
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class DataPegawaiActivity : AppCompatActivity() {
+class DataPegawaiActivity : BaseActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var etSearch: EditText
     private lateinit var fabTambahPegawai: FloatingActionButton

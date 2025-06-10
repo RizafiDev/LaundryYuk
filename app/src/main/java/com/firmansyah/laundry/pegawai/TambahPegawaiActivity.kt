@@ -8,6 +8,7 @@ import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.firmansyah.laundry.BaseActivity
 import com.firmansyah.laundry.R
 import com.firmansyah.laundry.model.ModelCabang
 import com.firmansyah.laundry.model.ModelPegawai
@@ -19,7 +20,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class TambahPegawaiActivity : AppCompatActivity() {
+class TambahPegawaiActivity : BaseActivity() {
 
     private val database = FirebaseDatabase.getInstance()
     private val myRef = database.getReference("pegawai")

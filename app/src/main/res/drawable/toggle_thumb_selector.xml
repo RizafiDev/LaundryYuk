@@ -1,0 +1,17 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Shadow -->
+    <item android:top="1dp" android:left="1dp">
+        <shape android:shape="oval">
+            <solid android:color="#1F000000" />
+        </shape>
+    </item>
+    <!-- Main thumb -->
+    <item android:bottom="1dp" android:right="1dp">
+        <shape android:shape="oval">
+            <solid android:color="#FFFFFF" />
+            <stroke
+                android:width="0.5dp"
+                android:color="#E5E7EB" />
+        </shape>
+    </item>
+</layer-list>

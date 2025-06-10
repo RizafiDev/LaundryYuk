@@ -43,7 +43,7 @@ android:layout_marginBottom="12dp">
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/inter_semibold"
-                android:text="Nama Layanan"
+                android:text="@string/nama_layanan"
                 android:textSize="16sp"
                 android:layout_marginLeft="12dp" />
 
@@ -67,7 +67,7 @@ android:layout_marginBottom="12dp">
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/inter_semibold"
-                android:text="Harga Layanan"
+                android:text="@string/harga_layanan"
                 android:textSize="16sp"
                 android:layout_marginLeft="12dp" />
 

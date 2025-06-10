@@ -5,11 +5,12 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.firmansyah.laundry.BaseActivity
 import com.firmansyah.laundry.R
 import com.firmansyah.laundry.model.ModelTambahan
 import com.google.firebase.database.FirebaseDatabase
 
-class EditTambahanActivity : AppCompatActivity() {
+class EditTambahanActivity : BaseActivity() {
     private lateinit var etNama: EditText
     private lateinit var etHarga: EditText
     private lateinit var btnSimpan: TextView

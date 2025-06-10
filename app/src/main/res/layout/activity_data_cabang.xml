@@ -6,13 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".cabang.DataCabangActivity"
-    android:background="#f9fafb">
+    android:background="@color/background_color">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        app:cardBackgroundColor="@color/card_background_color"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -20,8 +20,9 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Data Cabang"
+            android:text="@string/cabang"
             android:fontFamily="@font/inter_bold"
+            android:textColor="@color/text_primary_color"
             android:textSize="18sp"
             android:padding="20dp" />
     </androidx.cardview.widget.CardView>
@@ -35,7 +36,8 @@
         app:cardElevation="1dp"
         app:layout_constraintTop_toBottomOf="@id/header"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
+        app:layout_constraintRight_toRightOf="parent"
+        app:cardBackgroundColor="@color/card_background_color">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -59,7 +61,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
-                android:hint="Cari nama cabang..."
+                android:hint="@string/search_cabang"
                 android:textSize="16sp"
                 android:fontFamily="@font/inter_medium"
                 android:textColorHint="#9CA3AF"
@@ -93,7 +95,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="12dp"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="@color/card_background_color"
         android:contentDescription="Tambah Pegawai"
         />
     <!--    jika sedang mode edit dan tidak ada data yang dipilih, drawable menjadi android:src="@drawable/xmark_solid"-->
@@ -108,7 +110,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="32dp"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="@color/card_background_color"
         android:contentDescription="Tambah Pegawai"
         />
 

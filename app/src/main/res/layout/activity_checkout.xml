@@ -6,14 +6,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".transaksi.CheckoutActivity"
-    android:background="#f9fafb">
+    android:background="@color/background_color">
 
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
+                app:cardBackgroundColor="@color/card_background_color"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -23,8 +23,10 @@
                     android:layout_height="wrap_content"
                     android:text="Checkout"
                     android:fontFamily="@font/inter_bold"
+                    android:textColor="@color/text_primary_color"
                     android:textSize="18sp"
-                    android:padding="20dp" />
+                    android:padding="20dp"
+                    />
             </androidx.cardview.widget.CardView>
 
             <!--informasi pelanggan-->
@@ -34,7 +36,7 @@
                 android:layout_width="match_parent"
                 android:layout_margin="12dp"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
+                app:cardBackgroundColor="@color/card_background_color"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="1dp">
                 <LinearLayout
@@ -53,10 +55,11 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Informasi Pelanggan"
+                            android:text="@string/informasi_pelanggan"
                             android:fontFamily="@font/inter_bold"
                             android:textSize="18sp"
-                            android:layout_marginLeft="6dp" />
+                            android:layout_marginLeft="6dp"
+                            android:textColor="@color/text_primary_color"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -70,6 +73,7 @@
                         android:layout_height="wrap_content"
                         android:text="Firmansyah Riza Afifudin"
                         android:fontFamily="@font/inter_semibold"
+                        android:textColor="@color/text_primary_color"
                         android:textSize="16sp" />
                     <TextView
                         android:id="@+id/tv_no_hp"
@@ -78,7 +82,7 @@
                         android:text="082133289048"
                         android:fontFamily="@font/inter_medium"
                         android:textSize="14sp"
-                        android:textColor="#4b5563"
+                        android:textColor="@color/text_primary_color"
                         android:layout_marginTop="4dp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -90,7 +94,7 @@
                 android:layout_width="match_parent"
                 android:layout_margin="12dp"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
+                app:cardBackgroundColor="@color/card_background_color"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="1dp">
                 <LinearLayout
@@ -109,8 +113,9 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Informasi Layanan"
+                            android:text="@string/informasi_layanan"
                             android:fontFamily="@font/inter_bold"
+                            android:textColor="@color/text_primary_color"
                             android:textSize="18sp"
                             android:layout_marginLeft="6dp" />
                     </LinearLayout>
@@ -126,6 +131,7 @@
                         android:layout_height="wrap_content"
                         android:text="Cuci Setrika"
                         android:fontFamily="@font/inter_semibold"
+                        android:textColor="@color/text_primary_color"
                         android:textSize="16sp" />
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -140,7 +146,7 @@
                             android:text="Rp. 12.000"
                             android:fontFamily="@font/inter_medium"
                             android:textSize="14sp"
-                            android:textColor="#4b5563"
+                            android:textColor="@color/text_primary_color"
                             android:layout_marginTop="4dp" />
 
                         <LinearLayout
@@ -164,7 +170,7 @@
                                 android:text="1 Kg"
                                 android:fontFamily="@font/inter_medium"
                                 android:textSize="14sp"
-                                android:textColor="#4b5563" />
+                                android:textColor="@color/text_primary_color" />
 
                             <ImageView
                                 android:id="@+id/btn_plus"
@@ -185,7 +191,7 @@
                 android:layout_width="match_parent"
                 android:layout_margin="12dp"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
+                app:cardBackgroundColor="@color/card_background_color"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="1dp">
                 <LinearLayout
@@ -204,8 +210,9 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Layanan Tambahan"
+                            android:text="@string/layanan_tambahan"
                             android:fontFamily="@font/inter_bold"
+                            android:textColor="@color/text_primary_color"
                             android:textSize="18sp"
                             android:layout_marginLeft="6dp" />
                     </LinearLayout>
@@ -227,9 +234,10 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/inter_medium"
                         android:textSize="14sp"
+                        android:textColor="@color/text_primary_color"
                         android:textAlignment="center"
                         android:layout_marginVertical="8dp"
-                        android:text="Tidak ada layanan tambahan"/>
+                        android:text="@string/tambahan_kosong"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -240,7 +248,7 @@
                 android:layout_width="match_parent"
                 android:layout_margin="12dp"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
+                app:cardBackgroundColor="@color/card_background_color"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="1dp">
                 <LinearLayout
@@ -259,8 +267,9 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Rincian Pembayaran"
+                            android:text="@string/detail_transaksi"
                             android:fontFamily="@font/inter_bold"
+                            android:textColor="@color/text_primary_color"
                             android:textSize="18sp"
                             android:layout_marginLeft="6dp" />
                     </LinearLayout>
@@ -278,8 +287,8 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Subtotal Layanan"
-                            android:textColor="#4b5563"
+                            android:text="@string/subtotal_layanan"
+                            android:textColor="@color/text_primary_color"
                             android:fontFamily="@font/inter_medium"
                             android:textSize="14sp"/>
                         <TextView
@@ -289,7 +298,7 @@
                             android:layout_weight="1"
                             android:text="Rp. 12.000"
                             android:textAlignment="textEnd"
-                            android:textColor="#4b5563"
+                            android:textColor="@color/text_primary_color"
                             android:fontFamily="@font/inter_medium"
                             android:textSize="14sp"/>
                     </LinearLayout>
@@ -302,8 +311,8 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Pajak 12%"
-                            android:textColor="#4b5563"
+                            android:text="@string/pajak"
+                            android:textColor="@color/text_primary_color"
                             android:fontFamily="@font/inter_medium"
                             android:textSize="14sp"/>
                         <TextView
@@ -313,7 +322,7 @@
                             android:layout_weight="1"
                             android:text="Rp. 1.440"
                             android:textAlignment="textEnd"
-                            android:textColor="#4b5563"
+                            android:textColor="@color/text_primary_color"
                             android:fontFamily="@font/inter_medium"
                             android:textSize="14sp"/>
                     </LinearLayout>
@@ -327,7 +336,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="Total Pembayaran"
-                            android:textColor="@color/black"
+                            android:textColor="@color/text_primary_color"
                             android:fontFamily="@font/inter_medium"
                             android:textSize="14sp"/>
                         <TextView
@@ -337,7 +346,7 @@
                             android:layout_weight="1"
                             android:text="Rp. 13.440"
                             android:textAlignment="textEnd"
-                            android:textColor="@color/black"
+                            android:textColor="@color/text_primary_color"
                             android:fontFamily="@font/inter_semibold"
                             android:textSize="14sp"/>
                     </LinearLayout>
@@ -348,7 +357,7 @@
                 android:id="@+id/containerCheckout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
+                app:cardBackgroundColor="@color/card_background_color"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -374,10 +383,10 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:textColor="@color/black"
+                                android:textColor="@color/text_primary_color"
                                 android:fontFamily="@font/inter_medium"
                                 android:textSize="14sp"
-                                android:text="Metode Pembayaran"/>
+                                android:text="@string/metode_pembayaran"/>
                             <TextView
                                 android:id="@+id/btn_pilih_metode_pembayaran"
                                 android:layout_width="0dp"
@@ -385,7 +394,7 @@
                                 android:textAlignment="textEnd"
                                 android:textColor="#4338ca"
                                 android:layout_weight="1"
-                                android:text="Pilih metode pembayaran"/>
+                                android:text="@string/pilih_metode_pembayaran"/>
                         </LinearLayout>
                         <TextView
                             android:id="@+id/btn_bayar"
@@ -395,7 +404,7 @@
                             android:textColor="@color/white"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Bayar"
+                            android:text="@string/bayar"
                             android:fontFamily="@font/inter_bold"
                             android:textSize="16sp"
                             android:padding="14dp"

@@ -5,13 +5,14 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.firmansyah.laundry.BaseActivity
 import com.firmansyah.laundry.R
 import com.firmansyah.laundry.adapter.DataTambahanAdapter
 import com.firmansyah.laundry.model.ModelTambahan
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.database.*
 
-class DataTambahanActivity : AppCompatActivity() {
+class DataTambahanActivity : BaseActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var tambahanList: ArrayList<ModelTambahan>
     private lateinit var adapter: DataTambahanAdapter

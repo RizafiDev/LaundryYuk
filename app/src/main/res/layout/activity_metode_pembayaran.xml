@@ -21,7 +21,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Metode Pembayaran"
+            android:text="@string/metode_pembayaran"
             android:fontFamily="@font/inter_bold"
             android:textSize="18sp"
             android:padding="20dp" />
@@ -56,7 +56,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Cash"
+                    android:text="@string/tunai"
                     android:fontFamily="@font/inter_bold"
                     android:textSize="18sp"
                     android:layout_marginLeft="12dp" />
@@ -92,7 +92,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="E Money"
+                    android:text="@string/uang_elektronik"
                     android:fontFamily="@font/inter_bold"
                     android:textSize="18sp"
                     android:layout_marginLeft="12dp" />
@@ -128,7 +128,7 @@
                     android:textColor="@color/white"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Konfirmasi"
+                    android:text="@string/konfirmasi"
                     android:fontFamily="@font/inter_bold"
                     android:textSize="16sp"
                     android:padding="14dp"
