@@ -1,6 +1,6 @@
 <div align="center">
   
-# 🧺 LaundryYuk!
+# LaundryYuk!
 
 ![logo](https://github.com/user-attachments/assets/f4294e4a-ebf0-444b-9ecc-3c5b1f2a3122)
 
