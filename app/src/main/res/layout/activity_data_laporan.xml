@@ -27,8 +27,9 @@
             android:padding="20dp" />
     </androidx.cardview.widget.CardView>
 
+    <!-- Filter Section with Collapsible Design -->
     <androidx.cardview.widget.CardView
-        android:id="@+id/searchCardView"
+        android:id="@+id/filterCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="12dp"
@@ -37,6 +38,280 @@
         app:cardElevation="1dp"
         android:background="@color/card_background_color"
         app:layout_constraintTop_toBottomOf="@id/header"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Filter Header - Always Visible -->
+            <LinearLayout
+                android:id="@+id/filterHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:id="@+id/iconFilter"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/filter_solid"
+                    android:layout_marginEnd="8dp"
+                    android:contentDescription="Filter Icon"
+                    app:tint="@color/primary_color" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Filter &amp; Pencarian"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/inter_medium"
+                    android:textColor="@color/text_primary_color" />
+
+                <TextView
+                    android:id="@+id/tvFilterSummary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Semua Data"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/inter_medium"
+                    android:textColor="@color/white"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/button_background"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="2dp" />
+
+                <ImageView
+                    android:id="@+id/iconExpand"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/plus_solid"
+                    android:contentDescription="Expand Icon"
+                    app:tint="@color/text_primary_color" />
+
+            </LinearLayout>
+
+            <!-- Filter Content - Collapsible -->
+            <LinearLayout
+                android:id="@+id/filterContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingHorizontal="16dp"
+                android:paddingBottom="16dp"
+                android:visibility="gone"
+                >
+
+                <!-- Quick Search - Always at top when expanded -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pencarian Cepat"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/inter_medium"
+                        android:textColor="@color/text_secondary_color"
+                        android:layout_marginBottom="4dp" />
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="0dp"
+                        android:background="@color/background_color">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:paddingHorizontal="12dp"
+                            android:background="@drawable/edittext_background_enabled">
+
+                            <ImageView
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
+                                android:src="@drawable/magnifying_glass_solid"
+                                android:layout_marginEnd="8dp"
+                                android:contentDescription="Search Icon"
+                                app:tint="@color/primary_color" />
+
+                            <EditText
+                                android:id="@+id/etSearchLaporan"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@android:color/transparent"
+                                android:hint="Cari transaksi..."
+                                android:textSize="14sp"
+                                android:fontFamily="@font/inter_medium"
+                                android:textColor="@color/text_primary_color"
+                                android:textColorHint="@color/text_tertiary_color"
+                                android:inputType="text"
+                                android:imeOptions="actionSearch"
+                                android:maxLines="1"
+                                android:gravity="center_vertical" />
+
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+
+                <!-- Row 1: Period | Status -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="12dp">
+
+                    <!-- Period Filter -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_marginEnd="8dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Periode"
+                            android:textSize="12sp"
+                            android:fontFamily="@font/inter_medium"
+                            android:textColor="@color/text_secondary_color"
+                            android:layout_marginBottom="4dp" />
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            app:cardCornerRadius="6dp"
+                            app:cardElevation="0dp"
+                            >
+
+                            <Spinner
+                                android:id="@+id/spinnerPeriode"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/edittext_background_enabled"
+                                android:paddingHorizontal="12dp"
+                                android:textSize="14sp"
+                                android:fontFamily="@font/inter_medium" />
+
+                        </androidx.cardview.widget.CardView>
+                    </LinearLayout>
+
+                    <!-- Status Filter -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_marginStart="8dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Status"
+                            android:textSize="12sp"
+                            android:fontFamily="@font/inter_medium"
+                            android:textColor="@color/text_secondary_color"
+                            android:layout_marginBottom="4dp" />
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            app:cardCornerRadius="6dp"
+                            app:cardElevation="0dp"
+                            android:background="@color/background_color">
+
+                            <Spinner
+                                android:id="@+id/spinnerStatus"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/edittext_background_enabled"
+                                android:paddingHorizontal="12dp"
+                                android:textSize="14sp"
+                                android:fontFamily="@font/inter_medium" />
+
+                        </androidx.cardview.widget.CardView>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Row 2: Cabang Filter -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Cabang"
+                        android:textSize="12sp"
+                        android:fontFamily="@font/inter_medium"
+                        android:textColor="@color/text_secondary_color"
+                        android:layout_marginBottom="4dp" />
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        app:cardCornerRadius="6dp"
+                        app:cardElevation="0dp"
+                        android:background="@color/background_color">
+
+                        <Spinner
+                            android:id="@+id/spinnerCabang"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/edittext_background_enabled"
+                            android:paddingHorizontal="12dp"
+                            android:textSize="14sp"
+                            android:fontFamily="@font/inter_medium" />
+
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+
+                <!-- Clear Filters Button -->
+                <TextView
+                    android:id="@+id/btnClearFilters"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:layout_gravity="end"
+                    android:text="Reset Filter"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/inter_medium"
+                    android:textColor="@color/primary_color"
+                    android:background="@drawable/button_background_outlined"
+                    android:paddingHorizontal="16dp"
+                    style="?android:attr/borderlessButtonStyle" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Total Income Summary - Always Visible -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/summaryCardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginTop="8dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="2dp"
+        app:cardBackgroundColor="@color/primary_color"
+        app:layout_constraintTop_toBottomOf="@id/filterCardView"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent">
 
@@ -48,41 +323,54 @@
             android:gravity="center_vertical">
 
             <ImageView
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:src="@drawable/magnifying_glass_solid"
-                android:layout_marginStart="8dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/wallet_solid"
                 android:layout_marginEnd="12dp"
-                android:contentDescription="Search Icon"
-                app:tint="@color/primary_color" />
+                android:contentDescription="Money Icon"
+                app:tint="@android:color/white" />
 
-            <EditText
-                android:id="@+id/etSearchLaporan"
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:hint="@string/search_laporan"
-                android:textSize="16sp"
-                android:fontFamily="@font/inter_medium"
-                android:textColor="@color/text_primary_color"
-                android:textColorHint="@color/text_tertiary_color"
-                android:inputType="text"
-                android:imeOptions="actionSearch"
-                android:maxLines="1" />
-        </LinearLayout>
+                android:orientation="vertical">
 
+                <TextView
+                    android:id="@+id/tvTotalIncome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rp 0"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/inter_bold"
+                    android:textColor="@android:color/white" />
+
+                <TextView
+                    android:id="@+id/tvTotalTransactions"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0 Transaksi"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/inter_medium"
+                    android:textColor="@android:color/white"
+                    android:alpha="0.8" />
+
+            </LinearLayout>
+
+        </LinearLayout>
     </androidx.cardview.widget.CardView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvDATA_LAPORAN"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         tools:listitem="@layout/card_data_laporan"
-        android:layout_marginVertical="12dp"
-        android:paddingBottom="140dp"
-        app:layout_constraintTop_toBottomOf="@id/searchCardView"
+        android:layout_marginTop="8dp"
+        android:paddingBottom="20dp"
+        android:clipToPadding="false"
+        app:layout_constraintTop_toBottomOf="@id/summaryCardView"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintRight_toRightOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

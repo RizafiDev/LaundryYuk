@@ -84,22 +84,13 @@ class DataCabangActivity : BaseActivity() {
         }
 
         try {
-            // Try to open WhatsApp first
+            // Langsung arahkan ke WhatsApp karena nomor sudah format 62
             val whatsappIntent = Intent(Intent.ACTION_VIEW).apply {
                 data = Uri.parse("https://wa.me/$phoneNumber")
             }
-
-            if (whatsappIntent.resolveActivity(packageManager) != null) {
-                startActivity(whatsappIntent)
-            } else {
-                // If WhatsApp is not available, open phone dialer
-                val dialIntent = Intent(Intent.ACTION_DIAL).apply {
-                    data = Uri.parse("tel:$phoneNumber")
-                }
-                startActivity(dialIntent)
-            }
+            startActivity(whatsappIntent)
         } catch (e: Exception) {
-            Toast.makeText(this, "Tidak dapat membuka aplikasi", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Tidak dapat membuka WhatsApp", Toast.LENGTH_SHORT).show()
         }
     }
     private fun setupClickListeners() {

@@ -5,8 +5,10 @@ import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.CheckBox
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.firmansyah.laundry.R
@@ -17,7 +19,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class DataTransaksiAdapter(
-    private val transaksiList: MutableList<Map<String, Any>>
+    private val transaksiList: MutableList<Map<String, Any>>,
+    private val onStatusUpdateClick: (String) -> Unit // Callback untuk update status
 ) : RecyclerView.Adapter<DataTransaksiAdapter.TransaksiViewHolder>() {
 
     private val numberFormat = NumberFormat.getCurrencyInstance(Locale("id", "ID"))
@@ -35,6 +38,8 @@ class DataTransaksiAdapter(
         val tvDataMetodePembayaran: TextView = itemView.findViewById(R.id.tvDataMetodePembayaran)
         val tvDataTerdaftarTransaksi: TextView = itemView.findViewById(R.id.tvDataTerdaftarTransaksi)
         val tvTotalBayar: TextView = itemView.findViewById(R.id.tvTotalBayar)
+        val tvStatusBadge: TextView = itemView.findViewById(R.id.tvStatusBadge)
+        val btnKonfirmasiDiambil: Button = itemView.findViewById(R.id.btnKonfirmasiDiambil)
         val checkBoxPelanggan: CheckBox = itemView.findViewById(R.id.checkBoxPelanggan)
     }
 
@@ -77,7 +82,7 @@ class DataTransaksiAdapter(
         val layananData = transaksi["layanan"] as? Map<String, Any>
         val namaLayanan = layananData?.get("nama") as? String ?: "N/A"
         val kilogram = when (val kg = layananData?.get("kilogram")) {
-            is Number -> kg.toInt() // Convert to integer
+            is Number -> kg.toInt()
             else -> 0
         }
 
@@ -114,6 +119,24 @@ class DataTransaksiAdapter(
         // Format currency without decimal places
         val formattedTotal = "Rp ${formatRupiah(totalPembayaran)}"
         holder.tvTotalBayar.text = formattedTotal
+
+        // Status handling
+        val statusDiambil = transaksi["statusDiambil"] as? Boolean ?: false
+
+        if (statusDiambil) {
+            holder.tvStatusBadge.text = "SUDAH DIAMBIL"
+            holder.tvStatusBadge.setBackgroundResource(R.drawable.badge_completed_background) // Anda perlu membuat drawable ini
+            holder.btnKonfirmasiDiambil.visibility = View.GONE
+        } else {
+            holder.tvStatusBadge.text = "BELUM DIAMBIL"
+            holder.tvStatusBadge.setBackgroundResource(R.drawable.badge_pending_background)
+            holder.btnKonfirmasiDiambil.visibility = View.VISIBLE
+        }
+
+        // Button click listener untuk konfirmasi diambil
+        holder.btnKonfirmasiDiambil.setOnClickListener {
+            showConfirmationDialog(context, transactionId, namaPelanggan)
+        }
 
         // Hide checkbox for now (can be used for future bulk operations)
         holder.checkBoxPelanggan.visibility = View.GONE
@@ -230,6 +253,20 @@ class DataTransaksiAdapter(
         }
 
         context.startActivity(intent)
+    }
+
+    private fun showConfirmationDialog(context: android.content.Context, transactionId: String, namaPelanggan: String) {
+        AlertDialog.Builder(context)
+            .setTitle("Konfirmasi")
+            .setMessage("Apakah Anda yakin ingin menandai pesanan dari $namaPelanggan dengan ID $transactionId sebagai sudah diambil?")
+            .setPositiveButton("Ya") { _, _ ->
+                onStatusUpdateClick(transactionId)
+            }
+            .setNegativeButton("Batal") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .setCancelable(true)
+            .show()
     }
 
     private fun parseHarga(harga: String): Int {

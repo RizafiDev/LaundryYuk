@@ -17,8 +17,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <!-- Checkbox untuk mode edit -->
-
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -26,27 +24,50 @@
             android:padding="18dp"
             android:orientation="vertical">
 
+            <!-- Header dengan ID Transaksi dan Status Badge -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal"
-                >
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
-                <ImageView
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:src="@drawable/clock_rotate_left_solid"
-                    app:tint="@color/primary_color"/>
-
-                <TextView
-                    android:id="@+id/tvDataIdTransaksi"
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/clock_rotate_left_solid"
+                        app:tint="@color/primary_color"/>
+
+                    <TextView
+                        android:id="@+id/tvDataIdTransaksi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter_semibold"
+                        android:text="TRX20250605123"
+                        android:textSize="16sp"
+                        android:layout_marginLeft="12dp" />
+
+                </LinearLayout>
+
+                <!-- Status Badge -->
+                <TextView
+                    android:id="@+id/tvStatusBadge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="BELUM DIAMBIL"
+                    android:textSize="10sp"
+                    android:textColor="@android:color/white"
                     android:fontFamily="@font/inter_semibold"
-                    android:text="TRX20250605123"
-                    android:textSize="16sp"
-                    android:layout_marginLeft="12dp" />
+                    android:background="@drawable/badge_pending_background"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="4dp"
+                    android:layout_marginStart="8dp"/>
 
             </LinearLayout>
 
@@ -146,7 +167,6 @@
 
             </LinearLayout>
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -223,8 +243,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0.8dp"
                 android:background="#D7D7D7"
-                android:layout_marginVertical="12dp"
-                />
+                android:layout_marginVertical="12dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -233,15 +252,14 @@
                 android:orientation="horizontal"
                 android:weightSum="2">
 
-
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="@font/inter_semibold"
                     android:text="@string/total_bayar"
-                    android:textSize="18sp"
-                     />
+                    android:textSize="18sp" />
+
                 <TextView
                     android:id="@+id/tvTotalBayar"
                     android:layout_width="0dp"
@@ -250,10 +268,22 @@
                     android:fontFamily="@font/inter_semibold"
                     android:text="Rp. 5000"
                     android:textSize="18sp"
-                    android:textAlignment="textEnd"
-                     />
+                    android:textAlignment="textEnd" />
 
             </LinearLayout>
+
+            <!-- Tombol Konfirmasi -->
+            <Button
+                android:id="@+id/btnKonfirmasiDiambil"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tandai Sudah Diambil"
+                android:textColor="@android:color/white"
+                android:backgroundTint="@color/primary_color"
+                android:fontFamily="@font/inter_semibold"
+                android:layout_marginTop="12dp"
+                android:textSize="14sp"
+                app:cornerRadius="6dp" />
 
         </LinearLayout>
 

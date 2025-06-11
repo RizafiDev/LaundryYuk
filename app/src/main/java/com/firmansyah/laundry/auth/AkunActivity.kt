@@ -24,6 +24,8 @@ import com.firmansyah.laundry.transaksi.DataTransaksiActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import java.text.SimpleDateFormat
 import java.util.*
 
 class AkunActivity : BaseActivity() {
@@ -32,6 +34,9 @@ class AkunActivity : BaseActivity() {
     private lateinit var toggleThumb: View
     private lateinit var labelID: TextView
     private lateinit var labelEN: TextView
+    private lateinit var tvNamaUser: TextView
+    private lateinit var tvDataTerdaftarUser: TextView
+    private lateinit var tvAvatarInitials: TextView
     private var isEnglish = false
     private var isInitialLoad = true
 
@@ -50,6 +55,9 @@ class AkunActivity : BaseActivity() {
 
         firebaseAuth = FirebaseAuth.getInstance()
 
+        // Load user profile data
+        loadUserProfile()
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -67,6 +75,79 @@ class AkunActivity : BaseActivity() {
         toggleThumb = findViewById(R.id.toggleThumb)
         labelID = findViewById(R.id.labelID)
         labelEN = findViewById(R.id.labelEN)
+        tvNamaUser = findViewById(R.id.tvNamaUser)
+        tvDataTerdaftarUser = findViewById(R.id.tvDataTerdaftarUser)
+        tvAvatarInitials = findViewById(R.id.tvAvatarInitials)
+    }
+
+    private fun loadUserProfile() {
+        val currentUser: FirebaseUser? = firebaseAuth.currentUser
+
+        if (currentUser != null) {
+            // Get user name
+            val displayName = currentUser.displayName ?: "Unknown User"
+            val email = currentUser.email ?: ""
+
+            // Update name
+            tvNamaUser.text = displayName.uppercase()
+
+            // Generate initials for avatar
+            val initials = generateInitials(displayName)
+            tvAvatarInitials.text = initials
+
+            // Get registration date (creation timestamp)
+            val creationTimestamp = currentUser.metadata?.creationTimestamp
+            if (creationTimestamp != null) {
+                val joinDate = formatJoinDate(creationTimestamp)
+                val joinText = if (isEnglish) "Joined on $joinDate" else "Bergabung pada $joinDate"
+                tvDataTerdaftarUser.text = joinText
+            } else {
+                // Fallback if timestamp is not available
+                val joinText = if (isEnglish) "Member since registration" else "Anggota sejak pendaftaran"
+                tvDataTerdaftarUser.text = joinText
+            }
+        } else {
+            // Handle case when user is not logged in
+            tvNamaUser.text = if (isEnglish) "GUEST USER" else "PENGGUNA TAMU"
+            tvAvatarInitials.text = "GU"
+            tvDataTerdaftarUser.text = if (isEnglish) "Not logged in" else "Belum masuk"
+        }
+    }
+
+    private fun generateInitials(fullName: String): String {
+        if (fullName.isBlank()) return "UN" // Unknown
+
+        val words = fullName.trim().split("\\s+".toRegex())
+
+        return when {
+            words.size >= 2 -> {
+                // Take first letter of first name and first letter of last name
+                "${words[0].first().uppercaseChar()}${words[words.size - 1].first().uppercaseChar()}"
+            }
+            words.size == 1 -> {
+                // If only one word, take first two letters or duplicate first letter
+                val word = words[0]
+                if (word.length >= 2) {
+                    "${word[0].uppercaseChar()}${word[1].uppercaseChar()}"
+                } else {
+                    "${word[0].uppercaseChar()}${word[0].uppercaseChar()}"
+                }
+            }
+            else -> "UN" // Fallback
+        }
+    }
+
+    private fun formatJoinDate(timestamp: Long): String {
+        val date = Date(timestamp)
+        val locale = if (isEnglish) Locale.ENGLISH else Locale("id", "ID")
+
+        return if (isEnglish) {
+            val formatter = SimpleDateFormat("MMMM dd, yyyy", locale)
+            formatter.format(date)
+        } else {
+            val formatter = SimpleDateFormat("dd MMMM yyyy", locale)
+            formatter.format(date)
+        }
     }
 
     private fun setupNavigationListeners() {
@@ -123,6 +204,9 @@ class AkunActivity : BaseActivity() {
 
         // Show feedback message in the new language
         showLanguageChangeMessage()
+
+        // Update user profile text with new language
+        loadUserProfile()
 
         // Recreate activity with delay to show animation
         recreateActivityWithNewLanguage()
@@ -195,6 +279,12 @@ class AkunActivity : BaseActivity() {
             startActivity(intent)
             finish()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // Refresh user profile when activity resumes
+        loadUserProfile()
     }
 
     override fun onBackPressed() {
