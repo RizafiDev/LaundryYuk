@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -57,6 +58,7 @@ class InvoiceActivity : BaseActivity() {
     companion object {
         private const val REQUEST_BLUETOOTH_PERMISSION = 1001
         private const val REQUEST_ENABLE_BLUETOOTH = 1002
+        const val EXTRA_FROM_LAPORAN = "from_laporan"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -67,6 +69,7 @@ class InvoiceActivity : BaseActivity() {
         initPrintService()
         loadDataFromIntent()
         setupClickListeners()
+        setupBackNavigation()
     }
 
     private fun initViews() {
@@ -103,8 +106,8 @@ class InvoiceActivity : BaseActivity() {
             baseServicePrice = bundle.getInt("baseServicePrice", 0)
             tambahanList = bundle.getSerializable("tambahanList") as? ArrayList<ModelTambahan>
 
-            // Check if this invoice is opened from laporan (existing transaction)
-            isFromLaporan = !transactionId.isEmpty() && subtotal > 0
+            // Load flag untuk menentukan dari laporan atau tidak
+            isFromLaporan = bundle.getBoolean(EXTRA_FROM_LAPORAN, false)
 
             displayInvoiceData()
         }
@@ -473,20 +476,26 @@ Terima kasih telah menggunakan layanan kami! 🙏
         }
     }
 
+    private fun setupBackNavigation() {
+        // Gunakan modern callback approach untuk handling back button
+        onBackPressedDispatcher.addCallback(this) {
+            if (isFromLaporan) {
+                // Jika dari laporan, kembali ke activity sebelumnya (DataLaporanActivity)
+                finish()
+            } else {
+                // Jika dari transaksi baru, kembali ke MainActivity
+                val intent = Intent(this@InvoiceActivity, MainActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                startActivity(intent)
+                finish()
+            }
+        }
+    }
+
     private fun formatRupiah(amount: Int): String {
         return String.format("%,d", amount).replace(',', '.')
     }
 
-    override fun onBackPressed() {
-        if (isFromLaporan) {
-            // If opened from laporan, go back to laporan activity
-            finish()
-        } else {
-            // If opened from new transaction, go to main activity
-            val intent = Intent(this, MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
-            startActivity(intent)
-            finish()
-        }
-    }
+    // HAPUS method onBackPressed() yang deprecated ini karena sudah diganti dengan callback modern di atas
+    // Method ini bisa konflik dengan callback modern
 }

@@ -250,6 +250,7 @@ class DataTransaksiAdapter(
             putExtra("totalPembayaran", totalPembayaran)
             putExtra("baseServicePrice", baseServicePrice)
             putExtra("tambahanList", tambahanList)
+            putExtra(InvoiceActivity.EXTRA_FROM_LAPORAN, true)
         }
 
         context.startActivity(intent)
